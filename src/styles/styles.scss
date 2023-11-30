@@ -1,0 +1,51 @@
+@import 'variables';
+
+/* Global styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* Other common styles */
+}
+
+/* Box sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Typography */
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  background-color: $dark-background;
+  padding-top: 5rem;
+}
+
+/* Reset list styles */
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Reset link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reset image styles */
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+/* Reset button and input styles */
+button,
+input {
+  border: none;
+  outline: none;
+}
