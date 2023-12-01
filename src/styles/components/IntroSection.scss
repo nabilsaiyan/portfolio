@@ -1,0 +1,113 @@
+@import '../variables';
+
+.intro-section {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding-top: 5rem;
+  padding-left: 5vw;
+  height: 100vh;
+  color: #fff;
+  gap: 0.5rem;
+
+  @media (max-width: $breakpoint-md) {
+    padding-top: 7rem;
+    padding-left: 1.5rem;
+  }
+
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+    padding-left: 5.5rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 0.5rem;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 1rem;
+    }
+
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .role-text {
+    font-size: 5rem;
+    text-align: left;
+    color: transparent;
+    background-image: linear-gradient(to right, $gradient-start, $gradient-end);
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 2.3rem;
+    }
+
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+      font-size: 3.5rem;
+    }
+  }
+
+  .roles-wrapper {
+    display: flex;
+    column-gap: 0.7rem;
+
+    @media (max-width: $breakpoint-md) {
+      padding-top: 1rem;
+    }
+    .roles-container {
+      position: relative;
+      display: flex;
+      flex-grow: 1;
+
+      div {
+        font-size: 5rem;
+        color: #fff;
+        border-radius: 5px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition:
+          opacity 0.5s ease-in-out,
+          transform 0.5s ease-in-out;
+        position: absolute;
+        left: 0;
+
+        @media (max-width: $breakpoint-md) {
+          font-size: 2rem;
+        }
+
+        @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+          font-size: 3rem;
+        }
+      }
+
+      .active {
+        opacity: 0.9;
+        transform: translateX(0%);
+      }
+    }
+  }
+
+  .plus {
+    color: transparent;
+    font-size: 7rem;
+    background-image: linear-gradient(to right, $gradient-start, $gradient-end);
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: auto auto;
+    line-height: 6rem;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 3rem;
+      line-height: 2.3rem;
+    }
+
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+      font-size: 5rem;
+      line-height: 3.5rem;
+    }
+  }
+}
