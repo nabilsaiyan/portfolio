@@ -8,7 +8,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 
+  @media (max-width: $breakpoint-md) {
+    background-color: $dark-background;
+    opacity: 0.9;
+  }
+
   ul {
+    position: relative;
     list-style: none;
     display: flex;
     padding: 1.5rem 0;
@@ -75,17 +81,103 @@
     .nav-sections {
       display: flex;
       gap: 1rem;
+
+      @media (max-width: $breakpoint-md) {
+        display: none;
+      }
+    }
+
+    .nav-sections.show {
+      @media (max-width: $breakpoint-md) {
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        transform: translateY(50%);
+        align-items: center;
+        padding-top: 10rem;
+        background-color: $dark-background;
+        background-color: rgba($dark-background, 0.95);
+        margin-top: 4rem;
+
+        li a {
+          font-size: 2rem;
+        }
+      }
     }
 
     .nav-icons {
       display: flex;
       gap: 1rem;
       margin-right: 5rem;
+
+      @media (max-width: $breakpoint-md) {
+        display: none;
+      }
+    }
+
+    .nav-icons.show {
+      @media (max-width: $breakpoint-md) {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 2.5rem 3rem;
+      }
     }
 
     .logo-wrapper {
       display: flex;
       margin-left: 5rem;
+
+      @media (max-width: $breakpoint-md) {
+        margin-left: 2.5rem;
+      }
+    }
+
+    .menu-icon {
+      display: none;
+      margin-right: 3rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+      @media (max-width: $breakpoint-md) {
+        display: inline-block;
+      }
+    }
+
+    .menu-icon-close {
+      display: none;
+    }
+
+    .menu-icon-close.show {
+      margin-right: 3rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+      @media (max-width: $breakpoint-md) {
+        display: inline-block;
+      }
+    }
+
+    .menu-icon-a {
+      font-size: 2rem;
+      color: transparent;
+      background-image: linear-gradient(
+        to right,
+        $gradient-start,
+        $gradient-end
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .menu-icon.hide {
+      display: none;
     }
   }
 }

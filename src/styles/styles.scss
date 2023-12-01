@@ -5,7 +5,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  /* Other common styles */
 }
 
 /* Box sizing */
@@ -16,7 +15,7 @@ body {
 /* Typography */
 body {
   font-size: 16px;
-  line-height: 1.5;
+  // line-height: 1.5;
   font-family: 'Montserrat', sans-serif;
   color: #fff;
   background-color: $dark-background;
