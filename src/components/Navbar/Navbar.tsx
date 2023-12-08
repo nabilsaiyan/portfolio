@@ -32,7 +32,7 @@ function Navbar() {
             <a onClick={() => scrollToSection('projects')}>Projects</a>
           </li>
           <li>
-            <a onClick={() => scrollToSection('contact')}>Contact</a>
+            <a onClick={() => scrollToSection('experience')}>Experience</a>
           </li>
         </div>
         <div className={`nav-icons ${showMenu ? 'show' : ''}`}>
