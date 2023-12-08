@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import '../../styles/components/IntroSection.scss'
 import AbstractShapeCanvas from './AbstractShapeCanvas'
+import TextSpan from './TextSpan'
 
 const roles = [
   'Full Stack Developer',
@@ -26,14 +27,11 @@ function IntroSection() {
         <AbstractShapeCanvas />
       </div>
       <h1>NABIL AMHAOUCH</h1>
-      {/* <span className="role-text">Software Engineer</span> */}
-      <span className="role-text">
+      <div className="role-text">
         {Array.from('Software Engineer').map((letter, index) => (
-          <span key={index} className="animated-letter">
-            {letter}
-          </span>
+          <TextSpan key={index}>{letter === ' ' ? '\u00A0' : letter}</TextSpan>
         ))}
-      </span>
+      </div>
       <div className="roles-wrapper">
         <div className="plus">+</div>
         <div className="roles-container">
