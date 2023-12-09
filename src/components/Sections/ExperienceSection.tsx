@@ -39,16 +39,22 @@ function ExperienceSection() {
 
   return (
     <section id="experience" className="experience-section">
-      <h1>Work Experience.</h1>
+      <h1>Experience.</h1>
       <VerticalTimeline>
         {experiences.map((experience, index) => (
           <VerticalTimelineElement
             className="timeline-card"
             key={index}
             date={experience.date}
-            // date={`${experience.date}  (${experience.duration})`}
             iconStyle={{ background: '#1c1c1d', color: '#fff' }}
-            // icon={<i className="fa fa-briefcase" />}
+            icon={
+              <div className="company-icon">
+                <img
+                  src={experience.company_logo}
+                  alt={experience.company_logo}
+                />
+              </div>
+            }
             contentStyle={{ background: '#1c1c1d' }}
           >
             <h3 className="vertical-timeline-element-title">
