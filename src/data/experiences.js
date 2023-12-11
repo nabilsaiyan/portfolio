@@ -4,6 +4,7 @@ export const experiences = [
     duration: '6 months',
     position: 'Software Engineer',
     company: 'Capgemini',
+    company_logo: './icons/capgemini.png',
     location: 'Issy-les-Moulineaux, France',
     project:
       'Redesign of a collaborative learning and knowledge-sharing web application.',
@@ -36,6 +37,7 @@ export const experiences = [
     duration: '6 months',
     position: 'Full Stack Developer',
     company: 'IBITEAM',
+    company_logo: './icons/ibiteam.png',
     location: 'Mantes-la-Jolie, France',
     project: 'Migration of an English vocabulary learning web application.',
     responsibilities: [
@@ -64,6 +66,7 @@ export const experiences = [
     duration: '4 months',
     position: 'Full Stack Developer',
     company: 'IBITEAM',
+    company_logo: './icons/ibiteam.png',
     location: 'Mantes-la-Jolie, France',
     project:
       'Development of GuideWay, a hybrid mobile mapping and route management application.',
