@@ -1,5 +1,78 @@
+@import '../variables';
+
 .projects-section {
-  height: 100vh;
+  height: 200vh;
   display: flex;
-  justify-content: center;
+  overflow: hidden;
+}
+
+.background-canvas {
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; /* Place it behind the content */
+}
+
+.text-iphone {
+  margin: 20rem 2rem 0 40rem;
+  display: flex;
+  flex-direction: column;
+  // z-index: -1;
+
+  h1 {
+    max-width: 37rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 1rem 0;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+  }
+
+  li {
+    font-size: 1.3rem;
+    margin: 0 0 1rem;
+    font-weight: 500;
+    color: $dark_grey;
+  }
+
+  .divider {
+    display: flex;
+    gap: 1rem;
+
+    hr {
+      position: relative;
+      margin: 2rem 0;
+      width: 100px;
+      height: 0.3rem;
+      border: none;
+      background: $gradient_end;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    hr::before {
+      content: '';
+      position: absolute;
+      top: 1px; /* Adjust this value to position the trapezoid */
+      left: 30%;
+      transform: translate(-59%, -110%);
+      width: 2rem; /* Adjust the width of the trapezoid */
+      height: 0;
+      border-left: 10px solid transparent; /* Half the width of the trapezoid */
+      border-right: 10px solid transparent; /* Half the width of the trapezoid */
+      border-bottom: 10px solid $gradient_end;
+      z-index: 1;
+    }
+
+    p {
+      font-weight: 700;
+      font-size: 1.2rem;
+      background: $gradient-end;
+      color: transparent;
+      background-clip: text;
+      margin: 1.2rem 0;
+    }
+  }
 }

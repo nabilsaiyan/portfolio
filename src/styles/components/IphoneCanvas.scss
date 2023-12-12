@@ -1,0 +1,14 @@
+.canvas-container {
+  position: relative;
+  width: 100vw;
+  height: 200vh;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+}

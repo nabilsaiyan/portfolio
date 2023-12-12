@@ -13,6 +13,11 @@ $dark-grey: #5a5a5a;
 $sky-blue: #3498db;
 $border-radius: 10px;
 $border-height: 5px;
+$gradient: linear-gradient(
+  to right,
+  $gradient-start,
+  $gradient-end
+); // Define the gradient
 
 /*breakpoints*/
 $breakpoint-sm: 640px;
