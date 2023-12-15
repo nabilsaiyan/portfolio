@@ -79,7 +79,7 @@ export const experiences = [
     technologies: [
       'React Native',
       'JavaScript',
-      'CSS3',
+      'StyleSheet',
       'C#',
       '.NET Core',
       'Entity Framework',
