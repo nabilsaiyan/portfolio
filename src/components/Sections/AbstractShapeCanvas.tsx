@@ -4,14 +4,17 @@ import * as THREE from 'three'
 import { useRef } from 'react'
 import '../../styles/components/AbstractShapeCanvas.scss'
 
-const directionalLightOne = new THREE.DirectionalLight(0x13efff, 5)
-directionalLightOne.position.set(-10, 10, -10)
-const directionalLightTwo = new THREE.DirectionalLight(0x4872ef, 5)
-directionalLightTwo.position.set(10, 5, 10)
-
 function RotatingModel() {
   const modelRef = useRef<THREE.Group>()
-  const { size } = useThree() // Access canvas size
+  const gltf = useLoader(GLTFLoader, './models/abstractshape1/scene.gltf')
+
+  const directionalLightOne = new THREE.DirectionalLight(0x13efff, 5)
+  directionalLightOne.position.set(-10, 10, -10)
+  const directionalLightTwo = new THREE.DirectionalLight(0x4872ef, 5)
+  directionalLightTwo.position.set(10, 5, 10)
+
+  gltf.scene.add(directionalLightOne)
+  gltf.scene.add(directionalLightTwo)
 
   useFrame(() => {
     if (modelRef.current) {
@@ -19,17 +22,14 @@ function RotatingModel() {
     }
   })
 
-  const gltf = useLoader(GLTFLoader, './models/abstractshape1/scene.gltf')
-  // Adjust model position
-  if (gltf.scene) {
-    gltf.scene.position.x = size.width / 800
-    gltf.scene.position.z = 2.3
-  }
-  // Add lights to the gltf scene
-  gltf.scene.add(directionalLightOne)
-  gltf.scene.add(directionalLightTwo)
-
-  return <primitive object={gltf.scene} ref={modelRef} />
+  return (
+    <primitive
+      object={gltf.scene}
+      position={[2, 0, 0]}
+      scale={2}
+      ref={modelRef}
+    />
+  )
 }
 
 function AbstractShapeCanvas() {
