@@ -1,41 +1,47 @@
-import { Canvas, useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-
-import { OrbitControls } from '@react-three/drei'
 import '../../styles/components/ProjectsSection.scss'
-import { useEffect, useRef } from 'react'
+import { IphoneCanvas } from './IphoneCanvas'
+import { LaptopCanvas } from './LaptopCanvas'
 
 function ProjectsSection() {
-  const gltf = useLoader(GLTFLoader, './models/laptop2/scene.gltf')
+  // const gltf = useLoader(GLTFLoader, './models/laptop2/scene.gltf')
 
   return (
     <section id="projects" className="projects-section">
-      <Canvas shadows camera={{ position: [0.5, 0.3, 0.5] }}>
-        {/* Directional Lights */}
-        <directionalLight
-          intensity={Math.PI * 2}
-          color="white"
-          position={[0, 0.4, 0.6]}
-          castShadow
-        />
-        <spotLight intensity={Math.PI * 3} />
-        <ambientLight intensity={Math.PI * 3} position={[0, 0.4, 0.6]} />
-        <ambientLight intensity={Math.PI * 3} position={[0, -0.4, -0.6]} />
-        {/* Your GLTF Model */}
-        <primitive
-          object={gltf.scene}
-          position={[0.6, 0.05, 0.15]}
-          children-0-castShadow
-        />
+      <div className="part-one">
+        <h1 className="title-section">Projects.</h1>
+        <div className="background-canvas">{/* <LaptopCanvas /> */}</div>
+        <div className="text-iphone t1">
+          <div className="divider">
+            <hr />
+            <p>01</p>
+          </div>
 
-        {/* Lights */}
+          <h1>A web application for finding TV series.</h1>
+          <ul>
+            <li>Development of the frontend using React and Typescript.</li>
+            <li>Leverages the TMDB API for series data.</li>
+          </ul>
+          <span className="view-button">
+            <a>View Project</a>
+            <span className="material-symbols-outlined">north_east</span>
+          </span>
+        </div>
+      </div>
+      <div className="part-two">
+        <div className="background-canvas">{/* <IphoneCanvas /> */}</div>
+        <div className="text-iphone t2">
+          <div className="divider">
+            <hr />
+            <p>02</p>
+          </div>
 
-        {/* Hemisphere Light */}
-        <hemisphereLight intensity={5} args={['#b1e1ff', '#fff']} />
-        <axesHelper />
-        {/* Controls */}
-        <OrbitControls enableZoom={false} target={[0.3, 0.05, 0.15]} />
-      </Canvas>
+          <h1>A hybrid mobile application for route management.</h1>
+          <ul>
+            <li>Design and development of the App using React Native.</li>
+            <li>Works on both Android and IOS devices.</li>
+          </ul>
+        </div>
+      </div>
     </section>
   )
 }
