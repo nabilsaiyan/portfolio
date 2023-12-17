@@ -1,11 +1,13 @@
 @import '../variables';
 
 .projects-section {
-  height: 150vh;
+  height: 200vh;
   display: flex;
   flex-direction: column;
-  // overflow: hidden;
-  gap: 40rem;
+  gap: 20rem;
+  margin: 10rem 0;
+  width: 100vw;
+  overflow: hidden;
 
   .title-section {
     padding: 0 0 1rem 6rem;
@@ -13,11 +15,11 @@
   }
 
   .t1 {
-    margin: 7.5rem 2rem 0 4rem;
+    margin: 1rem 2rem 0 4rem;
   }
 
   .t2 {
-    margin: 7.5rem 2rem 0 40rem;
+    margin: 1.5rem 2rem 0 40rem;
   }
 
   .view-button {
@@ -31,7 +33,6 @@
     display: flex;
     gap: 0.5rem;
     position: relative;
-    // overflow: hidden;
 
     &:hover {
       cursor: pointer;
@@ -58,14 +59,11 @@
   .background-canvas {
     overflow: hidden;
     position: absolute;
-    border: dashed 1px red;
-    // z-index: -1; /* Place it behind the content */
   }
 
   .text-iphone {
     display: flex;
     flex-direction: column;
-    // z-index: -1;
 
     h1 {
       max-width: 37rem;
@@ -104,13 +102,13 @@
       hr::before {
         content: '';
         position: absolute;
-        top: 1px; /* Adjust this value to position the trapezoid */
+        top: 1px;
         left: 30%;
         transform: translate(-59%, -110%);
-        width: 2rem; /* Adjust the width of the trapezoid */
+        width: 2rem;
         height: 0;
-        border-left: 10px solid transparent; /* Half the width of the trapezoid */
-        border-right: 10px solid transparent; /* Half the width of the trapezoid */
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
         border-bottom: 10px solid $gradient_end;
         z-index: 1;
       }
