@@ -1,15 +1,23 @@
 import '../../styles/components/ProjectsSection.scss'
-import { IphoneCanvas } from './IphoneCanvas'
-import { LaptopCanvas } from './LaptopCanvas'
+import { IphoneCanvas } from '../Canvas/IphoneCanvas'
+import { LaptopCanvas } from '../Canvas/LaptopCanvas'
 
 function ProjectsSection() {
-  // const gltf = useLoader(GLTFLoader, './models/laptop2/scene.gltf')
+  const goToGitHubProject = () => {
+    window.open(
+      'https://github.com/nabilsaiyan/series-finder-frontend',
+      '_blank',
+      'noopener noreferrer',
+    )
+  }
 
   return (
     <section id="projects" className="projects-section">
       <div className="part-one">
         <h1 className="title-section">Projects.</h1>
-        <div className="background-canvas">{/* <LaptopCanvas /> */}</div>
+        <div className="background-canvas">
+          <LaptopCanvas />
+        </div>
         <div className="text-iphone t1">
           <div className="divider">
             <hr />
@@ -21,14 +29,16 @@ function ProjectsSection() {
             <li>Development of the frontend using React and Typescript.</li>
             <li>Leverages the TMDB API for series data.</li>
           </ul>
-          <span className="view-button">
+          <span className="view-button" onClick={goToGitHubProject}>
             <a>View Project</a>
             <span className="material-symbols-outlined">north_east</span>
           </span>
         </div>
       </div>
       <div className="part-two">
-        <div className="background-canvas">{/* <IphoneCanvas /> */}</div>
+        <div className="background-canvas">
+          <IphoneCanvas />
+        </div>
         <div className="text-iphone t2">
           <div className="divider">
             <hr />

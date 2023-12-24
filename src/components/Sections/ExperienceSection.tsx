@@ -40,7 +40,7 @@ function ExperienceSection() {
   return (
     <section id="experience" className="experience-section">
       <h1>Experience.</h1>
-      <VerticalTimeline>
+      <VerticalTimeline className="vertical-timeline">
         {experiences.map((experience, index) => (
           <VerticalTimelineElement
             className="timeline-card"

@@ -126,20 +126,15 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -1; /* Place it behind the content */
+    z-index: 1; /* Place it behind the content */
   }
-
-  // .content-wrapper {
-  //   position: relative; /* To position the content on top */
-  //   z-index: 1; /* Ensure content is above the canvas */
-  //   /* Add other styles for your content */
-  // }
 }
 
 .text-span {
   position: relative;
   display: inline-block;
   transition: background-position 0.5s ease-in-out;
+  z-index: 1;
 }
 
 .text-span:hover {
