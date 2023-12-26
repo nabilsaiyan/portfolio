@@ -1,0 +1,17 @@
+@import '../variables';
+
+.loading-overlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: $dark-background;
+  z-index: 9999;
+
+  img {
+    height: 100px;
+    width: auto;
+  }
+}
