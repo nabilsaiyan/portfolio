@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: left;
-  padding-top: 5rem;
+  padding-top: 10rem;
   padding-left: 5vw;
   height: 100vh;
   color: #fff;
@@ -12,7 +12,7 @@
   overflow: hidden;
 
   @media (max-width: $breakpoint-md) {
-    padding-top: 7rem;
+    margin-top: 7rem;
     padding-left: 1.5rem;
   }
 
@@ -56,8 +56,9 @@
     column-gap: 0.7rem;
     margin-top: 1.5rem;
     margin-left: 1rem;
+
     @media (max-width: $breakpoint-md) {
-      padding-top: 1rem;
+      margin-top: 1rem;
     }
     .roles-container {
       position: relative;

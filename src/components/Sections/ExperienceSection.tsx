@@ -4,8 +4,9 @@ import {
 } from 'react-vertical-timeline-component'
 import 'react-vertical-timeline-component/style.min.css'
 import '../../styles/components/ExperienceSection.scss'
-
 import { experiences } from '../../data/experiences'
+import { motion } from 'framer-motion'
+import Reveal from '../Animations/Reveal'
 
 function ExperienceSection() {
   function getRandomColor() {
@@ -38,8 +39,11 @@ function ExperienceSection() {
   }
 
   return (
-    <section id="experience" className="experience-section">
-      <h1>Experience.</h1>
+    <motion.section id="experience" className="experience-section">
+      <Reveal>
+        <h1>Experience</h1>
+      </Reveal>
+
       <VerticalTimeline className="vertical-timeline">
         {experiences.map((experience, index) => (
           <VerticalTimelineElement
@@ -57,34 +61,45 @@ function ExperienceSection() {
             }
             contentStyle={{ background: '#1c1c1d' }}
           >
-            <h3 className="vertical-timeline-element-title">
-              {experience.position}
-            </h3>
-            <h4 className="vertical-timeline-element-subtitle">
-              {experience.company} - {experience.location}
-            </h4>
-            <h5>{experience.project}</h5>
+            <Reveal>
+              <h3 className="vertical-timeline-element-title">
+                {experience.position}
+              </h3>
+            </Reveal>
+            <Reveal>
+              <h4 className="vertical-timeline-element-subtitle">
+                {experience.company} - {experience.location}
+              </h4>
+            </Reveal>
+            <Reveal>
+              <h5>{experience.project}</h5>
+            </Reveal>
+
             <ul>
               {experience.responsibilities.map((responsibility, index) => (
-                <li key={index}>{responsibility}</li>
+                <Reveal>
+                  <li key={index}>{responsibility}</li>
+                </Reveal>
               ))}
             </ul>
-            <div className="techs">
-              {experience.technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  style={{
-                    color: getRandomColor(),
-                  }}
-                >
-                  #{tech}
-                </span>
-              ))}
-            </div>
+            <Reveal>
+              <div className="techs">
+                {experience.technologies.map((tech, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      color: getRandomColor(),
+                    }}
+                  >
+                    #{tech}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>
-    </section>
+    </motion.section>
   )
 }
 

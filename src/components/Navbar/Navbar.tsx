@@ -7,7 +7,13 @@ function Navbar() {
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId)
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' })
+      const yOffset = -140
+      const element = document.getElementById(sectionId)
+      const y =
+        element?.getBoundingClientRect()?.top &&
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset
+
+      window.scrollTo({ top: y, behavior: 'smooth' })
     }
   }
 

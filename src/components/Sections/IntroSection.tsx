@@ -3,6 +3,7 @@ import '../../styles/components/IntroSection.scss'
 import TextSpan from './TextSpan'
 import { AvatarCanvas } from '../Canvas/AvatarCanvas'
 import { motion } from 'framer-motion'
+import Reveal from '../Animations/Reveal'
 
 const roles = [
   'Full Stack Developer',
@@ -13,7 +14,6 @@ const roles = [
 
 function IntroSection() {
   const [roleIndex, setRoleIndex] = useState(0)
-  const delay = 2
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,44 +28,30 @@ function IntroSection() {
       <div className="background-canvas">
         <AvatarCanvas />
       </div>
-      <motion.h1
-        initial={{
-          opacity: 0,
-        }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1, delay: delay * 0.5 }}
-      >
-        NABIL AMHAOUCH
-      </motion.h1>
-      <motion.div
-        className="role-text"
-        initial={{
-          opacity: 0,
-        }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1, delay: delay * 1.5 }}
-      >
-        {Array.from('Software Engineer').map((letter, index) => (
-          <TextSpan key={index}>{letter === ' ' ? '\u00A0' : letter}</TextSpan>
-        ))}
-      </motion.div>
-      <motion.div
-        className="roles-wrapper"
-        initial={{
-          opacity: 0,
-        }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1, delay: delay * 2 }}
-      >
-        <div className="plus">+</div>
-        <div className="roles-container">
-          {roles.map((role, index) => (
-            <div key={index} className={index === roleIndex ? 'active' : ''}>
-              {role}
-            </div>
+      <Reveal>
+        <h1>NABIL AMHAOUCH</h1>
+      </Reveal>
+      <Reveal>
+        <motion.div className="role-text">
+          {Array.from('Software Engineer').map((letter, index) => (
+            <TextSpan key={index}>
+              {letter === ' ' ? '\u00A0' : letter}
+            </TextSpan>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </Reveal>
+      <Reveal animations={['move']} width="100%">
+        <motion.div className="roles-wrapper">
+          <div className="plus">+</div>
+          <div className="roles-container">
+            {roles.map((role, index) => (
+              <div key={index} className={index === roleIndex ? 'active' : ''}>
+                {role}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </Reveal>
     </section>
   )
 }

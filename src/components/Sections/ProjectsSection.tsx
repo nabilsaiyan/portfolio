@@ -1,4 +1,5 @@
 import '../../styles/components/ProjectsSection.scss'
+import Reveal from '../Animations/Reveal'
 import { IphoneCanvas } from '../Canvas/IphoneCanvas'
 import { LaptopCanvas } from '../Canvas/LaptopCanvas'
 
@@ -14,20 +15,31 @@ function ProjectsSection() {
   return (
     <section id="projects" className="projects-section">
       <div className="part-one">
-        <h1 className="title-section">Projects.</h1>
-        <div className="background-canvas">
-          <LaptopCanvas />
-        </div>
-        <div className="text-iphone t1">
-          <div className="divider">
-            <hr />
-            <p>01</p>
-          </div>
+        <Reveal>
+          <h1 className="title-section">Projects</h1>
+        </Reveal>
 
-          <h1>A web application for finding TV series.</h1>
+        <div className="background-canvas">{/* <LaptopCanvas /> */}</div>
+
+        <div className="text-iphone t1">
+          <Reveal>
+            <div className="divider">
+              <hr />
+              <p>01</p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <h1>A web application for finding TV series.</h1>
+          </Reveal>
+
           <ul>
-            <li>Development of the frontend using React and Typescript.</li>
-            <li>Leverages the TMDB API for series data.</li>
+            <Reveal>
+              <li>Development of the frontend using React and Typescript.</li>
+            </Reveal>
+            <Reveal>
+              <li>Leverages the TMDB API for series data.</li>
+            </Reveal>
           </ul>
           <span className="view-button" onClick={goToGitHubProject}>
             <a>View Project</a>
@@ -36,19 +48,26 @@ function ProjectsSection() {
         </div>
       </div>
       <div className="part-two">
-        <div className="background-canvas">
-          <IphoneCanvas />
-        </div>
+        <div className="background-canvas">{/* <IphoneCanvas /> */}</div>
         <div className="text-iphone t2">
-          <div className="divider">
-            <hr />
-            <p>02</p>
-          </div>
+          <Reveal>
+            <div className="divider">
+              <hr />
+              <p>02</p>
+            </div>
+          </Reveal>
 
-          <h1>A hybrid mobile application for route management.</h1>
+          <Reveal>
+            <h1>A hybrid mobile application for route management.</h1>
+          </Reveal>
+
           <ul>
-            <li>Design and development of the App using React Native.</li>
-            <li>Works on both Android and IOS devices.</li>
+            <Reveal>
+              <li>Design and development of the App using React Native.</li>
+            </Reveal>
+            <Reveal>
+              <li>Works on both Android and IOS devices.</li>
+            </Reveal>
           </ul>
         </div>
       </div>
