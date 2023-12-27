@@ -1,16 +1,16 @@
 @import '../variables';
 
 .projects-section {
-  height: 200vh;
+  height: 70rem;
   display: flex;
   flex-direction: column;
   gap: 20rem;
-  margin: 10rem 0;
+  margin: 10rem 0 0 5rem;
   width: 100vw;
   overflow: hidden;
 
   .title-section {
-    margin: 0 0 1rem 6rem;
+    margin: 0 0 1rem 0rem;
     font-size: 4rem;
   }
 
