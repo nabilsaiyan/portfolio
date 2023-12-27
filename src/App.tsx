@@ -5,6 +5,7 @@ import ExperienceSection from './components/Sections/ExperienceSection'
 import IntroSection from './components/Sections/IntroSection'
 import ProjectsSection from './components/Sections/ProjectsSection'
 import './styles/styles.scss'
+import DetailsSection from './components/Sections/DetailsSection'
 
 function App() {
   const [started, onStarted] = useState<boolean>(false)
@@ -24,6 +25,7 @@ function App() {
           <IntroSection />
           <ExperienceSection />
           <ProjectsSection />
+          <DetailsSection />
         </Suspense>
       )}
     </div>

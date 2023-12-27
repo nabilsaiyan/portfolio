@@ -1,0 +1,68 @@
+@import '../variables';
+
+.details-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+  margin: 10rem 0 0 5rem;
+  width: 100vw;
+  overflow: hidden;
+
+  .title-section {
+    font-size: 4rem;
+  }
+
+  p {
+    max-width: 40rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: $light-grey;
+    line-height: 2rem;
+    // margin-left: 2rem;
+
+    a {
+      color: $gradient-end;
+      font-weight: 700;
+      text-decoration: underline;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .view-button {
+    background: $gradient-end;
+    width: 12rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $dark_background;
+    transition: ease-in-out 0.1s;
+    display: flex;
+    gap: 0.5rem;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+      scale: 1.05;
+    }
+
+    &:hover span {
+      transform: translate(10%, -10%);
+      transition: transform 0.1s ease;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2.5rem;
+      height: 1.3rem;
+      background: $dark_background;
+      transform: translate(50%, -50%) rotate(45deg);
+    }
+  }
+}
