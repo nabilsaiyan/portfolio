@@ -3,6 +3,7 @@
 .loading-overlay {
   position: fixed;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
@@ -10,8 +11,17 @@
   background: $dark-background;
   z-index: 9999;
 
+  .loading-container {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+  }
+
   img {
-    height: 100px;
+    height: 80px;
     width: auto;
   }
 }
