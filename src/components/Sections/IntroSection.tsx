@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../../styles/components/IntroSection.scss'
-import TextSpan from './TextSpan'
+import TextSpan from '../Common/TextSpan'
 import { AvatarCanvas } from '../Canvas/AvatarCanvas'
 import { motion } from 'framer-motion'
 import Reveal from '../Animations/Reveal'

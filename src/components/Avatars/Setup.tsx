@@ -869,7 +869,6 @@ export default function Setup(props: JSX.IntrinsicElements['group']) {
   ) as GLTFResult
 
   const { actions, names } = useAnimations(animations, group)
-  console.log('**', names[0])
 
   useEffect(() => {
     if (actions['Armature|mixamo.com|Layer0'])

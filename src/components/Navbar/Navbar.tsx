@@ -19,7 +19,6 @@ function Navbar() {
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu)
-    console.log('showMenu', showMenu)
   }
 
   return (
@@ -32,13 +31,13 @@ function Navbar() {
         </div>
         <div className={`nav-sections ${showMenu ? 'show' : ''}`}>
           <li>
-            <a onClick={() => scrollToSection('intro')}>Intro</a>
+            <a onClick={() => scrollToSection('experience')}>Experience</a>
           </li>
           <li>
             <a onClick={() => scrollToSection('projects')}>Projects</a>
           </li>
           <li>
-            <a onClick={() => scrollToSection('experience')}>Experience</a>
+            <a onClick={() => scrollToSection('details')}>Details</a>
           </li>
         </div>
         <div className={`nav-icons ${showMenu ? 'show' : ''}`}>

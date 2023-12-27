@@ -57,7 +57,7 @@ function Reveal({
           style={{
             position: 'absolute',
             top: 4,
-            bottom: 0,
+            bottom: 4,
             left: 0,
             right: 0,
             background: background,
