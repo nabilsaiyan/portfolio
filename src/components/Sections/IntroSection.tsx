@@ -40,18 +40,18 @@ function IntroSection() {
           ))}
         </motion.div>
       </Reveal>
-      {/* <Reveal animations={['move']} width="100%"> */}
-      <motion.div className="roles-wrapper">
-        <div className="plus">+</div>
-        <div className="roles-container">
-          {roles.map((role, index) => (
-            <div key={index} className={index === roleIndex ? 'active' : ''}>
-              {role}
-            </div>
-          ))}
-        </div>
-      </motion.div>
-      {/* </Reveal> */}
+      <Reveal width="100%">
+        <motion.div className="roles-wrapper">
+          <div className="plus">+</div>
+          <div className="roles-container">
+            {roles.map((role, index) => (
+              <div key={index} className={index === roleIndex ? 'active' : ''}>
+                {role}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </Reveal>
     </section>
   )
 }

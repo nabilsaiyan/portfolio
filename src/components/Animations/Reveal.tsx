@@ -1,22 +1,19 @@
 import { motion, useAnimation, useInView } from 'framer-motion'
-import { ReactNode, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface RevealProps {
-  children: ReactNode
+  children: JSX.Element
   width?: string
   background?: string
-  animations?: string[]
 }
 
 function Reveal({
   children,
   width = 'fit-content',
   background = '#13efff',
-  animations = ['move', 'reveal'],
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true })
-
   const mainControls = useAnimation()
   const slideControls = useAnimation()
 
@@ -29,42 +26,36 @@ function Reveal({
 
   return (
     <div ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }}>
-      {animations.includes('move') ? (
-        <motion.div
-          variants={{
-            hidden: { opacity: 0, y: 75 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          initial="hidden"
-          animate={mainControls}
-          transition={{ duration: 0.75, delay: 0.15 }}
-        >
-          {children}
-        </motion.div>
-      ) : (
-        children
-      )}
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 75 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        initial="hidden"
+        animate={mainControls}
+        transition={{ duration: 0.5, delay: 0.25 }}
+      >
+        {children}
+      </motion.div>
 
-      {animations.includes('reveal') ? (
-        <motion.div
-          variants={{
-            hidden: { left: 0 },
-            visible: { left: '100%' },
-          }}
-          initial="hidden"
-          animate={slideControls}
-          transition={{ duration: 0.75, delay: 0.15, ease: 'easeInOut' }}
-          style={{
-            position: 'absolute',
-            top: 4,
-            bottom: 4,
-            left: 0,
-            right: 0,
-            background: background,
-            zIndex: 20,
-          }}
-        />
-      ) : null}
+      <motion.div
+        variants={{
+          hidden: { left: 0 },
+          visible: { left: '100%' },
+        }}
+        initial="hidden"
+        animate={slideControls}
+        transition={{ duration: 0.5, ease: 'easeIn' }}
+        style={{
+          position: 'absolute',
+          top: 4,
+          bottom: 4,
+          left: 0,
+          right: 0,
+          background: background,
+          zIndex: 20,
+        }}
+      />
     </div>
   )
 }

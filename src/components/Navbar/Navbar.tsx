@@ -7,7 +7,9 @@ function Navbar() {
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId)
     if (section) {
-      const yOffset = -140
+      let yOffset = 0
+      if (sectionId === 'intro') yOffset = -140
+      else if (sectionId !== 'Details') yOffset = -100
       const element = document.getElementById(sectionId)
       const y =
         element?.getBoundingClientRect()?.top &&

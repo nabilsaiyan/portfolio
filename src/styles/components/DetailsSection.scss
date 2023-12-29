@@ -1,11 +1,10 @@
 @import '../variables';
 
 .details-section {
-  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   gap: 20rem;
-  margin: 10rem 0 0 5rem;
+  margin: 10rem 0 10rem 5rem;
   overflow: hidden;
 
   .title-section {
