@@ -14,7 +14,7 @@ function Reveal({
   background = '#13efff',
   animations = ['move', 'reveal'],
 }: RevealProps) {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true })
 
   const mainControls = useAnimation()

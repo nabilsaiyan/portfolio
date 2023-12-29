@@ -1,16 +1,17 @@
 @import '../variables';
 
 .details-section {
-  height: 100vh;
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   gap: 20rem;
   margin: 10rem 0 0 5rem;
-  width: 100vw;
   overflow: hidden;
 
   .title-section {
     font-size: 4rem;
+    padding: 0;
+    margin: 1rem 0;
   }
 
   p {
@@ -19,16 +20,38 @@
     font-weight: 500;
     color: $light-grey;
     line-height: 2rem;
-    // margin-left: 2rem;
 
     a {
       color: $gradient-end;
       font-weight: 700;
-      text-decoration: underline;
-
+      transition: ease-in-out 0.5;
       &:hover {
         cursor: pointer;
+        text-decoration: underline;
       }
+    }
+  }
+
+  .details-email {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    color: $gradient-end;
+
+    &:hover {
+      color: $light-grey;
+      cursor: pointer;
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    a {
+      font-size: 1.5rem;
+      font-weight: 500;
     }
   }
 
