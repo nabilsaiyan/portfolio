@@ -24,7 +24,7 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${showMenu ? 'show' : ''}`}>
       <ul>
         <div className="logo-wrapper">
           <li className="special">
