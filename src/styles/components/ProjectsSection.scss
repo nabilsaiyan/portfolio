@@ -3,26 +3,56 @@
 .projects-section {
   display: flex;
   flex-direction: column;
-  gap: 20rem;
-  margin: 10rem 0 0 5rem;
-  overflow: hidden;
+  margin: 5rem 0 0 5rem;
+
+  @media (max-width: $breakpoint-xsm) {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  @media (max-width: $breakpoint-xl) {
+    margin: 5rem 1rem;
+  }
 
   .title-section {
     margin: 0 0 1rem 0rem;
     font-size: 4rem;
+    text-align: left;
+
+    @media (max-width: $breakpoint-xsm) {
+      font-size: 2rem;
+    }
+
+    @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+      font-size: 3rem;
+    }
   }
 
   .t1 {
     margin: 1rem 2rem 0 4rem;
+
+    @media (max-width: $breakpoint-xl) {
+      margin-left: 0;
+    }
   }
 
   .t2 {
     margin: 1.5rem 2rem 0 40rem;
+
+    @media (max-width: $breakpoint-xl) {
+      margin-left: 0;
+    }
   }
 
   .view-button {
     background: $gradient-end;
-    width: 12rem;
+    max-width: 12rem;
     padding: 1rem;
     font-size: 1.2rem;
     font-weight: 600;
@@ -31,6 +61,20 @@
     display: flex;
     gap: 0.5rem;
     position: relative;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $breakpoint-xsm) {
+      font-size: 0.9rem;
+      max-width: 10rem;
+      padding: 0.6rem 0.2rem;
+    }
+
+    @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+      font-size: 1rem;
+      max-width: 11rem;
+      padding: 0.8rem 0.3rem;
+    }
 
     &:hover {
       cursor: pointer;
@@ -68,18 +112,35 @@
       font-size: 2.5rem;
       font-weight: 600;
       margin: 1rem 0;
+
+      @media (max-width: $breakpoint-xsm) {
+        font-size: 1.5rem;
+      }
+
+      @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+        font-size: 2rem;
+      }
     }
 
     ul {
-      list-style: disc;
+      list-style: circle;
       margin: 1rem 0 1rem 1.5rem;
     }
 
     li {
+      display: list-item;
       font-size: 1.3rem;
       margin: 0 0 1rem;
       font-weight: 500;
       color: $dark_grey;
+
+      @media (max-width: $breakpoint-xsm) {
+        font-size: 1.1rem;
+      }
+
+      @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+        font-size: 1.2rem;
+      }
     }
 
     .divider {
@@ -95,6 +156,14 @@
         background: $gradient_end;
         z-index: 1;
         overflow: visible;
+
+        @media (max-width: $breakpoint-xsm) {
+          width: 80px;
+        }
+
+        @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+          width: 80px;
+        }
       }
 
       hr::before {
@@ -104,11 +173,25 @@
         left: 30%;
         transform: translate(-59%, -110%);
         width: 2rem;
-        height: 0;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         border-bottom: 10px solid $gradient_end;
         z-index: 1;
+
+        @media (max-width: $breakpoint-xsm) {
+          width: 1.7rem;
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+          border-bottom: 7px solid $gradient_end;
+        }
+
+        @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+          width: 1.7rem;
+          transform: translate(-60%, -110%);
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+          border-bottom: 7px solid $gradient_end;
+        }
       }
 
       p {
@@ -118,6 +201,16 @@
         color: transparent;
         background-clip: text;
         margin: 1.2rem 0;
+
+        @media (max-width: $breakpoint-xsm) {
+          font-size: 1rem;
+          margin: 1.4rem 0;
+        }
+
+        @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+          font-size: 1rem;
+          margin: 1.4rem 0;
+        }
       }
     }
   }

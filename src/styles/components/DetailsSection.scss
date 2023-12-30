@@ -7,10 +7,32 @@
   margin: 10rem 0 10rem 5rem;
   overflow: hidden;
 
+  @media (max-width: $breakpoint-xsm) {
+    margin: 5rem 0 10rem 0;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+    margin: 5rem 0 10rem 0;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
   .title-section {
     font-size: 4rem;
     padding: 0;
     margin: 1rem 0;
+
+    @media (max-width: $breakpoint-xsm) {
+      margin-left: 0;
+      font-size: 2rem;
+    }
+
+    @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+      margin-left: 0;
+      font-size: 3rem;
+    }
   }
 
   p {
@@ -19,6 +41,14 @@
     font-weight: 500;
     color: $light-grey;
     line-height: 2rem;
+
+    @media (max-width: $breakpoint-xsm) {
+      font-size: 1rem;
+    }
+
+    @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+      font-size: 1.1rem;
+    }
 
     a {
       color: $gradient-end;
@@ -46,11 +76,27 @@
 
     i {
       font-size: 1.5rem;
+
+      @media (max-width: $breakpoint-xsm) {
+        font-size: 1rem;
+      }
+
+      @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+        font-size: 1.1rem;
+      }
     }
 
     a {
       font-size: 1.5rem;
       font-weight: 500;
+
+      @media (max-width: $breakpoint-xsm) {
+        font-size: 1rem;
+      }
+
+      @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+        font-size: 1.1rem;
+      }
     }
   }
 

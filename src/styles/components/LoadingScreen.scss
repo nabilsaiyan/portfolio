@@ -23,5 +23,15 @@
   img {
     height: 80px;
     width: auto;
+
+    @media (max-width: $breakpoint-xsm) {
+      height: 60px;
+      width: auto;
+    }
+
+    @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
+      height: 70px;
+      width: auto;
+    }
   }
 }

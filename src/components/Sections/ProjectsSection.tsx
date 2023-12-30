@@ -14,11 +14,10 @@ function ProjectsSection() {
 
   return (
     <section id="projects" className="projects-section">
+      <Reveal>
+        <h1 className="title-section">Projects</h1>
+      </Reveal>
       <div className="part-one">
-        <Reveal>
-          <h1 className="title-section">Projects</h1>
-        </Reveal>
-
         <div className="background-canvas">{/* <LaptopCanvas /> */}</div>
 
         <div className="text-iphone t1">
