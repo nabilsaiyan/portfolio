@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 import LoadingScreen from './components/Animations/LoadingScreen'
 import Navbar from './components/Navbar/Navbar'
 import ExperienceSection from './components/Sections/ExperienceSection'
@@ -20,13 +20,13 @@ function App() {
         />
       )}{' '}
       {started && (
-        <Suspense>
+        <>
           <Navbar />
           <IntroSection />
           <ExperienceSection />
           <ProjectsSection />
           <DetailsSection />
-        </Suspense>
+        </>
       )}
     </div>
   )
