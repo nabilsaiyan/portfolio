@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
-import { Environment } from '@react-three/drei'
+import { Environment, OrbitControls } from '@react-three/drei'
 import Setup from '../Avatars/Setup'
 import { Vector3 } from 'three'
 

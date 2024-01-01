@@ -14,7 +14,7 @@ function ProjectsSection() {
 
   return (
     <section id="projects" className="projects-section">
-      <Reveal>
+      <Reveal styles={{ display: 'flex', alignSelf: 'flex-start' }}>
         <h1 className="title-section">Projects</h1>
       </Reveal>
       <div className="part-one">
@@ -33,12 +33,18 @@ function ProjectsSection() {
           </Reveal>
 
           <ul>
-            <Reveal>
-              <li>Development of the frontend using React and Typescript.</li>
-            </Reveal>
-            <Reveal>
-              <li>Leverages the TMDB API for series data.</li>
-            </Reveal>
+            <li>
+              <Reveal>
+                <div>
+                  Development of the frontend using React and Typescript.
+                </div>
+              </Reveal>
+            </li>
+            <li>
+              <Reveal>
+                <div>Leverages the TMDB API for series data.</div>
+              </Reveal>
+            </li>
           </ul>
           <span className="view-button" onClick={goToGitHubProject}>
             <a>View Project</a>
@@ -61,12 +67,16 @@ function ProjectsSection() {
           </Reveal>
 
           <ul>
-            <Reveal>
-              <li>Design and development of the App using React Native.</li>
-            </Reveal>
-            <Reveal>
-              <li>Works on both Android and IOS devices.</li>
-            </Reveal>
+            <li>
+              <Reveal>
+                <div>Design and development of the App using React Native.</div>
+              </Reveal>
+            </li>
+            <li>
+              <Reveal>
+                <div>Works on both Android and IOS devices.</div>
+              </Reveal>
+            </li>
           </ul>
         </div>
       </div>

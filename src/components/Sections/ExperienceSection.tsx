@@ -77,9 +77,11 @@ function ExperienceSection() {
 
             <ul>
               {experience.responsibilities.map((responsibility, index) => (
-                <Reveal key={index}>
-                  <li key={index}>{responsibility}</li>
-                </Reveal>
+                <li className="responsibility-item" key={index}>
+                  <Reveal key={index}>
+                    <div>{responsibility}</div>
+                  </Reveal>
+                </li>
               ))}
             </ul>
             <Reveal>
