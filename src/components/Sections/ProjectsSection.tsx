@@ -17,9 +17,8 @@ function ProjectsSection() {
       <Reveal styles={{ display: 'flex', alignSelf: 'flex-start' }}>
         <h1 className="title-section">Projects</h1>
       </Reveal>
-      <div className="part-one">
-        <div className="background-canvas">{/* <LaptopCanvas /> */}</div>
 
+      <div className="part-one">
         <div className="text-iphone t1">
           <Reveal>
             <div className="divider">
@@ -51,9 +50,14 @@ function ProjectsSection() {
             <span className="material-symbols-outlined">north_east</span>
           </span>
         </div>
+        <div className="background-canvas">
+          <LaptopCanvas />
+        </div>
       </div>
       <div className="part-two">
-        <div className="background-canvas">{/* <IphoneCanvas /> */}</div>
+        {/* <div className="background-canvas">
+          <IphoneCanvas />
+        </div> */}
         <div className="text-iphone t2">
           <Reveal>
             <div className="divider">

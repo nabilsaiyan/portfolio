@@ -6,6 +6,7 @@ import IntroSection from './components/Sections/IntroSection'
 import ProjectsSection from './components/Sections/ProjectsSection'
 import './styles/styles.scss'
 import DetailsSection from './components/Sections/DetailsSection'
+import { LaptopCanvas } from './components/Canvas/LaptopCanvas'
 
 function App() {
   const [started, onStarted] = useState<boolean>(false)
@@ -23,9 +24,9 @@ function App() {
         <>
           <Navbar />
           <IntroSection />
-          <ExperienceSection />
+          {/* <ExperienceSection /> */}
           <ProjectsSection />
-          <DetailsSection />
+          {/* <DetailsSection /> */}
         </>
       )}
     </div>

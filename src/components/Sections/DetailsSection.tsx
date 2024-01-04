@@ -1,5 +1,6 @@
 import '../../styles/components/DetailsSection.scss'
 import Reveal from '../Animations/Reveal'
+import { AvatarCanvas } from '../Canvas/AvatarCanvas'
 
 function DetailsSection() {
   const goTo = (url: string) => {

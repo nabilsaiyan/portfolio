@@ -1,6 +1,7 @@
 @import '../variables';
 
 .projects-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-top: 5rem;
@@ -31,8 +32,56 @@
     }
   }
 
+  .background-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      position: relative;
+      width: 100%;
+      height: 50vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+  }
+
+  .part-one {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $breakpoint-xl) {
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+
+  .part-two {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $breakpoint-xl) {
+    }
+  }
+
   .t1 {
-    margin: 2rem 0rem 4rem 7rem;
+    margin: 4rem 0rem 4rem 7rem;
 
     @media (max-width: $breakpoint-md) {
       margin-right: 1rem;
@@ -41,7 +90,7 @@
   }
 
   .t2 {
-    margin: 2rem 0rem 2rem 7rem;
+    margin: 6rem 0rem 2rem 7rem;
 
     @media (max-width: $breakpoint-md) {
       margin-right: 1rem;
@@ -95,11 +144,6 @@
       background: $dark_background;
       transform: translate(50%, -50%) rotate(45deg);
     }
-  }
-
-  .background-canvas {
-    overflow: hidden;
-    position: absolute;
   }
 
   .text-iphone {

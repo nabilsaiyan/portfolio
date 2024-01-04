@@ -11,14 +11,6 @@ const roles = ['Web Developer', 'Mobile Developer', 'Design Enthusiast']
 function IntroSection() {
   const [roleIndex, setRoleIndex] = useState(0)
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setRoleIndex((prevIndex) => (prevIndex + 1) % roles.length)
-  //   }, 3000)
-
-  //   return () => clearInterval(interval)
-  // }, [])
-
   return (
     <section id="intro" className="intro-section">
       <div className="background-canvas">
@@ -38,7 +30,6 @@ function IntroSection() {
             ))}
           </motion.div>
         </Reveal>
-        {/* <Reveal width="100%"> */}
         <motion.div className="roles-wrapper">
           <div className="plus">+</div>
           <div className="roles-container">

@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
-import { Environment, OrbitControls } from '@react-three/drei'
+import { Environment } from '@react-three/drei'
 import Setup from '../Avatars/Setup'
 import { Vector3 } from 'three'
 
@@ -18,14 +18,14 @@ function AvatarCanvas() {
       if (screenWidth < 1000) {
         if (screenWidth < 450) {
           setCameraPosition(new Vector3(2, 3.8, -17))
-          setSetupPosition(new Vector3(0, 2, 0)) // Change setup position for width < 450px
+          setSetupPosition(new Vector3(0, 2, 0))
         } else {
           setCameraPosition(new Vector3(0, 3.8, -17))
-          setSetupPosition(new Vector3(-2, 2, 0)) // Change setup position for width < 768px
+          setSetupPosition(new Vector3(-2, 2, 0))
         }
       } else {
         setCameraPosition(new Vector3(-3, 3.8, -17))
-        setSetupPosition(new Vector3(-5, 2, 0)) // Default setup position for larger screens
+        setSetupPosition(new Vector3(-5, 2, 0))
       }
     }
 
