@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react'
 import '../../styles/components/IntroSection.scss'
 import TextSpan from '../Common/TextSpan'
 import { AvatarCanvas } from '../Canvas/AvatarCanvas'
 import { motion } from 'framer-motion'
 import Reveal from '../Animations/Reveal'
-import RevealRole from '../Animations/RevealRole'
-
-const roles = ['Web Developer', 'Mobile Developer', 'Design Enthusiast']
+import RolesAnimation from '../Animations/RolesAnimation'
 
 function IntroSection() {
-  const [roleIndex, setRoleIndex] = useState(0)
-
   return (
     <section id="intro" className="intro-section">
       <div className="background-canvas">
@@ -32,18 +27,8 @@ function IntroSection() {
         </Reveal>
         <motion.div className="roles-wrapper">
           <div className="plus">+</div>
-          <div className="roles-container">
-            {/* {roles.map((role, index) => (
-              <div key={index} className={index === roleIndex ? 'active' : ''}>
-                {role}
-              </div> */}
-            {/* ))} */}
-            <RevealRole>
-              <span className="additional-role">Web Developer</span>
-            </RevealRole>
-          </div>
+          <RolesAnimation />
         </motion.div>
-        {/* </Reveal> */}
       </div>
     </section>
   )
