@@ -9,7 +9,7 @@ import { Vector3 } from 'three'
 
 function LaptopCanvas() {
   const sceneRef = useRef(null)
-  const gltf2 = useLoader(GLTFLoader, './models/macbook/scene.gltf')
+  const gltf = useLoader(GLTFLoader, './models/macbook/scene.gltf')
 
   const ref = useRef(null)
 
@@ -59,7 +59,7 @@ function LaptopCanvas() {
     >
       <Environment preset="sunset" />
       <motion.primitive
-        object={gltf2.scene}
+        object={gltf.scene}
         position={laptopPosition}
         scale={scale}
         rotation-x={rotateX}
@@ -72,4 +72,4 @@ function LaptopCanvas() {
   )
 }
 
-export { LaptopCanvas }
+export default LaptopCanvas

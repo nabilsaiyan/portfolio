@@ -68,33 +68,6 @@
   .roles-wrapper {
     display: flex;
     column-gap: 0.3rem;
-
-    @media (max-width: $breakpoint-md) {
-      // margin-top: 1rem;
-    }
-    .roles-container {
-      position: relative;
-      display: flex;
-      flex-grow: 1;
-
-      .additional-role {
-        font-size: 5rem;
-        font-weight: 600;
-        color: $gradient-end;
-
-        @media (max-width: $breakpoint-xsm) {
-          font-size: 1.8rem;
-        }
-
-        @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
-          font-size: 2.3rem;
-        }
-
-        @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
-          font-size: 3.5rem;
-        }
-      }
-    }
   }
 
   .plus {

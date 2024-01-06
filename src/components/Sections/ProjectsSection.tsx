@@ -1,7 +1,7 @@
 import '../../styles/components/ProjectsSection.scss'
 import Reveal from '../Animations/Reveal'
-import { IphoneCanvas } from '../Canvas/IphoneCanvas'
-import { LaptopCanvas } from '../Canvas/LaptopCanvas'
+import LaptopCanvas from '../Canvas/LaptopCanvas'
+import PhonesCanvas from '../Canvas/PhonesCanvas'
 
 function ProjectsSection() {
   const goToGitHubProject = () => {
@@ -55,9 +55,6 @@ function ProjectsSection() {
         </div>
       </div>
       <div className="part-two">
-        {/* <div className="background-canvas">
-          <IphoneCanvas />
-        </div> */}
         <div className="text-iphone t2">
           <Reveal>
             <div className="divider">
@@ -82,6 +79,9 @@ function ProjectsSection() {
               </Reveal>
             </li>
           </ul>
+        </div>
+        <div className="background-canvas">
+          <PhonesCanvas />
         </div>
       </div>
     </section>
