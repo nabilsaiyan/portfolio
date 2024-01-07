@@ -6,6 +6,7 @@ import IntroSection from './components/Sections/IntroSection'
 import ProjectsSection from './components/Sections/ProjectsSection'
 import './styles/styles.scss'
 import DetailsSection from './components/Sections/DetailsSection'
+import CustomCursor from './components/Common/CustomCursor'
 
 function App() {
   const [started, onStarted] = useState<boolean>(false)
@@ -26,6 +27,7 @@ function App() {
           <ExperienceSection />
           <ProjectsSection />
           <DetailsSection />
+          <CustomCursor />
         </>
       )}
     </div>

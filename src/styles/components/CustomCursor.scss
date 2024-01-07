@@ -1,0 +1,13 @@
+@import '../variables';
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $gradient-end;
+  z-index: 9999;
+}
