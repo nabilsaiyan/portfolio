@@ -102,6 +102,12 @@
     overflow: hidden;
     z-index: -1;
   }
+
+  .mouse-scroll {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+  }
 }
 
 .text-span {

@@ -4,6 +4,7 @@ import { AvatarCanvas } from '../Canvas/AvatarCanvas'
 import { motion } from 'framer-motion'
 import Reveal from '../Animations/Reveal'
 import RolesAnimation from '../Animations/RolesAnimation'
+import MouseScroll from '../Common/MouseScroll'
 
 function IntroSection() {
   return (
@@ -11,7 +12,6 @@ function IntroSection() {
       <div className="background-canvas">
         <AvatarCanvas />
       </div>
-
       <div>
         <Reveal>
           <h1>NABIL AMHAOUCH</h1>
@@ -29,6 +29,9 @@ function IntroSection() {
           <div className="plus">+</div>
           <RolesAnimation />
         </motion.div>
+      </div>
+      <div className="mouse-scroll">
+        <MouseScroll />
       </div>
     </section>
   )

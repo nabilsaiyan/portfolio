@@ -26,7 +26,7 @@ function LaptopCanvas() {
   const scale = useTransform(rotateYSmooth, [0, 1], [6, 15])
 
   const [laptopPosition, setLaptopPosition] = useState<Vector3>(
-    new Vector3(2, -1.2, -2),
+    new Vector3(2, -0.5, 0),
   )
 
   useEffect(() => {
@@ -67,7 +67,11 @@ function LaptopCanvas() {
         ref={sceneRef}
         rotation-y={rotateY}
       />
-      <OrbitControls enableZoom={false} position={[2, 0.5, 0]} />
+      <OrbitControls
+        enableZoom={false}
+        position={[2, 0.5, 0]}
+        enabled={false}
+      />
     </Canvas>
   )
 }

@@ -1,0 +1,87 @@
+@import '../variables';
+
+.mouse-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mouse-icon {
+  height: 35px;
+  width: 22px;
+  border-radius: 12px;
+  border: 2px solid $gradient-end;
+  position: relative;
+
+  &:after {
+    content: '';
+    height: 5px;
+    width: 3px;
+    display: block;
+    margin: 5px auto;
+    border: 2px solid $gradient-end;
+    border-radius: 8px;
+    animation: mouse-wheel 1s linear infinite;
+  }
+}
+
+.mouse-arrow {
+  display: block;
+  transform: rotate(45deg);
+  border-right: 2px solid $gradient-end;
+  border-bottom: 2px solid $gradient-end;
+  margin: 2px 0 3px 6px;
+  width: 8px;
+  height: 8px;
+  animation: mouse-scroll 1s infinite;
+  animation-delay: 100ms;
+  animation-direction: alternate;
+
+  &:after,
+  &:before {
+    position: absolute;
+    content: '';
+    display: block;
+    border-right: 2px solid $gradient-end;
+    border-bottom: 2px solid $gradient-end;
+    width: 8px;
+    height: 8px;
+    animation: mouse-scroll 1s infinite;
+  }
+
+  &:after {
+    margin: 7px 0 3px 7px;
+    animation-delay: 200ms;
+    animation-direction: alternate;
+  }
+
+  &:before {
+    margin: 14px 0 3px 14px;
+    animation-delay: 300ms;
+    animation-direction: alternate;
+  }
+}
+
+@keyframes mouse-wheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes mouse-scroll {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

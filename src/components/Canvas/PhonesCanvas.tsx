@@ -24,7 +24,7 @@ function PhonesCanvas() {
   const firstRotateY = useTransform(rotateYSmooth, [0, 1], [3, 7])
   const firstRotateX = useTransform(rotateYSmooth, [0, 1], [0.1, 0.4])
 
-  const firstScale = useTransform(rotateYSmooth, [0, 1], [4, 8])
+  const firstScale = useTransform(rotateYSmooth, [0, 1], [0.02, 0.08])
 
   const [firstPhonePosition, setFirstPhonePosition] = useState<Vector3>(
     new Vector3(0.8, -0.4, 0),
@@ -76,19 +76,19 @@ function PhonesCanvas() {
         y
         object={gltf1.scene}
         position={firstPhonePosition}
-        scale={0.06}
+        scale={firstScale}
         receiveShadow
         rotation-x={firstRotateX}
         rotation-y={firstRotateY}
       />
-      <motion.primitive
+      {/* <motion.primitive
         object={gltf2.scene}
         position={secondPhonePosition}
         scale={8}
         receiveShadow
         rotation-y={firstRotateY}
         rotation-x={firstRotateX}
-      />
+      /> */}
     </Canvas>
   )
 }
