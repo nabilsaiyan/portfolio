@@ -5,7 +5,6 @@ import IntroSection from './components/Sections/IntroSection'
 import './styles/styles.scss'
 import CustomCursor from './components/Common/CustomCursor'
 import { LanguageProvider } from './context/LanguageContext'
-
 const ExperienceSection = lazy(() => import('./components/Sections/ExperienceSection'))
 const ProjectsSection = lazy(() => import('./components/Sections/ProjectsSection'))
 const DetailsSection = lazy(() => import('./components/Sections/DetailsSection'))

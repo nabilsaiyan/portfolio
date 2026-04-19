@@ -1,7 +1,6 @@
 import { useProgress } from '@react-three/drei'
-import '../../styles/components/LoadingScreen.scss'
-import { useEffect, useState } from 'react'
-import ProgressBar from '../Common/ProgressBar'
+import { useEffect } from 'react'
+import { LoadingG1 } from './LoadingG1'
 
 interface LoadingScreenProps {
   setStarted: React.Dispatch<React.SetStateAction<boolean>>
@@ -9,25 +8,18 @@ interface LoadingScreenProps {
 }
 
 function LoadingScreen({ setStarted, setLoadingDisapear }: LoadingScreenProps) {
-  const { progress, total, loaded, item } = useProgress()
-  const [progressPercent, setProgressPercent] = useState<number>(0)
+  const { progress } = useProgress()
 
   useEffect(() => {
-    setProgressPercent(progress)
     if (progress === 100) {
       setStarted(true)
-      setTimeout(() => {
-        setLoadingDisapear(true)
-      }, 1250)
+      setTimeout(() => setLoadingDisapear(true), 1250)
     }
-  }, [progress, total, loaded, item])
+  }, [progress])
 
   return (
-    <div className="loading-overlay">
-      <div className="loading-container">
-        <img src="./icon.png" alt="loading-icon" />
-        <ProgressBar value={progressPercent} />
-      </div>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
+      <LoadingG1 progress={progress} />
     </div>
   )
 }
