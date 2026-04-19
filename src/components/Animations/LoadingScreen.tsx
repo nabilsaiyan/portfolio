@@ -12,8 +12,10 @@ function LoadingScreen({ setStarted, setLoadingDisapear }: LoadingScreenProps) {
 
   useEffect(() => {
     if (progress === 100) {
-      setStarted(true)
-      setTimeout(() => setLoadingDisapear(true), 1250)
+      setTimeout(() => {
+        setStarted(true)
+        setTimeout(() => setLoadingDisapear(true), 1000)
+      }, 2000)
     }
   }, [progress])
 

@@ -7,6 +7,7 @@ import RolesAnimation from '../Animations/RolesAnimation'
 import MouseScroll from '../Common/MouseScroll'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
+import GlitchName from '../Common/GlitchName'
 
 function IntroSection() {
   const { lang } = useLang()
@@ -19,7 +20,7 @@ function IntroSection() {
       </div>
       <div>
         <Reveal>
-          <h1>NABIL AMHAOUCH</h1>
+          <GlitchName />
         </Reveal>
         <Reveal>
           <motion.div className="role-text">

@@ -55,7 +55,7 @@ export function LoadingG1({ progress }: Props) {
                 transition={{ duration: 0.1 }}
                 style={{
                   fontFamily: "'Courier New', monospace",
-                  fontSize: 'clamp(14px, 2vw, 28px)',
+                  fontSize: 'clamp(28px, 5vw, 72px)',
                   fontWeight: 900, letterSpacing: '0.25em',
                   color: gl ? '#0ff' : '#ddeeff',
                   textShadow: gl
@@ -78,17 +78,17 @@ export function LoadingG1({ progress }: Props) {
           transition={{ duration: 0.7 }}
           style={{
             fontFamily: "'Courier New', monospace",
-            fontSize: 'clamp(6px, 0.85vw, 10px)',
-            color: '#3498db', marginTop: '0.5rem',
+            fontSize: 'clamp(11px, 1.4vw, 18px)',
+            color: '#3498db', marginTop: '0.8rem',
           }}
         >
           {SUBTITLE}
         </motion.div>
       </div>
       <div style={{
-        zIndex: 3, marginTop: '1.5rem',
+        zIndex: 3, marginTop: '2.5rem',
         fontFamily: "'Courier New', monospace",
-        color: '#3498db', fontSize: 'clamp(8px, 0.9vw, 11px)',
+        color: '#3498db', fontSize: 'clamp(13px, 1.4vw, 20px)',
         letterSpacing: '0.08em', textShadow: '0 0 8px #3498db',
       }}>
         [{'█'.repeat(bars)}{'░'.repeat(20 - bars)}] {Math.floor(progress)}%

@@ -18,6 +18,10 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: #fff;
   background-color: $dark-background;
+  background-image:
+    linear-gradient(rgba(52, 152, 219, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 152, 219, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* Reset list styles */

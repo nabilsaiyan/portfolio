@@ -26,13 +26,13 @@
     padding-left: 3.5rem;
   }
 
-  h1 {
+  .glitch-name {
     font-size: 1.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 5px;
+    font-weight: 900;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.25em;
     margin-bottom: 0.8rem;
-    color: $light-grey;
+    display: flex;
 
     @media (max-width: $breakpoint-xsm) {
       font-size: 0.8rem;
@@ -44,6 +44,19 @@
 
     @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
       font-size: 1.5rem;
+    }
+
+    .glitch-name__letter {
+      display: inline-block;
+      color: #ddeeff;
+      text-shadow: 0 0 18px rgba(52, 152, 219, 0.9);
+      transition: color 0.05s, text-shadow 0.05s, transform 0.05s;
+
+      &--active {
+        color: #0ff;
+        text-shadow: 5px 0 #f0f, -5px 0 #0ff, 0 0 20px #fff;
+        transform: skewX(-10deg) translateX(3px);
+      }
     }
   }
 
