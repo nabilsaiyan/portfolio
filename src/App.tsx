@@ -7,30 +7,33 @@ import ProjectsSection from './components/Sections/ProjectsSection'
 import './styles/styles.scss'
 import DetailsSection from './components/Sections/DetailsSection'
 import CustomCursor from './components/Common/CustomCursor'
+import { LanguageProvider } from './context/LanguageContext'
 
 function App() {
   const [started, onStarted] = useState<boolean>(false)
   const [loadingDisapear, setLoadingDisapear] = useState<boolean>(false)
 
   return (
-    <div className="main-container">
-      {!loadingDisapear && (
-        <LoadingScreen
-          setStarted={onStarted}
-          setLoadingDisapear={setLoadingDisapear}
-        />
-      )}{' '}
-      {started && (
-        <>
-          <Navbar />
-          <IntroSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <DetailsSection />
-          <CustomCursor />
-        </>
-      )}
-    </div>
+    <LanguageProvider>
+      <div className="main-container">
+        {!loadingDisapear && (
+          <LoadingScreen
+            setStarted={onStarted}
+            setLoadingDisapear={setLoadingDisapear}
+          />
+        )}{' '}
+        {started && (
+          <>
+            <Navbar />
+            <IntroSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <DetailsSection />
+            <CustomCursor />
+          </>
+        )}
+      </div>
+    </LanguageProvider>
   )
 }
 

@@ -5,8 +5,13 @@ import { motion } from 'framer-motion'
 import Reveal from '../Animations/Reveal'
 import RolesAnimation from '../Animations/RolesAnimation'
 import MouseScroll from '../Common/MouseScroll'
+import { useLang } from '../../context/LanguageContext'
+import { translations } from '../../i18n/translations'
 
 function IntroSection() {
+  const { lang } = useLang()
+  const role = translations[lang].intro.role
+
   return (
     <section id="intro" className="intro-section">
       <div className="background-canvas">
@@ -18,7 +23,7 @@ function IntroSection() {
         </Reveal>
         <Reveal>
           <motion.div className="role-text">
-            {Array.from('Software Engineer').map((letter, index) => (
+            {Array.from(role).map((letter, index) => (
               <TextSpan key={index}>
                 {letter === ' ' ? '\u00A0' : letter}
               </TextSpan>

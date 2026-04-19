@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import '../../styles/components/Navbar.scss'
+import { useLang } from '../../context/LanguageContext'
+import { translations } from '../../i18n/translations'
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false)
+  const { lang, setLang } = useLang()
+  const t = translations[lang].nav
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId)
@@ -33,13 +37,13 @@ function Navbar() {
         </div>
         <div className={`nav-sections ${showMenu ? 'show' : ''}`}>
           <li>
-            <a onClick={() => scrollToSection('experience')}>Experience</a>
+            <a onClick={() => scrollToSection('experience')}>{t.experience}</a>
           </li>
           <li>
-            <a onClick={() => scrollToSection('projects')}>Projects</a>
+            <a onClick={() => scrollToSection('projects')}>{t.projects}</a>
           </li>
           <li>
-            <a onClick={() => scrollToSection('details')}>Details</a>
+            <a onClick={() => scrollToSection('details')}>{t.details}</a>
           </li>
         </div>
         <div className={`nav-icons ${showMenu ? 'show' : ''}`}>
@@ -52,15 +56,29 @@ function Navbar() {
               <i className="fab fa-github"></i>
             </a>
           </li>
-
           <li>
             <a
               href="https://www.linkedin.com/in/nabil-amhaouch/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fab fa-linkedin"></i>{' '}
+              <i className="fab fa-linkedin"></i>
             </a>
+          </li>
+          <li className="lang-toggle">
+            <button
+              className={lang === 'fr' ? 'active' : ''}
+              onClick={() => setLang('fr')}
+            >
+              FR
+            </button>
+            <span className="lang-sep">|</span>
+            <button
+              className={lang === 'en' ? 'active' : ''}
+              onClick={() => setLang('en')}
+            >
+              EN
+            </button>
           </li>
         </div>
         <div className={`menu-icon ${showMenu ? 'hide' : ''}`}>
