@@ -1,4 +1,4 @@
-@import '../variables';
+@use '../variables' as *;
 
 .navbar {
   position: fixed;
@@ -162,6 +162,39 @@
       }
       @media (max-width: $breakpoint-md) {
         display: inline-block;
+      }
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+
+      button {
+        background: none;
+        border: none;
+        font-size: 0.85rem;
+        font-family: inherit;
+        color: $light-grey;
+        cursor: pointer;
+        padding: 0.2rem 0.3rem;
+        transition: color 0.2s ease;
+        letter-spacing: 0.05em;
+
+        &.active {
+          color: #fff;
+          font-weight: 700;
+        }
+
+        &:hover {
+          color: #fff;
+        }
+      }
+
+      .lang-sep {
+        color: $light-grey;
+        font-size: 0.8rem;
+        user-select: none;
       }
     }
 

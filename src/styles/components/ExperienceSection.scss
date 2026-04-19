@@ -1,4 +1,4 @@
-@import '../variables';
+@use '../variables' as *;
 
 .experience-section {
   display: flex;
@@ -86,6 +86,42 @@
           height: 25px;
           transform: translateY(30%);
         }
+      }
+
+      .company-initials {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.05em;
+
+        @media (max-width: 1170px) {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .sub-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .sub-project {
+      border-left: 2px solid $light-grey;
+      padding-left: 1rem;
+
+      .sub-project-name {
+        margin: 0 0 0.4rem;
+        font-size: 0.95rem;
+        color: #ddd;
+      }
+
+      .sub-project-date {
+        font-size: 0.78rem;
+        color: $light-grey;
+        display: block;
+        margin-bottom: 0.8rem;
       }
     }
   }
