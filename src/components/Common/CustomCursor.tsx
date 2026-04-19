@@ -2,11 +2,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import '../../styles/components/CustomCursor.scss'
 
+const isTouchDevice = () =>
+  window.matchMedia('(hover: none) and (pointer: coarse)').matches
+
 function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [showCursor, setShowCursor] = useState(false)
 
   useEffect(() => {
+    if (isTouchDevice()) return
+
     const moveCursor = (e: MouseEvent) => {
       setPosition({ x: e.clientX - 8, y: e.clientY - 8 })
       setShowCursor(true)

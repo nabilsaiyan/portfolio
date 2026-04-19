@@ -1,5 +1,11 @@
 @use '../variables' as *;
 
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
+
 .custom-cursor {
   position: fixed;
   top: 0;
