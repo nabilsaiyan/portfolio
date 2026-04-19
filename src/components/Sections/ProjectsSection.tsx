@@ -1,9 +1,11 @@
+import { lazy, Suspense } from 'react'
 import '../../styles/components/ProjectsSection.scss'
 import Reveal from '../Animations/Reveal'
-import LaptopCanvas from '../Canvas/LaptopCanvas'
-import PhonesCanvas from '../Canvas/PhonesCanvas'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
+
+const LaptopCanvas = lazy(() => import('../Canvas/LaptopCanvas'))
+const PhonesCanvas = lazy(() => import('../Canvas/PhonesCanvas'))
 
 function ProjectsSection() {
   const { lang } = useLang()
@@ -31,11 +33,9 @@ function ProjectsSection() {
               <p>01</p>
             </div>
           </Reveal>
-
           <Reveal>
             <h1>{t.p1.title}</h1>
           </Reveal>
-
           <ul>
             {t.p1.features.map((feature, i) => (
               <li key={i}>
@@ -51,7 +51,9 @@ function ProjectsSection() {
           </span>
         </div>
         <div className="background-canvas">
-          <LaptopCanvas />
+          <Suspense fallback={null}>
+            <LaptopCanvas />
+          </Suspense>
         </div>
       </div>
       <div className="part-two">
@@ -62,11 +64,9 @@ function ProjectsSection() {
               <p>02</p>
             </div>
           </Reveal>
-
           <Reveal>
             <h1>{t.p2.title}</h1>
           </Reveal>
-
           <ul>
             {t.p2.features.map((feature, i) => (
               <li key={i}>
@@ -78,7 +78,9 @@ function ProjectsSection() {
           </ul>
         </div>
         <div className="background-canvas">
-          <PhonesCanvas />
+          <Suspense fallback={null}>
+            <PhonesCanvas />
+          </Suspense>
         </div>
       </div>
     </section>

@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import LoadingScreen from './components/Animations/LoadingScreen'
 import Navbar from './components/Navbar/Navbar'
-import ExperienceSection from './components/Sections/ExperienceSection'
 import IntroSection from './components/Sections/IntroSection'
-import ProjectsSection from './components/Sections/ProjectsSection'
 import './styles/styles.scss'
-import DetailsSection from './components/Sections/DetailsSection'
 import CustomCursor from './components/Common/CustomCursor'
 import { LanguageProvider } from './context/LanguageContext'
+
+const ExperienceSection = lazy(() => import('./components/Sections/ExperienceSection'))
+const ProjectsSection = lazy(() => import('./components/Sections/ProjectsSection'))
+const DetailsSection = lazy(() => import('./components/Sections/DetailsSection'))
 
 function App() {
   const [started, onStarted] = useState<boolean>(false)
@@ -26,9 +27,11 @@ function App() {
           <>
             <Navbar />
             <IntroSection />
-            <ExperienceSection />
-            <ProjectsSection />
-            <DetailsSection />
+            <Suspense fallback={null}>
+              <ExperienceSection />
+              <ProjectsSection />
+              <DetailsSection />
+            </Suspense>
             <CustomCursor />
           </>
         )}
