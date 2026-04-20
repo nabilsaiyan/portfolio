@@ -58,7 +58,7 @@ export function LoadingT2({ progress }: Props) {
       <div style={{
         background: '#2d2d2d', borderBottom: '1px solid #404040',
         padding: '5px 12px',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         fontSize: 'clamp(7px, 0.8vw, 10px)',
         color: '#ccc', letterSpacing: '0.04em',
         flexShrink: 0, display: 'flex', alignItems: 'center', gap: '6px',
@@ -69,7 +69,7 @@ export function LoadingT2({ progress }: Props) {
       {/* Editor body */}
       <div style={{
         flex: 1, display: 'flex', overflowY: 'hidden',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         fontSize: 'clamp(8px, 0.95vw, 12px)',
         padding: '0.4rem 0',
       }}>
@@ -104,7 +104,7 @@ export function LoadingT2({ progress }: Props) {
       {/* Status bar */}
       <div style={{
         background: '#007acc', padding: '2px 10px',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         fontSize: 'clamp(7px, 0.75vw, 9px)',
         color: '#fff', display: 'flex', justifyContent: 'space-between',
         flexShrink: 0, alignItems: 'center',

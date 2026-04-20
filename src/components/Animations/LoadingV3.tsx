@@ -36,7 +36,7 @@ export function LoadingV3({ progress }: Props) {
         pointerEvents: 'none',
       }} />
       <div style={{
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         fontSize: 'clamp(9px, 1.1vw, 13px)',
         width: '100%', maxWidth: '420px', position: 'relative', zIndex: 1,
       }}>

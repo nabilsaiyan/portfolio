@@ -25,7 +25,7 @@ export function LoadingPreview() {
   const labelStyle: React.CSSProperties = {
     position: 'absolute', top: '10px', left: '50%',
     transform: 'translateX(-50%)',
-    color: '#555', fontFamily: "'Courier New', monospace",
+    color: '#555', fontFamily: "'Inconsolata', monospace",
     fontSize: '10px', letterSpacing: '0.18em', zIndex: 100,
     background: 'rgba(0,0,0,0.85)', padding: '2px 8px',
     borderRadius: '3px', whiteSpace: 'nowrap', border: '1px solid #222',

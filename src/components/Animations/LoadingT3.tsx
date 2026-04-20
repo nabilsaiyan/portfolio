@@ -38,7 +38,7 @@ export function LoadingT3({ progress }: Props) {
       padding: '1.5rem', boxSizing: 'border-box',
     }}>
       <div style={{
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         fontSize: 'clamp(7px, 0.9vw, 11px)',
         width: '100%', maxWidth: '480px',
       }}>

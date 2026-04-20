@@ -41,7 +41,7 @@ export function LoadingV1({ progress }: Props) {
             transition={{ duration: 0.12 }}
             style={{
               display: 'inline-block',
-              fontFamily: "'Courier New', monospace",
+              fontFamily: "'Inconsolata', monospace",
               fontSize: 'clamp(22px, 3vw, 40px)',
               fontWeight: 900,
               letterSpacing: '0.25em',
@@ -76,7 +76,7 @@ export function LoadingV1({ progress }: Props) {
       </div>
       <div style={{
         zIndex: 2, marginTop: '2rem',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         color: '#3498db', fontSize: 'clamp(9px, 1vw, 13px)',
         letterSpacing: '0.1em', textShadow: '0 0 8px #3498db',
       }}>

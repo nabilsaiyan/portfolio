@@ -7,7 +7,7 @@ export const translations = {
     },
     intro: {
       role: 'Software Engineer',
-      roles: ['Full Stack Developer', 'Mobile Developer', 'Design Enthusiast'],
+      roles: ['Full Stack Developer', 'Mobile Developer', 'Design Enthusiast', 'AI Enthusiast'],
     },
     experience: {
       title: 'Experience',
@@ -54,6 +54,7 @@ export const translations = {
         'Développeur Full Stack',
         'Développeur Mobile',
         'Passionné de Design',
+        "Passionné par l'IA",
       ],
     },
     experience: {

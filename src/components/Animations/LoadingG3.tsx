@@ -40,7 +40,7 @@ export function LoadingG3({ progress }: Props) {
                 : { duration: 0 }}
               style={{
                 display: 'inline-block',
-                fontFamily: "'Courier New', monospace",
+                fontFamily: "'Inconsolata', monospace",
                 fontSize: 'clamp(14px, 2vw, 28px)',
                 fontWeight: 900,
                 letterSpacing: '0.25em',
@@ -57,7 +57,7 @@ export function LoadingG3({ progress }: Props) {
       </div>
       <div style={{
         marginTop: '2rem',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         color: '#333', fontSize: 'clamp(8px, 0.9vw, 11px)',
       }}>
         [{'█'.repeat(bars)}{'░'.repeat(20 - bars)}] {Math.floor(progress)}%

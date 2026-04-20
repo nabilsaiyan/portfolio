@@ -51,7 +51,7 @@ export function LoadingG2({ progress }: Props) {
             const locked = isLocked(i)
             return (
               <span key={i} style={{
-                fontFamily: "'Courier New', monospace",
+                fontFamily: "'Inconsolata', monospace",
                 fontSize: 'clamp(14px, 2vw, 28px)',
                 fontWeight: 900,
                 color: locked ? '#ffffff' : '#00881a',
@@ -68,7 +68,7 @@ export function LoadingG2({ progress }: Props) {
           })}
         </div>
         <div style={{
-          fontFamily: "'Courier New', monospace",
+          fontFamily: "'Inconsolata', monospace",
           color: '#003308', fontSize: 'clamp(7px, 0.8vw, 9px)',
           letterSpacing: '0.3em',
         }}>
@@ -77,7 +77,7 @@ export function LoadingG2({ progress }: Props) {
       </div>
       <div style={{
         zIndex: 1, marginTop: '2rem',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         color: '#006614', fontSize: 'clamp(8px, 0.9vw, 11px)',
         textShadow: '0 0 6px #00ff41',
       }}>

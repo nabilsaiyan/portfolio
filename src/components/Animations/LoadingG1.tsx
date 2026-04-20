@@ -54,7 +54,7 @@ export function LoadingG1({ progress }: Props) {
                   : { opacity: 0, y: -25, filter: 'blur(8px)' }}
                 transition={{ duration: 0.1 }}
                 style={{
-                  fontFamily: "'Courier New', monospace",
+                  fontFamily: "'Inconsolata', monospace",
                   fontSize: 'clamp(28px, 5vw, 72px)',
                   fontWeight: 900, letterSpacing: '0.25em',
                   color: gl ? '#0ff' : '#ddeeff',
@@ -77,7 +77,7 @@ export function LoadingG1({ progress }: Props) {
           animate={progress >= 88 ? { opacity: 0.55, letterSpacing: '0.35em' } : { opacity: 0 }}
           transition={{ duration: 0.7 }}
           style={{
-            fontFamily: "'Courier New', monospace",
+            fontFamily: "'Inconsolata', monospace",
             fontSize: 'clamp(11px, 1.4vw, 18px)',
             color: '#3498db', marginTop: '0.8rem',
           }}
@@ -87,7 +87,7 @@ export function LoadingG1({ progress }: Props) {
       </div>
       <div style={{
         zIndex: 3, marginTop: '2.5rem',
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         color: '#3498db', fontSize: 'clamp(13px, 1.4vw, 20px)',
         letterSpacing: '0.08em', textShadow: '0 0 8px #3498db',
       }}>

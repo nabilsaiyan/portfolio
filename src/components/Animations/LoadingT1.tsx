@@ -40,13 +40,13 @@ export function LoadingT1({ progress }: Props) {
         pointerEvents: 'none',
       }} />
       <div style={{
-        fontFamily: "'Courier New', monospace",
+        fontFamily: "'Inconsolata', monospace",
         color: '#1a4a1a', fontSize: 'clamp(7px, 0.75vw, 9px)',
         marginBottom: '0.7rem', letterSpacing: '0.08em',
       }}>
         nabil@portfolio:~
       </div>
-      <div style={{ fontFamily: "'Courier New', monospace", fontSize: 'clamp(8px, 0.9vw, 11px)' }}>
+      <div style={{ fontFamily: "'Inconsolata', monospace", fontSize: 'clamp(8px, 0.9vw, 11px)' }}>
         <AnimatePresence>
           {LINES.slice(0, visible).map((line, i) => (
             <motion.div key={i}
