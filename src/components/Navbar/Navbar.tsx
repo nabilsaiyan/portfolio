@@ -21,6 +21,7 @@ function Navbar() {
 
       window.scrollTo({ top: y, behavior: 'smooth' })
     }
+    setShowMenu(false)
   }
 
   const handleMenuToggle = () => {

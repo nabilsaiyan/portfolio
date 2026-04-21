@@ -15,6 +15,7 @@ function IntroSection() {
   const [phase, setPhase] = useState(0)
   const [selectedIdx, setSelectedIdx] = useState(0)
 
+
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 300)
     const t2 = setTimeout(() => setPhase(2), 1000)
@@ -40,7 +41,7 @@ function IntroSection() {
           animate={{ opacity: phase >= 1 ? 1 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <span style={{ color: C }}>❯</span> select role
+          <span style={{ color: C }}>$</span> {t.prompt}
         </motion.div>
 
         <AnimatePresence>
@@ -89,7 +90,7 @@ function IntroSection() {
       </div>
 
       <div className="mouse-scroll">
-        <MouseScroll />
+        <MouseScroll variant="classic" />
       </div>
     </section>
   )

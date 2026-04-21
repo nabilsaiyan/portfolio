@@ -2,17 +2,41 @@ import '../../styles/components/DetailsSection.scss'
 import Reveal from '../Animations/Reveal'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SnakeGame from '../Games/SnakeGame'
 import TypeRush from '../Games/TypeRush'
 import BugCatcher from '../Games/BugCatcher'
 import CommitBreaker from '../Games/CommitBreaker'
+
+const STACK_CATCHER_IDX = 2
+const GAME_HEIGHT = 700
 
 function DetailsSection() {
   const { lang } = useLang()
   const t = translations[lang].details
 
   const [activeGame, setActiveGame] = useState(0)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768)
+  const [scale, setScale] = useState(() => {
+    if (window.innerWidth > 768) return 1
+    return Math.min(1, (window.innerWidth - 32) / 600)
+  })
+
+  useEffect(() => {
+    const update = () => {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+      if (mobile) {
+        setActiveGame(STACK_CATCHER_IDX)
+        setScale(Math.min(1, (window.innerWidth - 32) / 600))
+      } else {
+        setScale(1)
+      }
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   const GAMES = [
     { label: 'SNAKE', node: <SnakeGame /> },
@@ -20,6 +44,10 @@ function DetailsSection() {
     { label: 'STACK CATCHER', node: <BugCatcher /> },
     { label: 'COMMIT BREAKER', node: <CommitBreaker /> },
   ]
+
+  const visibleGames = isMobile
+    ? GAMES.filter((_, i) => i === STACK_CATCHER_IDX)
+    : GAMES
 
   const goTo = (url: string) => {
     window.open(url, '_blank', 'noopener noreferrer')
@@ -35,48 +63,29 @@ function DetailsSection() {
           <Reveal>
             <p>
               {t.bio1}{' '}
-              <a
-                onClick={() =>
-                  goTo('https://www.univ-lorraine.fr/en/univ-lorraine/')
-                }
-              >
+              <a onClick={() => goTo('https://www.univ-lorraine.fr/en/univ-lorraine/')}>
                 {t.bio1_uni}
               </a>
               {t.bio1_end}
             </p>
           </Reveal>
-          <Reveal>
-            <p>{t.bio2}</p>
-          </Reveal>
-          <Reveal>
-            <p>{t.bio3}</p>
-          </Reveal>
+          <Reveal><p>{t.bio2}</p></Reveal>
+          <Reveal><p>{t.bio3}</p></Reveal>
         </div>
 
         <div className="details-contact">
           <Reveal>
             <p>
               {t.contact}{' '}
-              <a
-                onClick={() =>
-                  goTo('https://www.linkedin.com/in/nabil-amhaouch')
-                }
-              >
-                LinkedIn
-              </a>{' '}
+              <a onClick={() => goTo('https://www.linkedin.com/in/nabil-amhaouch')}>LinkedIn</a>{' '}
               {t.contact_and}{' '}
-              <a onClick={() => goTo('https://github.com/nabilsaiyan')}>
-                GitHub
-              </a>
-              .
+              <a onClick={() => goTo('https://github.com/nabilsaiyan')}>GitHub</a>.
             </p>
           </Reveal>
           <Reveal>
             <div className="details-email">
               <i className="fa-solid fa-envelope"></i>{' '}
-              <a href="mailto:nabil.amhaouch1@gmail.com">
-                nabil.amhaouch1@gmail.com
-              </a>
+              <a href="mailto:nabil.amhaouch.dev@gmail.com">nabil.amhaouch.dev@gmail.com</a>
             </div>
           </Reveal>
         </div>
@@ -85,18 +94,36 @@ function DetailsSection() {
       <div className="details-right">
         <div className="game-selector">
           <div className="game-selector__tabs">
-            {GAMES.map((g, i) => (
-              <button
-                key={g.label}
-                className={`game-selector__tab${activeGame === i ? ' game-selector__tab--active' : ''}`}
-                onClick={() => setActiveGame(i)}
-              >
-                {g.label}
-              </button>
-            ))}
+            {visibleGames.map((g) => {
+              const i = GAMES.findIndex(x => x.label === g.label)
+              return (
+                <button
+                  key={g.label}
+                  className={`game-selector__tab${activeGame === i ? ' game-selector__tab--active' : ''}`}
+                  onClick={() => setActiveGame(i)}
+                >
+                  {g.label}
+                </button>
+              )
+            })}
           </div>
-          <div className="game-selector__content">
-            {GAMES[activeGame].node}
+
+          <div
+            className="game-selector__content"
+            style={scale < 1 ? {
+              height: `${GAME_HEIGHT * scale}px`,
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+            } : undefined}
+          >
+            <div style={scale < 1 ? {
+              transform: `scale(${scale})`,
+              transformOrigin: 'top center',
+              flexShrink: 0,
+            } : undefined}>
+              {GAMES[activeGame].node}
+            </div>
           </div>
         </div>
       </div>

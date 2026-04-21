@@ -10,6 +10,23 @@ import Reveal from '../Animations/Reveal'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
 
+function computeDuration(startDate: string, lang: string): string {
+  const [sy, sm] = startDate.split('-').map(Number)
+  const now = new Date()
+  let months = (now.getFullYear() - sy) * 12 + (now.getMonth() + 1 - sm)
+  if (months < 1) months = 1
+  const years = Math.floor(months / 12)
+  const rem = months % 12
+  if (lang === 'fr') {
+    if (years === 0) return `${rem} mois`
+    if (rem === 0) return years === 1 ? '1 an' : `${years} ans`
+    return `${years} ${years === 1 ? 'an' : 'ans'} ${rem} mois`
+  }
+  if (years === 0) return `${rem} month${rem > 1 ? 's' : ''}`
+  if (rem === 0) return `${years} year${years > 1 ? 's' : ''}`
+  return `${years} year${years > 1 ? 's' : ''} ${rem} month${rem > 1 ? 's' : ''}`
+}
+
 function ExperienceSection() {
   const { lang } = useLang()
   const t = translations[lang].experience
@@ -96,7 +113,7 @@ function ExperienceSection() {
                     </Reveal>
                     <Reveal>
                       <span className="sub-project-date">
-                        {sub.date[lang]} · {sub.duration[lang]}
+                        {sub.date[lang]} · {sub.startDate ? computeDuration(sub.startDate, lang) : sub.duration[lang]}
                       </span>
                     </Reveal>
                     <ul>

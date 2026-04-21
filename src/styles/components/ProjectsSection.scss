@@ -67,6 +67,12 @@
     @media (max-width: $breakpoint-xl) {
       flex-direction: column;
       height: 100%;
+      width: 100%;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 1rem;
+      box-sizing: border-box;
     }
   }
 
@@ -79,6 +85,12 @@
     @media (max-width: $breakpoint-xl) {
       flex-direction: column;
       height: 100%;
+      width: 100%;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 1rem;
+      box-sizing: border-box;
     }
   }
 
@@ -86,8 +98,7 @@
     margin: 0rem 0rem 4rem 7rem;
 
     @media (max-width: $breakpoint-md) {
-      margin-right: 1rem;
-      margin-left: 1rem;
+      margin: 2rem 0;
     }
   }
 
@@ -95,8 +106,7 @@
     margin: 0rem 0rem 2rem 7rem;
 
     @media (max-width: $breakpoint-md) {
-      margin-right: 1rem;
-      margin-left: 1rem;
+      margin: 2rem 0;
     }
   }
 
@@ -113,6 +123,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
 
     @media (max-width: $breakpoint-xsm) {
       font-size: 0.9rem;
@@ -151,6 +162,8 @@
   .text-iphone {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
 
     h1 {
       max-width: 37rem;
@@ -159,11 +172,13 @@
       margin: 1rem 0;
 
       @media (max-width: $breakpoint-xsm) {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+        max-width: 100%;
       }
 
       @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        max-width: 100%;
       }
     }
 
@@ -180,11 +195,11 @@
       color: $dark_grey;
 
       @media (max-width: $breakpoint-xsm) {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
       }
 
       @media (min-width: $breakpoint-xsm) and (max-width: $breakpoint-md) {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
     }
 

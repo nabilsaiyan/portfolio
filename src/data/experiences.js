@@ -1,7 +1,7 @@
 export const experiences = [
   {
     date: { en: 'Mar 2024 - Present', fr: 'Mars 2024 - En cours' },
-    duration: { en: '2 years 2 months', fr: '2 ans 2 mois' },
+    startDate: '2024-03',
     position: { en: 'Software Engineer', fr: 'Ingénieur Logiciel' },
     company: 'Klee Group',
     company_logo: './icons/kleegroup.jpg',
@@ -13,7 +13,7 @@ export const experiences = [
           fr: 'Application de gestion des saisines et dossiers médicaux pour le CIG (Centre Interdépartemental de Gestion)',
         },
         date: { en: 'Mar 2025 - Present', fr: 'Mars 2025 - En cours' },
-        duration: { en: '1 year 2 months', fr: '1 an 2 mois' },
+        startDate: '2025-03',
         responsibilities: {
           en: [
             'Development of complex dynamic interfaces: multi-step steppers, editable tables, advanced filters and reactive components based on Angular signals.',

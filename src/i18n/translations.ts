@@ -7,6 +7,7 @@ export const translations = {
     },
     intro: {
       role: 'Software Engineer',
+      prompt: 'whoami',
       roles: ['Full Stack Developer', 'Mobile Developer', 'Design Enthusiast', 'AI Enthusiast'],
     },
     experience: {
@@ -84,6 +85,7 @@ export const translations = {
     },
     intro: {
       role: 'Ingénieur Logiciel',
+      prompt: 'whoami',
       roles: [
         'Développeur Full Stack',
         'Développeur Mobile',

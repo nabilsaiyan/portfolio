@@ -1,8 +1,18 @@
-import { Canvas } from '@react-three/fiber'
-import { Suspense, useEffect, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Suspense, useEffect, useState, useRef } from 'react'
 import { Environment } from '@react-three/drei'
 import Setup from '../Avatars/Setup'
-import { Vector3 } from 'three'
+import { Vector3, Group } from 'three'
+import { useScroll } from 'framer-motion'
+
+function ScrollRotation({ children }: { children: React.ReactNode }) {
+  const ref = useRef<Group>(null)
+  const { scrollYProgress } = useScroll()
+  useFrame(() => {
+    if (ref.current) ref.current.rotation.y = scrollYProgress.get() * 1.8
+  })
+  return <group ref={ref}>{children}</group>
+}
 
 function AvatarCanvas() {
   const [cameraPosition, setCameraPosition] = useState<Vector3>(
@@ -41,7 +51,9 @@ function AvatarCanvas() {
       <ambientLight />
       <Environment preset="sunset" />
       <Suspense fallback={null}>
-        <Setup position={setupPosition} rotation={[-0.4, -1, 0]} scale={0.7} />
+        <ScrollRotation>
+          <Setup position={setupPosition} rotation={[-0.4, -1, 0]} scale={0.7} />
+        </ScrollRotation>
       </Suspense>
     </Canvas>
   )

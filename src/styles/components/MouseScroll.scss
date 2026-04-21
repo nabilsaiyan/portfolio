@@ -1,87 +1,242 @@
 @use '../variables' as *;
 
-.mouse-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+$c: #00d4ff;
 
-.mouse-icon {
-  height: 35px;
-  width: 22px;
-  border-radius: 12px;
-  border: 2px solid $gradient-end;
-  position: relative;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CLASSIC — mouse + wheel scrolls down + cascading chevrons
+   Most universally understood scroll indicator
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.ms-classic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 
-  &:after {
-    content: '';
-    height: 5px;
-    width: 3px;
-    display: block;
-    margin: 5px auto;
-    border: 2px solid $gradient-end;
-    border-radius: 8px;
-    animation: mouse-wheel 1s linear infinite;
+  &__label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba($c, 0.45);
+    animation: label-pulse 2s ease-in-out infinite;
   }
-}
 
-.mouse-arrow {
-  display: block;
-  transform: rotate(45deg);
-  border-right: 2px solid $gradient-end;
-  border-bottom: 2px solid $gradient-end;
-  margin: 2px 0 3px 6px;
-  width: 8px;
-  height: 8px;
-  animation: mouse-scroll 1s infinite;
-  animation-delay: 100ms;
-  animation-direction: alternate;
+  &__mouse {
+    width: 24px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1.8px solid rgba($c, 0.7);
+    position: relative;
+    box-shadow: 0 0 10px rgba($c, 0.2), inset 0 0 8px rgba($c, 0.05);
+    animation: mouse-glow 2s ease-in-out infinite;
+  }
 
-  &:after,
-  &:before {
+  &__wheel {
+    width: 4px;
+    height: 7px;
+    border-radius: 2px;
+    background: $c;
+    box-shadow: 0 0 6px $c;
     position: absolute;
-    content: '';
-    display: block;
-    border-right: 2px solid $gradient-end;
-    border-bottom: 2px solid $gradient-end;
-    width: 8px;
-    height: 8px;
-    animation: mouse-scroll 1s infinite;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: wheel-down 1.6s ease-in-out infinite;
   }
 
-  &:after {
-    margin: 7px 0 3px 7px;
-    animation-delay: 200ms;
-    animation-direction: alternate;
+  &__arrows {
+    width: 20px;
+    color: $c;
   }
 
-  &:before {
-    margin: 14px 0 3px 14px;
-    animation-delay: 300ms;
-    animation-direction: alternate;
+  &__v {
+    opacity: 0;
+    animation: chevron-wave 1.6s ease-in-out infinite;
+    &--1 { animation-delay: 0s; }
+    &--2 { animation-delay: 0.2s; }
+    &--3 { animation-delay: 0.4s; }
   }
 }
 
-@keyframes mouse-wheel {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes label-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.9; }
+}
+@keyframes mouse-glow {
+  0%, 100% { box-shadow: 0 0 6px rgba($c, 0.15), inset 0 0 6px rgba($c, 0.04); }
+  50%       { box-shadow: 0 0 16px rgba($c, 0.5), inset 0 0 12px rgba($c, 0.1); }
+}
+@keyframes wheel-down {
+  0%   { top: 7px; opacity: 1; }
+  60%  { top: 22px; opacity: 0; }
+  61%  { top: 7px; opacity: 0; }
+  80%  { opacity: 1; }
+  100% { top: 7px; opacity: 1; }
+}
+@keyframes chevron-wave {
+  0%        { opacity: 0; transform: translateY(-3px); }
+  30%, 60%  { opacity: 1; transform: translateY(0); }
+  90%, 100% { opacity: 0; transform: translateY(3px); }
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SWIPE — finger + droplets trailing downward
+   Communicates touch/swipe gesture clearly
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.ms-swipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+
+  &__finger {
+    width: 28px;
+    color: $c;
+    filter: drop-shadow(0 0 5px rgba($c, 0.5));
+    animation: swipe-down 1.8s ease-in-out infinite;
+    transform-origin: 50% 30%;
   }
-  100% {
-    opacity: 0;
-    transform: translateY(6px);
+
+  &__trail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  &__drop {
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, $c, transparent);
+    box-shadow: 0 0 4px rgba($c, 0.5);
+    animation: drop-appear 1.8s ease-in-out infinite;
+
+    &--1 { height: 14px; animation-delay: 0.1s; }
+    &--2 { height: 10px; animation-delay: 0.25s; }
+    &--3 { height: 6px;  animation-delay: 0.4s; }
   }
 }
 
-@keyframes mouse-scroll {
-  0% {
+@keyframes swipe-down {
+  0%        { transform: translateY(-4px); opacity: 0.5; }
+  30%, 60%  { transform: translateY(4px);  opacity: 1; }
+  100%      { transform: translateY(-4px); opacity: 0.5; }
+}
+@keyframes drop-appear {
+  0%, 20%  { opacity: 0; transform: scaleY(0.3); }
+  40%, 65% { opacity: 1; transform: scaleY(1); }
+  100%     { opacity: 0; transform: scaleY(0.3); }
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BOUNCE — mouse + big chevron bouncing down
+   Extremely readable, no ambiguity
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.ms-bounce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  &__mouse {
+    width: 24px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1.8px solid rgba($c, 0.65);
+    position: relative;
+    box-shadow: 0 0 8px rgba($c, 0.2);
+  }
+
+  &__wheel {
+    width: 4px;
+    height: 7px;
+    border-radius: 2px;
+    background: $c;
+    box-shadow: 0 0 6px $c;
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: wheel-down 1.6s ease-in-out infinite;
+  }
+
+  &__arrow {
+    width: 28px;
+    color: $c;
+    filter: drop-shadow(0 0 5px rgba($c, 0.6));
+    animation: big-bounce 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes big-bounce {
+  0%, 100% { transform: translateY(-4px); opacity: 0.5; }
+  50%       { transform: translateY(4px);  opacity: 1; filter: drop-shadow(0 0 8px $c); }
+}
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REVEAL — mouse + "scroll ↓" typewriter loop
+   Text makes intent 100% explicit
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.ms-reveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  &__mouse {
+    width: 24px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1.8px solid rgba($c, 0.65);
+    position: relative;
+    box-shadow: 0 0 8px rgba($c, 0.2);
+    animation: mouse-glow 2s ease-in-out infinite;
+  }
+
+  &__wheel {
+    width: 4px;
+    height: 7px;
+    border-radius: 2px;
+    background: $c;
+    box-shadow: 0 0 6px $c;
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: wheel-down 1.6s ease-in-out infinite;
+  }
+
+  &__text {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: $c;
+    display: flex;
+    overflow: hidden;
+  }
+
+  &__char {
+    display: inline-block;
     opacity: 0;
+    animation: char-pop 4s ease-in-out infinite;
+    color: rgba($c, 0.8);
+
+    &--s   { animation-delay: 0s; }
+    &--c   { animation-delay: 0.1s; }
+    &--r   { animation-delay: 0.2s; }
+    &--o   { animation-delay: 0.3s; }
+    &--l   { animation-delay: 0.4s; }
+    &--l2  { animation-delay: 0.5s; }
+    &--arr { animation-delay: 0.65s; color: $c; filter: drop-shadow(0 0 4px $c); }
   }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+}
+
+@keyframes char-pop {
+  0%, 10%  { opacity: 0; transform: translateY(4px); }
+  20%, 70% { opacity: 1; transform: translateY(0); }
+  85%, 100%{ opacity: 0; transform: translateY(-2px); }
 }

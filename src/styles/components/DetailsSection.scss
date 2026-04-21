@@ -5,7 +5,7 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 4rem;
-  margin: 10rem 5rem 10rem 5rem;
+  margin: 10rem 5rem 3rem 5rem;
   overflow: hidden;
 
   .details-right {
@@ -58,11 +58,26 @@
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
-    margin: 5rem 0 10rem 0;
+    margin: 5rem 0 3rem 0;
     padding: 0 1rem;
 
     .details-right {
-      order: -1;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .game-selector {
+      width: 100%;
+      align-items: flex-start;
+
+      &__tabs {
+        width: 100%;
+        justify-content: center;
+      }
+
+      &__content {
+        width: 100%;
+      }
     }
   }
 
