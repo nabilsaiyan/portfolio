@@ -38,13 +38,13 @@ function Navbar() {
         </div>
         <div className={`nav-sections ${showMenu ? 'show' : ''}`}>
           <li>
-            <a onClick={() => scrollToSection('experience')}>{t.experience}</a>
+            <a onClick={() => scrollToSection('experience')} data-text={t.experience}>{t.experience}</a>
           </li>
           <li>
-            <a onClick={() => scrollToSection('projects')}>{t.projects}</a>
+            <a onClick={() => scrollToSection('projects')} data-text={t.projects}>{t.projects}</a>
           </li>
           <li>
-            <a onClick={() => scrollToSection('details')}>{t.details}</a>
+            <a onClick={() => scrollToSection('details')} data-text={t.details}>{t.details}</a>
           </li>
         </div>
         <div className={`nav-icons ${showMenu ? 'show' : ''}`}>

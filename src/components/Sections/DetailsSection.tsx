@@ -63,7 +63,7 @@ function DetailsSection() {
           <Reveal>
             <p>
               {t.bio1}{' '}
-              <a onClick={() => goTo('https://www.univ-lorraine.fr/en/univ-lorraine/')}>
+              <a onClick={() => goTo('https://www.univ-lorraine.fr/en/univ-lorraine/')} data-text={t.bio1_uni}>
                 {t.bio1_uni}
               </a>
               {t.bio1_end}
@@ -77,15 +77,15 @@ function DetailsSection() {
           <Reveal>
             <p>
               {t.contact}{' '}
-              <a onClick={() => goTo('https://www.linkedin.com/in/nabil-amhaouch')}>LinkedIn</a>{' '}
+              <a onClick={() => goTo('https://www.linkedin.com/in/nabil-amhaouch')} data-text="LinkedIn">LinkedIn</a>{' '}
               {t.contact_and}{' '}
-              <a onClick={() => goTo('https://github.com/nabilsaiyan')}>GitHub</a>.
+              <a onClick={() => goTo('https://github.com/nabilsaiyan')} data-text="GitHub">GitHub</a>.
             </p>
           </Reveal>
           <Reveal>
             <div className="details-email">
               <i className="fa-solid fa-envelope"></i>{' '}
-              <a href="mailto:nabil.amhaouch.dev@gmail.com">nabil.amhaouch.dev@gmail.com</a>
+              <a href="mailto:nabil.amhaouch.dev@gmail.com" data-text="nabil.amhaouch.dev@gmail.com">nabil.amhaouch.dev@gmail.com</a>
             </div>
           </Reveal>
         </div>

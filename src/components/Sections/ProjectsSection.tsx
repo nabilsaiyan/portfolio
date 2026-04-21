@@ -45,7 +45,7 @@ function ProjectsSection() {
               </li>
             ))}
           </ul>
-          <span className="view-button" onClick={goToGitHubProject}>
+          <span className="view-button" onClick={goToGitHubProject} data-text={t.viewProject}>
             <a>{t.viewProject}</a>
             <span className="material-symbols-outlined">north_east</span>
           </span>
