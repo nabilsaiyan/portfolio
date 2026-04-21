@@ -1,12 +1,25 @@
 import '../../styles/components/DetailsSection.scss'
 import Reveal from '../Animations/Reveal'
-import { AvatarCanvas } from '../Canvas/AvatarCanvas'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
+import { useState } from 'react'
+import SnakeGame from '../Games/SnakeGame'
+import TypeRush from '../Games/TypeRush'
+import BugCatcher from '../Games/BugCatcher'
+import CommitBreaker from '../Games/CommitBreaker'
 
 function DetailsSection() {
   const { lang } = useLang()
   const t = translations[lang].details
+
+  const [activeGame, setActiveGame] = useState(0)
+
+  const GAMES = [
+    { label: 'SNAKE', node: <SnakeGame /> },
+    { label: 'TYPE RUSH', node: <TypeRush /> },
+    { label: 'STACK CATCHER', node: <BugCatcher /> },
+    { label: 'COMMIT BREAKER', node: <CommitBreaker /> },
+  ]
 
   const goTo = (url: string) => {
     window.open(url, '_blank', 'noopener noreferrer')
@@ -14,7 +27,7 @@ function DetailsSection() {
 
   return (
     <section id="details" className="details-section">
-      <div>
+      <div className="details-left">
         <Reveal>
           <h1 className="title-section">{t.title}</h1>
         </Reveal>
@@ -66,6 +79,25 @@ function DetailsSection() {
               </a>
             </div>
           </Reveal>
+        </div>
+      </div>
+
+      <div className="details-right">
+        <div className="game-selector">
+          <div className="game-selector__tabs">
+            {GAMES.map((g, i) => (
+              <button
+                key={g.label}
+                className={`game-selector__tab${activeGame === i ? ' game-selector__tab--active' : ''}`}
+                onClick={() => setActiveGame(i)}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
+          <div className="game-selector__content">
+            {GAMES[activeGame].node}
+          </div>
         </div>
       </div>
     </section>
