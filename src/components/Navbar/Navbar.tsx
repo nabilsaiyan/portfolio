@@ -33,7 +33,7 @@ function Navbar() {
       <ul>
         <div className="logo-wrapper">
           <li className="special">
-            <a onClick={() => scrollToSection('intro')}>N</a>
+            <a onClick={() => scrollToSection('intro')} data-text="N">N</a>
           </li>
         </div>
         <div className={`nav-sections ${showMenu ? 'show' : ''}`}>
@@ -70,6 +70,7 @@ function Navbar() {
             <button
               className={lang === 'fr' ? 'active' : ''}
               onClick={() => setLang('fr')}
+              data-text="FR"
             >
               FR
             </button>
@@ -77,6 +78,7 @@ function Navbar() {
             <button
               className={lang === 'en' ? 'active' : ''}
               onClick={() => setLang('en')}
+              data-text="EN"
             >
               EN
             </button>

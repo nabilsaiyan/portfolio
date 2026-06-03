@@ -120,7 +120,7 @@ function BugCatcher() {
             const isSquashed = squashed.includes(i)
             const age = bug ? (Date.now() - bug.born) / BUG_LIFETIME : 0
             return (
-              <div key={i} onClick={() => squash(i)}
+              <div key={i} onClick={() => bug && squash(i)}
                 style={{ width: CELL, height: CELL, background: '#06030a', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: bug ? 'pointer' : 'default', position: 'relative', overflow: 'hidden', borderRadius: 2 }}>
                 {/* Grid lines */}
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,68,85,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,68,85,0.04) 1px, transparent 1px)', backgroundSize: '12px 12px' }} />

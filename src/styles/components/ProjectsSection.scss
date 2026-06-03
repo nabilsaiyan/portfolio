@@ -42,18 +42,17 @@
     z-index: -1;
 
     @media (min-width: $breakpoint-lg) and (max-width: $breakpoint-xl) {
-      position: absolute;
-      right: 0;
-      left: auto;
-      width: 55%;
-      height: 100vh;
+      position: relative;
+      width: 100%;
+      height: 65vh;
+      overflow: hidden;
       z-index: -1;
     }
 
     @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
       position: relative;
       width: 100%;
-      height: 70vh;
+      height: 60vh;
       overflow: hidden;
       z-index: -1;
     }
@@ -77,11 +76,12 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
     }
 
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
-      box-sizing: border-box;
     }
   }
 
@@ -95,11 +95,12 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
     }
 
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
-      box-sizing: border-box;
     }
   }
 

@@ -102,6 +102,12 @@ function DetailsSection() {
         )}
       </div>
 
+      {isMobile && (
+        <Reveal>
+          <p className="details-game-hint details-game-hint--mobile">{t.game_hint_mobile}</p>
+        </Reveal>
+      )}
+
       <div className="details-right">
         <div className="game-selector">
           <div className="game-selector__tabs">
@@ -139,11 +145,6 @@ function DetailsSection() {
         </div>
       </div>
 
-      {isMobile && (
-        <Reveal>
-          <p className="details-game-hint details-game-hint--mobile">{t.game_hint_mobile}</p>
-        </Reveal>
-      )}
     </section>
   )
 }
