@@ -32,14 +32,17 @@ function CustomCursor() {
     }
     resize()
 
+    let mouseX = 0, mouseY = 0
     const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
       hueRef.current = (hueRef.current + 2) % 360
-      dot.style.transform = `translate(${e.clientX - 8}px, ${e.clientY - 8}px)`
       dot.style.opacity = '1'
       pathPts.current.push({ x: e.clientX, y: e.clientY, t: performance.now() })
     }
 
     const animate = () => {
+      dot.style.transform = `translate(${mouseX - 8}px, ${mouseY - 8}px)`
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       const now = performance.now()

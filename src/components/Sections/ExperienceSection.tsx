@@ -9,6 +9,19 @@ import { motion } from 'framer-motion'
 import Reveal from '../Animations/Reveal'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
+import { useMemo } from 'react'
+
+const TECH_COLORS = [
+  '#FF5733', '#33FFA8', '#3366FF', '#FF33A8', '#33FF33', '#FFD700',
+  '#FF1493', '#00CED1', '#FF4500', '#7FFF00', '#FF6347', '#20B2AA',
+  '#FF69B4', '#FF8C00', '#ac3c63', '#a448e5',
+]
+
+const getTechColor = (tech: string) => {
+  let hash = 0
+  for (let i = 0; i < tech.length; i++) hash = tech.charCodeAt(i) + ((hash << 5) - hash)
+  return TECH_COLORS[Math.abs(hash) % TECH_COLORS.length]
+}
 
 function computeDuration(startDate: string, lang: string): string {
   const [sy, sm] = startDate.split('-').map(Number)
@@ -31,19 +44,14 @@ function ExperienceSection() {
   const { lang } = useLang()
   const t = translations[lang].experience
 
-  function getRandomColor() {
-    const colors = [
-      '#FF5733', '#33FFA8', '#3366FF', '#FF33A8', '#33FF33', '#FFD700',
-      '#FF1493', '#00CED1', '#FF4500', '#7FFF00', '#FF6347', '#20B2AA',
-      '#FF69B4', '#FF8C00', '#ac3c63', '#a448e5',
-    ]
-    const prevColor = localStorage.getItem('prevColor')
-    const filteredColors = colors.filter((color) => color !== prevColor)
-    const randomIndex = Math.floor(Math.random() * filteredColors.length)
-    const selectedColor = filteredColors[randomIndex]
-    localStorage.setItem('prevColor', selectedColor)
-    return selectedColor
-  }
+  const techColorMap = useMemo(() => {
+    const map = new Map<string, string>()
+    experiences.forEach((exp: any) => {
+      const techs = exp.technologies ?? exp.subProjects?.flatMap((s: any) => s.technologies) ?? []
+      techs.forEach((tech: string) => { if (!map.has(tech)) map.set(tech, getTechColor(tech)) })
+    })
+    return map
+  }, [])
 
   return (
     <motion.section id="experience" className="experience-section">
@@ -130,7 +138,7 @@ function ExperienceSection() {
                     <Reveal>
                       <div className="techs">
                         {sub.technologies.map((tech: string, tIndex: number) => (
-                          <span key={tIndex} style={{ color: getRandomColor() }}>
+                          <span key={tIndex} style={{ color: techColorMap.get(tech) ?? getTechColor(tech) }}>
                             #{tech}
                           </span>
                         ))}
@@ -159,7 +167,7 @@ function ExperienceSection() {
                   <div className="techs">
                     {experience.technologies.map(
                       (tech: string, tIndex: number) => (
-                        <span key={tIndex} style={{ color: getRandomColor() }}>
+                        <span key={tIndex} style={{ color: techColorMap.get(tech) ?? getTechColor(tech) }}>
                           #{tech}
                         </span>
                       ),

@@ -38,16 +38,21 @@ function DetailsSection() {
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const GAMES = [
-    { label: 'SNAKE', node: <SnakeGame /> },
-    { label: 'TYPE RUSH', node: <TypeRush /> },
-    { label: 'STACK CATCHER', node: <BugCatcher /> },
-    { label: 'COMMIT BREAKER', node: <CommitBreaker /> },
-  ]
+  const GAME_LABELS = ['SNAKE', 'TYPE RUSH', 'STACK CATCHER', 'COMMIT BREAKER']
 
-  const visibleGames = isMobile
-    ? GAMES.filter((_, i) => i === STACK_CATCHER_IDX)
-    : GAMES
+  const visibleLabels = isMobile
+    ? [GAME_LABELS[STACK_CATCHER_IDX]]
+    : GAME_LABELS
+
+  const renderActiveGame = () => {
+    switch (activeGame) {
+      case 0: return <SnakeGame />
+      case 1: return <TypeRush />
+      case 2: return <BugCatcher />
+      case 3: return <CommitBreaker />
+      default: return null
+    }
+  }
 
   const goTo = (url: string) => {
     window.open(url, '_blank', 'noopener noreferrer')
@@ -100,15 +105,15 @@ function DetailsSection() {
       <div className="details-right">
         <div className="game-selector">
           <div className="game-selector__tabs">
-            {visibleGames.map((g) => {
-              const i = GAMES.findIndex(x => x.label === g.label)
+            {visibleLabels.map((label) => {
+              const i = GAME_LABELS.indexOf(label)
               return (
                 <button
-                  key={g.label}
+                  key={label}
                   className={`game-selector__tab${activeGame === i ? ' game-selector__tab--active' : ''}`}
                   onClick={() => setActiveGame(i)}
                 >
-                  {g.label}
+                  {label}
                 </button>
               )
             })}
@@ -128,7 +133,7 @@ function DetailsSection() {
               transformOrigin: 'top center',
               flexShrink: 0,
             } : undefined}>
-              {GAMES[activeGame].node}
+              {renderActiveGame()}
             </div>
           </div>
         </div>

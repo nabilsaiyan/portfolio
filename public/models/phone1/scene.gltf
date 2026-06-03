@@ -1287,13 +1287,13 @@
   ],
   "images": [
     {
-      "uri": "textures/Lens_baseColor.png"
+      "uri": "textures/Lens_baseColor.jpg"
     },
     {
       "uri": "textures/Display_baseColor.jpeg"
     },
     {
-      "uri": "textures/Samsung_baseColor.png"
+      "uri": "textures/Samsung_baseColor.jpg"
     }
   ],
   "materials": [

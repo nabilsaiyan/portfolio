@@ -1,16 +1,15 @@
-import { Canvas, useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { Canvas } from '@react-three/fiber'
 import '../../styles/components/PhonesCanvas.scss'
 import { useEffect, useRef, useState } from 'react'
-import { Environment, OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
 import { Vector3 } from 'three'
 
 function PhonesCanvas() {
   const firstRef = useRef(null)
-  const gltf1 = useLoader(GLTFLoader, './models/phone2/scene.gltf')
-  const gltf2 = useLoader(GLTFLoader, './models/phone1/scene.gltf')
+  const { scene: scene1 } = useGLTF('./models/phone2/scene.gltf')
+  const { scene: scene2 } = useGLTF('./models/phone1/scene.gltf')
 
   const ref = useRef(null)
 
@@ -74,7 +73,7 @@ function PhonesCanvas() {
       <motion.primitive
         ref={firstRef}
         y
-        object={gltf1.scene}
+        object={scene1}
         position={firstPhonePosition}
         scale={firstScale}
         receiveShadow
@@ -82,7 +81,7 @@ function PhonesCanvas() {
         rotation-y={firstRotateY}
       />
       {/* <motion.primitive
-        object={gltf2.scene}
+        object={scene2}
         position={secondPhonePosition}
         scale={8}
         receiveShadow
@@ -94,3 +93,6 @@ function PhonesCanvas() {
 }
 
 export default PhonesCanvas
+
+useGLTF.preload('./models/phone1/scene.gltf')
+useGLTF.preload('./models/phone2/scene.gltf')

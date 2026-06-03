@@ -1272,7 +1272,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"Cameralens_baseColor",
-			"uri":"textures/Cameralens_baseColor.png"
+			"uri":"textures/Cameralens_baseColor.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
@@ -1282,7 +1282,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"Wallpaper_baseColor",
-			"uri":"textures/Wallpaper_baseColor.png"
+			"uri":"textures/Wallpaper_baseColor.jpg"
 		}
 	],
 	"accessors":[

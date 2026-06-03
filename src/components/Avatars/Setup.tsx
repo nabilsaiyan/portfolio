@@ -11358,4 +11358,5 @@ export default function Setup(props: JSX.IntrinsicElements['group']) {
   )
 }
 
+useGLTF.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/')
 useGLTF.preload('./models/setup.glb')

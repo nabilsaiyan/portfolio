@@ -1,15 +1,14 @@
-import { Canvas, useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { Canvas } from '@react-three/fiber'
 import '../../styles/components/LaptopCanvas.scss'
 import { useEffect, useRef, useState } from 'react'
-import { Environment, OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
 import { Vector3 } from 'three'
 
 function LaptopCanvas() {
   const sceneRef = useRef(null)
-  const gltf = useLoader(GLTFLoader, './models/macbook/scene.gltf')
+  const { scene: gltfScene } = useGLTF('./models/macbook/scene.gltf')
 
   const ref = useRef(null)
 
@@ -59,7 +58,7 @@ function LaptopCanvas() {
     >
       <Environment preset="sunset" />
       <motion.primitive
-        object={gltf.scene}
+        object={gltfScene}
         position={laptopPosition}
         scale={scale}
         rotation-x={rotateX}
@@ -77,3 +76,5 @@ function LaptopCanvas() {
 }
 
 export default LaptopCanvas
+
+useGLTF.preload('./models/macbook/scene.gltf')
