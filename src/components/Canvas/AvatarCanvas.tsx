@@ -15,12 +15,18 @@ function ScrollRotation({ children }: { children: React.ReactNode }) {
 }
 
 function AvatarCanvas() {
-  const [cameraPosition, setCameraPosition] = useState<Vector3>(
-    new Vector3(-3, 3.8, -17),
-  )
-  const [setupPosition, setSetupPosition] = useState<Vector3>(
-    new Vector3(-5, 2, 0),
-  )
+  const [cameraPosition, setCameraPosition] = useState<Vector3>(() => {
+    const w = window.innerWidth
+    if (w < 450) return new Vector3(2, 3.8, -17)
+    if (w < 1000) return new Vector3(0, 3.8, -17)
+    return new Vector3(-3, 3.8, -17)
+  })
+  const [setupPosition, setSetupPosition] = useState<Vector3>(() => {
+    const w = window.innerWidth
+    if (w < 450) return new Vector3(0, 2, 0)
+    if (w < 1000) return new Vector3(-2, 2, 0)
+    return new Vector3(-5, 2, 0)
+  })
 
   useEffect(() => {
     const handleResize = () => {

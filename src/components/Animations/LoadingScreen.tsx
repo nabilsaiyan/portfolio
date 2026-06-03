@@ -1,5 +1,5 @@
 import { useProgress } from '@react-three/drei'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LoadingG1 } from './LoadingG1'
 
 interface LoadingScreenProps {
@@ -9,19 +9,27 @@ interface LoadingScreenProps {
 
 function LoadingScreen({ setStarted, setLoadingDisapear }: LoadingScreenProps) {
   const { progress } = useProgress()
+  const [displayProgress, setDisplayProgress] = useState(0)
+  const doneRef = useRef(false)
+
+  // Only move forward — never reset backwards when new assets register
+  useEffect(() => {
+    setDisplayProgress(prev => Math.max(prev, progress))
+  }, [progress])
 
   useEffect(() => {
-    if (progress === 100) {
+    if (displayProgress >= 100 && !doneRef.current) {
+      doneRef.current = true
       setTimeout(() => {
         setStarted(true)
         setTimeout(() => setLoadingDisapear(true), 1000)
       }, 2000)
     }
-  }, [progress])
+  }, [displayProgress])
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999 }}>
-      <LoadingG1 progress={progress} />
+      <LoadingG1 progress={displayProgress} />
     </div>
   )
 }

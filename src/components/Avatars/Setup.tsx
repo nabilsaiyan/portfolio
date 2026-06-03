@@ -871,8 +871,11 @@ export default function Setup(props: JSX.IntrinsicElements['group']) {
   const { actions, names } = useAnimations(animations, group)
 
   useEffect(() => {
-    if (actions['Armature|mixamo.com|Layer0'])
-      actions['Armature|mixamo.com|Layer0'].reset().fadeIn(0.5).play()
+    const action = actions['Armature|mixamo.com|Layer0']
+    if (action) {
+      action.setLoop(THREE.LoopPingPong, Infinity)
+      action.reset().fadeIn(0.5).play()
+    }
   }, [])
 
   return (

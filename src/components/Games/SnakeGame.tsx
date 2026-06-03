@@ -108,7 +108,8 @@ function SnakeGame() {
     // Tech logos accumulated in snake belly (skip head at i=0)
     snakeRef.current.forEach((seg, i) => {
       if (i === 0) return
-      const foodIdx = eatenFoodsRef.current[i - 1]
+      const eaten = eatenFoodsRef.current
+      const foodIdx = eaten[eaten.length - i]
       if (foodIdx == null) return
       const logo = foodImgsRef.current[foodIdx]
       if (!logo) return
