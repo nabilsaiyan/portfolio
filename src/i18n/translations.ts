@@ -41,6 +41,8 @@ export const translations = {
       bio3: 'In my spare time, I enjoy football, swimming, video games, and exploring new places through travel.',
       contact: 'Feel free to reach out through the email below. You can also connect on',
       contact_and: 'and explore my projects on',
+      game_hint: 'Feel free to play — a few tech-themed mini-games are waiting for you →',
+      game_hint_mobile: 'Feel free to play Stack Catcher below ↓',
     },
     games: {
       pressStart: 'PRESS START',
@@ -124,6 +126,8 @@ export const translations = {
       bio3: "En dehors du travail, j'apprécie le football, la natation, les jeux vidéo et les voyages.",
       contact: 'N\'hésitez pas à me contacter par email ci-dessous. Vous pouvez aussi me rejoindre sur',
       contact_and: 'et explorer mes projets sur',
+      game_hint: 'N\'hésitez pas à jouer — quelques mini-jeux tech vous attendent →',
+      game_hint_mobile: 'N\'hésitez pas à jouer à Stack Catcher ci-dessous ↓',
     },
     games: {
       pressStart: 'DÉMARRER',

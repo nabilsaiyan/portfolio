@@ -1,46 +1,107 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#  nabilamhaouch.dev — Portfolio
 
-## Available Scripts
+**The résumé was boring. So I built this instead.**
 
-In the project directory, you can run:
+[![](https://capsule-render.vercel.app/api?type=rect&color=111111&height=50&text=→%20nabilamhaouch.dev&fontSize=20&fontColor=00d4ff)](https://www.nabilamhaouch.dev)
 
-### `npm start`
+![React](https://img.shields.io/badge/React_18-61DAFB?style=flat-square&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Three.js](https://img.shields.io/badge/Three.js-000000?style=flat-square&logo=threedotjs&logoColor=white) ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=flat-square&logo=framer&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+</div>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This portfolio goes beyond listing skills and experience. It features a fully animated 3D scene, scroll-driven interactions, a custom glitch design system, and a dedicated section with playable mini-games themed around my tech stack — all built from scratch.
 
-### `npm run build`
+Bilingual (🇬🇧 EN / 🇫🇷 FR), responsive across all screen sizes, and designed with a dark cyber-terminal aesthetic.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **3D Interactive Scene** — React Three Fiber avatar at a full dev setup, rotating on scroll via `useFrame` + framer-motion
+- **Glitch Design System** — Consistent cyan/magenta RGB-split glitch effect on all interactive elements (navbar, links, buttons)
+- **Terminal Intro** — `$ whoami` prompt with animated role selector and letter-by-letter glitch name effect
+- **Scroll Animations** — Reveal animations, scroll-driven 3D model rotation, custom animated mouse indicator
+- **4 Playable Mini-Games** — Snake (with tech-stack logos as food), TypeRush, Stack Catcher, Commit Breaker — all themed around real portfolio technologies
+- **Auto-calculated Experience Duration** — Ongoing positions update duration automatically without manual edits
+- **Bilingual** — Full EN/FR translation including UI, bio, and game text (game names stay in English)
+- **Fully Responsive** — Mobile, tablet, and desktop — mobile shows optimized Stack Catcher game only
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tech Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Layer | Technologies |
+|---|---|
+| **Frontend** | React 18, TypeScript, Vite |
+| **3D / Canvas** | Three.js, React Three Fiber, @react-three/drei |
+| **Animation** | Framer Motion, CSS keyframes |
+| **Styling** | SCSS Modules, CSS custom properties |
+| **Icons** | Font Awesome, Google Material Symbols, Devicons CDN |
+| **i18n** | Custom context-based translation system |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Project Structure
 
-## Learn More
+```
+src/
+├── components/
+│   ├── Avatars/          # 3D model components (Setup, Avatar)
+│   ├── Canvas/           # Three.js canvas wrappers
+│   ├── Common/           # Shared UI (GlitchName, MouseScroll...)
+│   ├── Games/            # Snake, TypeRush, StackCatcher, CommitBreaker
+│   └── Sections/         # Page sections (Intro, Experience, Projects, Details)
+├── data/                 # Experience & project data
+├── i18n/                 # EN/FR translations
+├── styles/               # SCSS — global + per-component
+└── context/              # Language context
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/nabilsaiyan/portfolio.git
+cd portfolio
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+---
+
+## Sections
+
+| # | Section | Description |
+|---|---|---|
+| 1 | **Intro** | Terminal prompt, animated name, rotating 3D setup |
+| 2 | **Experience** | Vertical timeline with auto-calculated durations |
+| 3 | **Projects** | Two featured projects with 3D device mockups |
+| 4 | **Details** | Bio, contact, and 4 interactive tech-themed games |
+
+---
+
+## Contact
+
+- **Email** — [nabil.amhaouch.dev@gmail.com](mailto:nabil.amhaouch.dev@gmail.com)
+- **LinkedIn** — [nabil-amhaouch](https://www.linkedin.com/in/nabil-amhaouch)
+- **GitHub** — [nabilsaiyan](https://github.com/nabilsaiyan)
+
+---
+
+<div align="center">
+  <sub>Built with React, Three.js & too much caffeine ☕</sub>
+</div>

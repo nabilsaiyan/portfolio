@@ -89,6 +89,12 @@ function DetailsSection() {
             </div>
           </Reveal>
         </div>
+
+        {!isMobile && (
+          <Reveal>
+            <p className="details-game-hint">{t.game_hint}</p>
+          </Reveal>
+        )}
       </div>
 
       <div className="details-right">
@@ -127,6 +133,12 @@ function DetailsSection() {
           </div>
         </div>
       </div>
+
+      {isMobile && (
+        <Reveal>
+          <p className="details-game-hint details-game-hint--mobile">{t.game_hint_mobile}</p>
+        </Reveal>
+      )}
     </section>
   )
 }
