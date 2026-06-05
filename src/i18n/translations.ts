@@ -18,18 +18,24 @@ export const translations = {
       title: 'Projects',
       viewProject: 'View Project',
       p1: {
-        title: 'A web application for finding TV series.',
+        title: 'Discover, filter and bookmark TV series.',
         features: [
-          'Development of the frontend using React and TypeScript.',
-          'Leverages the TMDB API for series data.',
+          'Server-rendered pages with automatic refresh — always up-to-date trending and top-rated series.',
+          'Search with advanced filters by genre, year and rating, with infinite scroll.',
+          'Detail page with cast, seasons, trailer and similar series.',
+          'Personal watchlist protected by GitHub authentication.',
         ],
+        technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Framer Motion', 'NextAuth v5', 'Zod', 'TMDB API'],
       },
       p2: {
-        title: 'A hybrid mobile application for route management.',
+        title: 'Discover places and navigate with interactive directions.',
         features: [
-          'Design and development of the App using React Native.',
-          'Works on both Android and iOS devices.',
+          'Interactive map to explore nearby places and points of interest.',
+          'Turn-by-turn directions powered by Google Maps.',
+          'REST API integration with Redux for global state management.',
+          'Cross-platform — runs natively on Android and iOS.',
         ],
+        technologies: ['React Native', 'Redux', 'REST API', 'Google Maps', 'React Navigation', 'Android', 'iOS'],
       },
     },
     details: {
@@ -103,18 +109,24 @@ export const translations = {
       title: 'Projets',
       viewProject: 'Voir le projet',
       p1: {
-        title: 'Une application web pour trouver des séries TV.',
+        title: 'Découvrez, filtrez et sauvegardez vos séries TV.',
         features: [
-          'Développement du frontend avec React et TypeScript.',
-          "Utilise l'API TMDB pour les données de séries.",
+          'Pages générées côté serveur avec rafraîchissement automatique — séries tendances toujours à jour.',
+          'Recherche avec filtres avancés par genre, année et note, avec défilement infini.',
+          'Page détail avec casting, saisons, bande-annonce et séries similaires.',
+          'Watchlist personnelle protégée par authentification GitHub.',
         ],
+        technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Framer Motion', 'NextAuth v5', 'Zod', 'TMDB API'],
       },
       p2: {
-        title: "Une application mobile hybride de gestion d'itinéraires.",
+        title: 'Découvrez des lieux et naviguez avec des directions interactives.',
         features: [
-          "Conception et développement de l'application avec React Native.",
-          'Compatible Android et iOS.',
+          'Carte interactive pour explorer les lieux et points d\'intérêt à proximité.',
+          'Itinéraires pas à pas alimentés par Google Maps.',
+          'Intégration d\'une REST API avec Redux pour la gestion globale de l\'état.',
+          'Multi-plateforme — fonctionne nativement sur Android et iOS.',
         ],
+        technologies: ['React Native', 'Redux', 'REST API', 'Google Maps', 'React Navigation', 'Android', 'iOS'],
       },
     },
     details: {

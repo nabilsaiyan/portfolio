@@ -138,8 +138,12 @@ function ExperienceSection() {
                     <Reveal>
                       <div className="techs">
                         {sub.technologies.map((tech: string, tIndex: number) => (
-                          <span key={tIndex} style={{ color: techColorMap.get(tech) ?? getTechColor(tech) }}>
-                            #{tech}
+                          <span key={tIndex} className="tech-tag" style={{
+                            color: techColorMap.get(tech) ?? getTechColor(tech),
+                            borderColor: `${techColorMap.get(tech) ?? getTechColor(tech)}44`,
+                            background: `${techColorMap.get(tech) ?? getTechColor(tech)}0d`,
+                          }}>
+                            {tech}
                           </span>
                         ))}
                       </div>
@@ -167,8 +171,12 @@ function ExperienceSection() {
                   <div className="techs">
                     {experience.technologies.map(
                       (tech: string, tIndex: number) => (
-                        <span key={tIndex} style={{ color: techColorMap.get(tech) ?? getTechColor(tech) }}>
-                          #{tech}
+                        <span key={tIndex} className="tech-tag" style={{
+                          color: techColorMap.get(tech) ?? getTechColor(tech),
+                          borderColor: `${techColorMap.get(tech) ?? getTechColor(tech)}44`,
+                          background: `${techColorMap.get(tech) ?? getTechColor(tech)}0d`,
+                        }}>
+                          {tech}
                         </span>
                       ),
                     )}
