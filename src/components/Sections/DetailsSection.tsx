@@ -5,7 +5,7 @@ import { translations } from '../../i18n/translations'
 import { useState, useEffect } from 'react'
 import SnakeGame from '../Games/SnakeGame'
 import TypeRush from '../Games/TypeRush'
-import BugCatcher from '../Games/BugCatcher'
+import StackCatcher from '../Games/StackCatcher'
 import CommitBreaker from '../Games/CommitBreaker'
 
 const STACK_CATCHER_IDX = 2
@@ -48,7 +48,7 @@ function DetailsSection() {
     switch (activeGame) {
       case 0: return <SnakeGame />
       case 1: return <TypeRush />
-      case 2: return <BugCatcher />
+      case 2: return <StackCatcher />
       case 3: return <CommitBreaker />
       default: return null
     }

@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import React, { useEffect, useRef } from 'react'
 import { useAnimations, useFBX, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { useAnimation } from 'framer-motion'
+
 
 type GLTFResult = GLTF & {
   nodes: {

@@ -22,7 +22,7 @@ const STACK_COLORS: Record<string, string> = {
 
 interface Bug { id: number; born: number; label: string }
 
-function BugCatcher() {
+function StackCatcher() {
   const { lang } = useLang()
   const t = translations[lang].games
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'over'>('idle')
@@ -187,4 +187,4 @@ function BugCatcher() {
   )
 }
 
-export default BugCatcher
+export default StackCatcher
