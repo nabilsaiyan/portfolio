@@ -7,6 +7,20 @@ body {
   padding: 0;
 }
 
+/* Slim scrollbar on mobile */
+@media (max-width: $breakpoint-md) {
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+}
+
 /* Box sizing */
 * {
   box-sizing: border-box;
