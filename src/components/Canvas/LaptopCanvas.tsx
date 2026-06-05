@@ -1,37 +1,39 @@
 import { Canvas, useThree } from '@react-three/fiber'
 import '../../styles/components/LaptopCanvas.scss'
 import { useEffect, useRef, useState } from 'react'
-import { Environment, OrbitControls, useGLTF, useTexture } from '@react-three/drei'
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
-import { Vector3, Mesh, MeshStandardMaterial, SRGBColorSpace, Color, LinearFilter, LinearMipmapLinearFilter } from 'three'
+import { Vector3, Mesh, MeshStandardMaterial, SRGBColorSpace, Color, LinearFilter, LinearMipmapLinearFilter, TextureLoader } from 'three'
 
 function MacbookScreen() {
   const { scene } = useGLTF('./models/macbook/scene.gltf')
-  const screenshot = useTexture('./images/series-finder.jpg')
   const { gl } = useThree()
 
   useEffect(() => {
-    screenshot.colorSpace = SRGBColorSpace
-    screenshot.flipY = true
-    screenshot.generateMipmaps = true
-    screenshot.minFilter = LinearMipmapLinearFilter
-    screenshot.magFilter = LinearFilter
-    screenshot.anisotropy = gl.capabilities.getMaxAnisotropy()
-    screenshot.needsUpdate = true
+    const loader = new TextureLoader()
+    loader.load('/images/series-finder.jpg', (screenshot) => {
+      screenshot.colorSpace = SRGBColorSpace
+      screenshot.flipY = true
+      screenshot.generateMipmaps = true
+      screenshot.minFilter = LinearMipmapLinearFilter
+      screenshot.magFilter = LinearFilter
+      screenshot.anisotropy = gl.capabilities.getMaxAnisotropy()
+      screenshot.needsUpdate = true
 
-    scene.traverse((child) => {
-      if (child instanceof Mesh) {
-        const mat = child.material as MeshStandardMaterial
-        if (mat?.name === 'VNZklasZKSWjWUk') {
-          mat.emissiveMap = screenshot
-          mat.emissive = new Color(1, 1, 1)
-          mat.emissiveIntensity = 2
-          mat.needsUpdate = true
+      scene.traverse((child) => {
+        if (child instanceof Mesh) {
+          const mat = child.material as MeshStandardMaterial
+          if (mat?.name === 'VNZklasZKSWjWUk') {
+            mat.emissiveMap = screenshot
+            mat.emissive = new Color(1, 1, 1)
+            mat.emissiveIntensity = 2
+            mat.needsUpdate = true
+          }
         }
-      }
+      })
     })
-  }, [scene, screenshot, gl])
+  }, [scene, gl])
 
   return null
 }
