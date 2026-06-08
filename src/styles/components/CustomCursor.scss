@@ -10,14 +10,14 @@
   }
 }
 
-/* Restore cursor inside native fullscreen so video controls are usable */
-:fullscreen,
-:-webkit-full-screen {
-  cursor: default !important;
-  * {
-    cursor: default !important;
-  }
-}
+/* Restore cursor inside native fullscreen (each prefix must be a separate rule —
+   browsers discard the whole block if any selector in a comma list is unknown) */
+:fullscreen              { cursor: default !important; }
+:fullscreen *            { cursor: default !important; }
+:-webkit-full-screen     { cursor: default !important; }
+:-webkit-full-screen *   { cursor: default !important; }
+:-moz-full-screen        { cursor: default !important; }
+:-moz-full-screen *      { cursor: default !important; }
 
 .cursor-canvas {
   position: fixed;

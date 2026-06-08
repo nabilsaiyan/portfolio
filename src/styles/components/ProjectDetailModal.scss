@@ -244,7 +244,7 @@
   }
 
   .pdm-btn-label {
-    @media (max-width: $breakpoint-sm) {
+    @media (max-width: $breakpoint-xsm) {
       display: none;
     }
   }
