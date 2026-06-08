@@ -104,6 +104,8 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
     const onChange = () => {
       const el = document.fullscreenElement || (document as any).webkitFullscreenElement
       if (!el) {
+        if (browserVideoRef.current) browserVideoRef.current.controls = false
+        if (phoneVideoRef.current) phoneVideoRef.current.controls = false
         setFsActive(null)
       } else if (el === browserVideoRef.current) {
         setFsActive('browser')
@@ -124,8 +126,10 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
     if (!v) return
     const isFs = !!(document.fullscreenElement || (document as any).webkitFullscreenElement)
     if (isFs) {
-      (document.exitFullscreen ?? (document as any).webkitExitFullscreen)?.call(document)
+      ;(document.exitFullscreen ?? (document as any).webkitExitFullscreen)?.call(document)
     } else {
+      v.controls = true
+      v.muted = false
       const req = v.requestFullscreen?.bind(v) ?? (v as any).webkitRequestFullscreen?.bind(v)
       req?.()
     }
@@ -206,7 +210,7 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                       className="pdm-action-btn"
                     >
                       <GitHubIcon />
-                      <span className="pdm-btn-label">{name}</span>
+                      <span className="pdm-btn-label">GitHub</span>
                     </a>
                   )}
                   {meta.live && (
@@ -217,7 +221,7 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                       className="pdm-action-btn pdm-action-btn--live"
                     >
                       <ExternalLinkIcon />
-                      <span className="pdm-btn-label">{name}</span>
+                      <span className="pdm-btn-label">Live Demo</span>
                     </a>
                   )}
                   <button className="pdm-close-btn" onClick={onClose}>
