@@ -10,6 +10,15 @@
   }
 }
 
+/* Restore cursor inside native fullscreen so video controls are usable */
+:fullscreen,
+:-webkit-full-screen {
+  cursor: default !important;
+  * {
+    cursor: default !important;
+  }
+}
+
 .cursor-canvas {
   position: fixed;
   top: 0;

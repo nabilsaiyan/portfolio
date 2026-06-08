@@ -197,10 +197,34 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                   <span className="pdm-name">{name}</span>
                   <span className="pdm-bracket">/&gt;</span>
                 </div>
-                <button className="pdm-close-btn" onClick={onClose}>
-                  <span className="pdm-esc">ESC</span>
-                  <span className="pdm-x">×</span>
-                </button>
+                <div className="pdm-header-right">
+                  {meta.github && (
+                    <a
+                      href={meta.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="pdm-action-btn"
+                    >
+                      <GitHubIcon />
+                      <span className="pdm-btn-label">{name}</span>
+                    </a>
+                  )}
+                  {meta.live && (
+                    <a
+                      href={meta.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="pdm-action-btn pdm-action-btn--live"
+                    >
+                      <ExternalLinkIcon />
+                      <span className="pdm-btn-label">{name}</span>
+                    </a>
+                  )}
+                  <button className="pdm-close-btn" onClick={onClose}>
+                    <span className="pdm-esc">ESC</span>
+                    <span className="pdm-x">×</span>
+                  </button>
+                </div>
               </div>
 
               {/* Body */}
@@ -250,36 +274,6 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                     ))}
                   </motion.div>
 
-                  <motion.div
-                    className="pdm-actions"
-                    custom={3}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    {meta.github && (
-                      <a
-                        href={meta.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="pdm-action-btn"
-                      >
-                        <GitHubIcon />
-                        {name}
-                      </a>
-                    )}
-                    {meta.live && (
-                      <a
-                        href={meta.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="pdm-action-btn pdm-action-btn--live"
-                      >
-                        <ExternalLinkIcon />
-                        {name}
-                      </a>
-                    )}
-                  </motion.div>
                 </div>
 
                 {/* Right: media */}

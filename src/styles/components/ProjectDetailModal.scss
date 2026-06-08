@@ -100,6 +100,13 @@
 .pdm-num    { color: rgba($gradient-end, 0.7); font-size: 1rem; }
 .pdm-name   { color: #fff; }
 
+.pdm-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
 .pdm-close-btn {
   display: flex;
   align-items: center;
@@ -198,29 +205,21 @@
   &:hover { opacity: 1; }
 }
 
-/* ── Action buttons ──────────────────────────────────────── */
-
-.pdm-actions {
-  display: flex;
-  gap: 0.9rem;
-  flex-wrap: wrap;
-  margin-top: auto;
-  padding-top: 0.5rem;
-}
+/* ── Action buttons (in header) ──────────────────────────── */
 
 .pdm-action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.2rem;
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
   font-family: 'Inconsolata', monospace;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: $gradient-end;
   background: rgba($gradient-end, 0.04);
-  border: 1px solid rgba($gradient-end, 0.45);
+  border: 1px solid rgba($gradient-end, 0.4);
   cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s;
   text-decoration: none;
@@ -230,17 +229,23 @@
 
   &:hover {
     background: rgba($gradient-end, 0.1);
-    box-shadow: 0 0 18px rgba($gradient-end, 0.25);
+    box-shadow: 0 0 14px rgba($gradient-end, 0.25);
   }
 
   &--live {
     color: #a448e5;
     background: rgba(#a448e5, 0.04);
-    border-color: rgba(#a448e5, 0.45);
+    border-color: rgba(#a448e5, 0.4);
 
     &:hover {
       background: rgba(#a448e5, 0.1);
-      box-shadow: 0 0 18px rgba(#a448e5, 0.25);
+      box-shadow: 0 0 14px rgba(#a448e5, 0.25);
+    }
+  }
+
+  .pdm-btn-label {
+    @media (max-width: $breakpoint-sm) {
+      display: none;
     }
   }
 }
