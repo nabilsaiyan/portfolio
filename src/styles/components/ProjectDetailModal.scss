@@ -445,32 +445,11 @@
   50% { opacity: 0; }
 }
 
-/* ── Fullscreen styles ───────────────────────────────────── */
+/* ── Fullscreen — native video player handles everything ─── */
 
-.pdm-browser-frame:fullscreen,
-.pdm-browser-frame:-webkit-full-screen,
-.pdm-phone-frame:fullscreen,
-.pdm-phone-frame:-webkit-full-screen {
+video:fullscreen,
+video:-webkit-full-screen {
+  cursor: default !important;
+  object-fit: contain;
   background: #000;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0;
-  border: none;
-  width: 100vw;
-  height: 100vh;
-
-  .pdm-browser-chrome,
-  .pdm-phone-notch,
-  .pdm-phone-home,
-  .pdm-phone-fs-btn {
-    display: none;
-  }
-
-  .pdm-media-content {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    max-height: none;
-    object-fit: contain;
-  }
 }
