@@ -308,17 +308,21 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                   )}
 
                   {meta.demoMobile && (
-                    <div className="pdm-phone-frame">
-                      <div className="pdm-phone-notch" />
-                      <button
-                        className="pdm-phone-fs-btn"
-                        onClick={() => toggleFs(phoneVideoRef)}
-                        title="Fullscreen"
-                      >
-                        {fsActive === 'phone' ? <CollapseIcon /> : <ExpandIcon />}
-                      </button>
+                    <div className="pdm-browser-frame">
+                      <div className="pdm-browser-chrome">
+                        <div className="pdm-browser-dots">
+                          <span /><span /><span />
+                        </div>
+                        <div className="pdm-browser-url">mobile view</div>
+                        <button
+                          className="pdm-fs-btn"
+                          onClick={() => toggleFs(phoneVideoRef)}
+                          title="Fullscreen"
+                        >
+                          {fsActive === 'phone' ? <CollapseIcon /> : <ExpandIcon />}
+                        </button>
+                      </div>
                       <MediaPlayer ref={phoneVideoRef} src={meta.demoMobile} />
-                      <div className="pdm-phone-home" />
                     </div>
                   )}
 
