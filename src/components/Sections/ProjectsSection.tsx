@@ -16,6 +16,7 @@ const getTechColor = (tech: string) => {
   return TECH_COLORS[Math.abs(hash) % TECH_COLORS.length]
 }
 
+const CartelloCanvas = lazy(() => import('../Canvas/CartelloCanvas'))
 const LaptopCanvas = lazy(() => import('../Canvas/LaptopCanvas'))
 const PhonesCanvas = lazy(() => import('../Canvas/PhonesCanvas'))
 
@@ -34,7 +35,7 @@ function ProjectsSection() {
 
       {/* ── 01 Cartello ───────────────────────────────────── */}
       <div className="part-one">
-        <div className="text-iphone t1">
+        <div className="text-iphone t1" style={{ position: 'relative', zIndex: 1 }}>
           <Reveal>
             <div className="divider">
               <p>01</p>
@@ -64,16 +65,27 @@ function ProjectsSection() {
               ))}
             </div>
           </Reveal>
-          <span className="view-button" onClick={() => setOpenProject('p1')} data-text={t.viewProject}>
-            <a>{t.viewProject}</a>
-            <span className="view-button__arrow">→</span>
-          </span>
+          <div className="view-button-row">
+            <span className="view-button" onClick={() => setOpenProject('p1')} data-text={t.viewProject}>
+              <a>{t.viewProject}</a>
+              <span className="view-button__arrow">→</span>
+            </span>
+            <div className="drag-hint">
+              <span className="drag-hint__card" aria-hidden />
+              <span>drag card to rotate</span>
+              <span className="drag-hint__arrow" aria-hidden />
+            </div>
+          </div>
         </div>
-        <div className="background-canvas">
+        <div className="background-canvas" style={{ zIndex: 0 }}>
           <Suspense fallback={null}>
-            <LaptopCanvas imageUrl="/images/cartello.jpg" />
+            <CartelloCanvas
+              frontUrl="/images/cartello-card-front.png"
+              backUrl="/images/cartello-card-back.png"
+            />
           </Suspense>
         </div>
+
       </div>
 
       {/* ── 02 Series Finder ──────────────────────────────── */}

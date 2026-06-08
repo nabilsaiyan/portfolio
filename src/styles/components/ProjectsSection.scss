@@ -202,11 +202,15 @@
     color: $gradient-end;
     background: rgba($gradient-end, 0.04);
     border: 1px solid rgba($gradient-end, 0.45);
-    box-shadow: 0 0 10px rgba($gradient-end, 0.08), inset 0 0 10px rgba($gradient-end, 0.03);
+    box-shadow:
+      0 0 10px rgba($gradient-end, 0.08),
+      inset 0 0 10px rgba($gradient-end, 0.03);
     position: relative;
     white-space: nowrap;
     cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
     margin-top: 0.5rem;
 
     &__arrow {
@@ -217,8 +221,12 @@
 
     &:hover {
       background: rgba($gradient-end, 0.1);
-      box-shadow: 0 0 18px rgba($gradient-end, 0.25), inset 0 0 12px rgba($gradient-end, 0.06);
-      animation: btn-glitch 0.5s steps(1) forwards, btn-glitch-idle 2.5s steps(1) 0.5s infinite;
+      box-shadow:
+        0 0 18px rgba($gradient-end, 0.25),
+        inset 0 0 12px rgba($gradient-end, 0.06);
+      animation:
+        btn-glitch 0.5s steps(1) forwards,
+        btn-glitch-idle 2.5s steps(1) 0.5s infinite;
 
       .view-button__arrow {
         transform: translate(4px, -4px);
@@ -312,8 +320,12 @@
         margin: 0;
         text-shadow: 0 0 14px rgba($gradient-end, 0.6);
 
-        &::before { content: '< '; }
-        &::after  { content: ' />'; }
+        &::before {
+          content: '< ';
+        }
+        &::after {
+          content: ' />';
+        }
 
         @media (max-width: $breakpoint-xsm) {
           font-size: 1.2rem;
@@ -328,17 +340,111 @@
 }
 
 @keyframes btn-glitch {
-  0%         { transform: none; text-shadow: none; }
-  10%        { transform: translateX(-3px) skewX(-8deg); text-shadow: 3px 0 #f0f, -3px 0 #000; }
-  20%        { transform: translateX(3px)  skewX(5deg);  text-shadow: -3px 0 #f0f, 3px 0 #000; }
-  30%        { transform: translateX(-2px); text-shadow: 2px 0 #0ff, -2px 0 #000; }
-  40%        { transform: translateX(2px)  skewX(-3deg); text-shadow: -2px 0 #0ff; }
-  50%, 100%  { transform: none; text-shadow: none; }
+  0% {
+    transform: none;
+    text-shadow: none;
+  }
+  10% {
+    transform: translateX(-3px) skewX(-8deg);
+    text-shadow:
+      3px 0 #f0f,
+      -3px 0 #000;
+  }
+  20% {
+    transform: translateX(3px) skewX(5deg);
+    text-shadow:
+      -3px 0 #f0f,
+      3px 0 #000;
+  }
+  30% {
+    transform: translateX(-2px);
+    text-shadow:
+      2px 0 #0ff,
+      -2px 0 #000;
+  }
+  40% {
+    transform: translateX(2px) skewX(-3deg);
+    text-shadow: -2px 0 #0ff;
+  }
+  50%,
+  100% {
+    transform: none;
+    text-shadow: none;
+  }
 }
 @keyframes btn-glitch-idle {
-  0%, 75%, 100% { transform: none; text-shadow: none; }
-  77%  { transform: translateX(-3px) skewX(-8deg); text-shadow: 3px 0 #f0f, -2px 0 #000; }
-  80%  { transform: translateX(3px)  skewX(4deg);  text-shadow: -2px 0 #0ff; }
-  83%  { transform: translateX(-1px); text-shadow: 2px 0 #f0f; }
-  86%  { transform: none; text-shadow: none; }
+  0%,
+  75%,
+  100% {
+    transform: none;
+    text-shadow: none;
+  }
+  77% {
+    transform: translateX(-3px) skewX(-8deg);
+    text-shadow:
+      3px 0 #f0f,
+      -2px 0 #000;
+  }
+  80% {
+    transform: translateX(3px) skewX(4deg);
+    text-shadow: -2px 0 #0ff;
+  }
+  83% {
+    transform: translateX(-1px);
+    text-shadow: 2px 0 #f0f;
+  }
+  86% {
+    transform: none;
+    text-shadow: none;
+  }
+}
+
+// ── View-button row (button + drag hint side by side) ────────────────────────
+.view-button-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+
+  // Remove the margin-top that was on .view-button alone; the row owns it now
+  .view-button { margin-top: 0; }
+}
+
+// ── Drag hint ─────────────────────────────────────────────────────────────────
+.drag-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.38);
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+
+  // Mini card that rotates in 3D — demonstrates exactly what dragging does
+  &__card {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 13px;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-radius: 2px;
+    animation: drag-card-rotate 2.4s ease-in-out infinite;
+  }
+
+  // Arrow: → on desktop (card is to the right), ↓ on mobile (card is below)
+  &__arrow::after {
+    content: '→';
+
+    @media (max-width: $breakpoint-xl) {
+      content: '↓';
+    }
+  }
+}
+
+@keyframes drag-card-rotate {
+  0%, 100% { transform: perspective(50px) rotateY(-35deg); }
+  50%       { transform: perspective(50px) rotateY(35deg);  }
 }
