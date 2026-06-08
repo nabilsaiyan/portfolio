@@ -8,16 +8,13 @@ export interface ProjectMeta {
 export const projectsMeta: Record<'p1' | 'p2' | 'p3', ProjectMeta> = {
   p1: {
     github: 'https://github.com/nabilsaiyan/cartello',
-    // live: 'https://cartello.vercel.app',
-    // demoDesktop: '/videos/cartello-desktop.mp4',
-    // demoMobile: '/videos/cartello-mobile.mp4',
+    demoDesktop: 'https://res.cloudinary.com/dvzs21utn/video/upload/q_auto/portfolio/cartello-demo.mov',
+    demoMobile:  'https://res.cloudinary.com/dvzs21utn/video/upload/q_auto/portfolio/cartello-demo-phone.mov',
   },
   p2: {
     github: 'https://github.com/nabilsaiyan/series-finder',
-    // demoDesktop: '/videos/series-finder-desktop.mp4',
-    // demoMobile: '/videos/series-finder-mobile.mp4',
+    demoDesktop: 'https://res.cloudinary.com/dvzs21utn/video/upload/q_auto/portfolio/series-finder-demo.mov',
+    demoMobile:  'https://res.cloudinary.com/dvzs21utn/video/upload/q_auto/portfolio/series-finder-demo-phone.mov',
   },
-  p3: {
-    // demoMobile: '/videos/mobile-app-demo.mp4',
-  },
+  p3: {},
 }
