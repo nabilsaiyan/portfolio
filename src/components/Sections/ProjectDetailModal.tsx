@@ -59,10 +59,20 @@ function CollapseIcon() {
   )
 }
 
-function MediaPlayer({ src }: { src: string }) {
+function MediaPlayer({ src, controls }: { src: string; controls?: boolean }) {
   const ext = src.split('.').pop()?.toLowerCase() ?? ''
   if (['mp4', 'mov', 'webm'].includes(ext)) {
-    return <video src={src} autoPlay loop muted playsInline className="pdm-media-content" />
+    return (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted={!controls}
+        playsInline
+        controls={controls}
+        className="pdm-media-content"
+      />
+    )
   }
   return <img src={src} alt="demo" className="pdm-media-content" />
 }
@@ -275,7 +285,7 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                           {fsActive === 'browser' ? <CollapseIcon /> : <ExpandIcon />}
                         </button>
                       </div>
-                      <MediaPlayer src={meta.demoDesktop} />
+                      <MediaPlayer src={meta.demoDesktop} controls={fsActive === 'browser'} />
                     </div>
                   )}
 
@@ -289,7 +299,7 @@ export default function ProjectDetailModal({ projectKey, onClose }: Props) {
                       >
                         {fsActive === 'phone' ? <CollapseIcon /> : <ExpandIcon />}
                       </button>
-                      <MediaPlayer src={meta.demoMobile} />
+                      <MediaPlayer src={meta.demoMobile} controls={fsActive === 'phone'} />
                       <div className="pdm-phone-home" />
                     </div>
                   )}

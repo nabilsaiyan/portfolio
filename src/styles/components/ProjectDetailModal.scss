@@ -345,23 +345,15 @@
 
 .pdm-phone-frame {
   position: relative;
-  width: 300px;
+  width: 100%;
   border: 2px solid rgba($gradient-end, 0.22);
-  border-radius: 32px;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 0 40px rgba($gradient-end, 0.07), 0 8px 40px rgba(0, 0, 0, 0.5);
 
   .pdm-media-content {
     max-height: none;
     object-fit: cover;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    width: 240px;
-  }
-
-  @media (max-width: $breakpoint-xsm) {
-    width: 200px;
   }
 }
 
@@ -456,10 +448,23 @@
 /* ── Fullscreen styles ───────────────────────────────────── */
 
 .pdm-browser-frame:fullscreen,
-.pdm-phone-frame:fullscreen {
+.pdm-browser-frame:-webkit-full-screen,
+.pdm-phone-frame:fullscreen,
+.pdm-phone-frame:-webkit-full-screen {
   background: #000;
   display: flex;
   flex-direction: column;
+  border-radius: 0;
+  border: none;
+  width: 100vw;
+  height: 100vh;
+
+  .pdm-browser-chrome,
+  .pdm-phone-notch,
+  .pdm-phone-home,
+  .pdm-phone-fs-btn {
+    display: none;
+  }
 
   .pdm-media-content {
     flex: 1;
@@ -468,10 +473,4 @@
     max-height: none;
     object-fit: contain;
   }
-}
-
-.pdm-phone-frame:fullscreen {
-  width: 100vw;
-  border-radius: 0;
-  border: none;
 }
