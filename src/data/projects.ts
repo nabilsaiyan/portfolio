@@ -8,6 +8,7 @@ export interface ProjectMeta {
 export const projectsMeta: Record<'p1' | 'p2' | 'p3', ProjectMeta> = {
   p1: {
     github: 'https://github.com/nabilsaiyan/cartello',
+    live: 'https://cartello-shop.vercel.app/',
     demoDesktop: 'https://res.cloudinary.com/dvzs21utn/video/upload/q_auto/portfolio/cartello-demo.mov',
     demoMobile:  'https://res.cloudinary.com/dvzs21utn/video/upload/q_auto/portfolio/cartello-demo-phone.mov',
   },

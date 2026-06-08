@@ -96,18 +96,9 @@
   }
 }
 
-.pdm-bracket {
-  color: rgba($gradient-end, 0.45);
-}
-
-.pdm-num {
-  color: rgba($gradient-end, 0.7);
-  font-size: 1rem;
-}
-
-.pdm-name {
-  color: #fff;
-}
+.pdm-bracket { color: rgba($gradient-end, 0.45); }
+.pdm-num    { color: rgba($gradient-end, 0.7); font-size: 1rem; }
+.pdm-name   { color: #fff; }
 
 .pdm-close-btn {
   display: flex;
@@ -123,10 +114,7 @@
   cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
 
-  .pdm-x {
-    font-size: 1.2rem;
-    line-height: 1;
-  }
+  .pdm-x { font-size: 1.2rem; line-height: 1; }
 
   &:hover {
     background: rgba($gradient-end, 0.08);
@@ -142,17 +130,13 @@
   flex: 1;
   padding: 2.5rem;
   gap: 3.5rem;
-  overflow: hidden;
 
-  @media (max-width: $breakpoint-xl) {
-    gap: 2.5rem;
-  }
+  @media (max-width: $breakpoint-xl) { gap: 2.5rem; }
 
   @media (max-width: $breakpoint-md) {
     flex-direction: column;
     gap: 2rem;
     padding: 1.5rem 1.2rem;
-    overflow: visible;
   }
 }
 
@@ -163,11 +147,9 @@
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  overflow-y: auto;
 
   @media (max-width: $breakpoint-md) {
     flex: none;
-    overflow-y: visible;
   }
 }
 
@@ -178,9 +160,7 @@
   margin: 0;
   color: #fff;
 
-  @media (max-width: $breakpoint-md) {
-    font-size: 1.25rem;
-  }
+  @media (max-width: $breakpoint-md) { font-size: 1.25rem; }
 }
 
 .pdm-features {
@@ -194,9 +174,7 @@
     margin-bottom: 0.75rem;
     line-height: 1.65;
 
-    @media (max-width: $breakpoint-xsm) {
-      font-size: 0.88rem;
-    }
+    @media (max-width: $breakpoint-xsm) { font-size: 0.88rem; }
   }
 }
 
@@ -217,10 +195,10 @@
   opacity: 0.9;
   transition: opacity 0.15s;
 
-  &:hover {
-    opacity: 1;
-  }
+  &:hover { opacity: 1; }
 }
+
+/* ── Action buttons ──────────────────────────────────────── */
 
 .pdm-actions {
   display: flex;
@@ -233,12 +211,12 @@
 .pdm-action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.65rem 1.3rem;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
   font-family: 'Inconsolata', monospace;
   font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: $gradient-end;
   background: rgba($gradient-end, 0.04);
@@ -248,18 +226,11 @@
   text-decoration: none;
   white-space: nowrap;
 
-  .pdm-arrow {
-    transition: transform 0.2s ease;
-    display: inline-block;
-  }
+  svg { flex-shrink: 0; }
 
   &:hover {
     background: rgba($gradient-end, 0.1);
     box-shadow: 0 0 18px rgba($gradient-end, 0.25);
-
-    .pdm-arrow {
-      transform: translate(4px, -4px);
-    }
   }
 
   &--live {
@@ -280,33 +251,57 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  align-items: center;
+  min-width: 0;
+}
+
+/* ── Fullscreen button (shared) ──────────────────────────── */
+
+.pdm-fs-btn,
+.pdm-phone-fs-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
-  min-width: 0;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
 
-  @media (max-width: $breakpoint-md) {
-    overflow-y: visible;
+  &:hover {
+    background: rgba($gradient-end, 0.12);
+    color: $gradient-end;
+    border-color: rgba($gradient-end, 0.4);
   }
 }
 
-/* Browser frame */
+/* ── Browser frame ───────────────────────────────────────── */
+
 .pdm-browser-frame {
   width: 100%;
   border: 1px solid rgba($gradient-end, 0.2);
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
 }
 
 .pdm-browser-chrome {
   background: rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba($gradient-end, 0.12);
-  padding: 0.5rem 0.85rem;
+  padding: 0.4rem 0.7rem;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
+
+  .pdm-fs-btn {
+    width: 26px;
+    height: 22px;
+    padding: 0;
+  }
 }
 
 .pdm-browser-dots {
@@ -344,44 +339,47 @@
   width: 100%;
   display: block;
   object-fit: cover;
-  max-height: 480px;
 }
 
-/* Phone frame */
+/* ── Phone frame ─────────────────────────────────────────── */
+
 .pdm-phone-frame {
   position: relative;
-  width: 210px;
+  width: 300px;
   border: 2px solid rgba($gradient-end, 0.22);
-  border-radius: 28px;
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba($gradient-end, 0.06), 0 8px 30px rgba(0, 0, 0, 0.4);
-  align-self: center;
+  box-shadow: 0 0 40px rgba($gradient-end, 0.07), 0 8px 40px rgba(0, 0, 0, 0.5);
 
   .pdm-media-content {
-    max-height: 420px;
+    max-height: none;
     object-fit: cover;
   }
 
-  &--compact {
-    width: 170px;
-    align-self: flex-end;
-
-    .pdm-media-content {
-      max-height: 300px;
-    }
+  @media (max-width: $breakpoint-md) {
+    width: 240px;
   }
 
   @media (max-width: $breakpoint-xsm) {
-    width: 160px;
-
-    &--compact {
-      width: 130px;
-    }
+    width: 200px;
   }
 }
 
+.pdm-phone-fs-btn {
+  position: absolute;
+  top: 28px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  z-index: 3;
+  border-radius: 50%;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 .pdm-phone-notch {
-  height: 22px;
+  height: 24px;
   background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
@@ -414,7 +412,8 @@
   }
 }
 
-/* Placeholder */
+/* ── Placeholder ─────────────────────────────────────────── */
+
 .pdm-placeholder {
   flex: 1;
   display: flex;
@@ -452,4 +451,27 @@
 
 @keyframes pdm-blink {
   50% { opacity: 0; }
+}
+
+/* ── Fullscreen styles ───────────────────────────────────── */
+
+.pdm-browser-frame:fullscreen,
+.pdm-phone-frame:fullscreen {
+  background: #000;
+  display: flex;
+  flex-direction: column;
+
+  .pdm-media-content {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+  }
+}
+
+.pdm-phone-frame:fullscreen {
+  width: 100vw;
+  border-radius: 0;
+  border: none;
 }
