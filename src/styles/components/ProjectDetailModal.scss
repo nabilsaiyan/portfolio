@@ -1,0 +1,455 @@
+@use '../variables' as *;
+
+.pdm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: all;
+}
+
+.pdm-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+
+.pdm-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 75%;
+  max-width: 1120px;
+  background: $dark-background;
+  background-image:
+    linear-gradient(rgba(52, 152, 219, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 152, 219, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  border-left: 1px solid rgba($gradient-end, 0.25);
+  box-shadow: -16px 0 60px rgba(0, 0, 0, 0.6), -2px 0 30px rgba($gradient-end, 0.06);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    height: 92%;
+    border-left: none;
+    border-top: 1px solid rgba($gradient-end, 0.25);
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+.pdm-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, $gradient-end 40%, $gradient-end 60%, transparent);
+  box-shadow: 0 0 16px rgba($gradient-end, 0.9), 0 0 40px rgba($gradient-end, 0.4);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+.pdm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 2.5rem;
+  border-bottom: 1px solid rgba($gradient-end, 0.12);
+  position: sticky;
+  top: 0;
+  background: $dark-background;
+  background-image:
+    linear-gradient(rgba(52, 152, 219, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 152, 219, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 5;
+  flex-shrink: 0;
+
+  @media (max-width: $breakpoint-xsm) {
+    padding: 1rem 1.2rem;
+  }
+}
+
+.pdm-project-tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+
+  @media (max-width: $breakpoint-xsm) {
+    font-size: 1rem;
+  }
+}
+
+.pdm-bracket {
+  color: rgba($gradient-end, 0.45);
+}
+
+.pdm-num {
+  color: rgba($gradient-end, 0.7);
+  font-size: 1rem;
+}
+
+.pdm-name {
+  color: #fff;
+}
+
+.pdm-close-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba($gradient-end, 0.3);
+  color: $gradient-end;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+
+  .pdm-x {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  &:hover {
+    background: rgba($gradient-end, 0.08);
+    border-color: rgba($gradient-end, 0.65);
+    box-shadow: 0 0 12px rgba($gradient-end, 0.2);
+  }
+}
+
+/* ── Body ────────────────────────────────────────────────── */
+
+.pdm-body {
+  display: flex;
+  flex: 1;
+  padding: 2.5rem;
+  gap: 3.5rem;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-xl) {
+    gap: 2.5rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem 1.2rem;
+    overflow: visible;
+  }
+}
+
+/* ── Info column ─────────────────────────────────────────── */
+
+.pdm-info {
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  overflow-y: auto;
+
+  @media (max-width: $breakpoint-md) {
+    flex: none;
+    overflow-y: visible;
+  }
+}
+
+.pdm-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  color: #fff;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.25rem;
+  }
+}
+
+.pdm-features {
+  list-style: disc;
+  padding-left: 1.4rem;
+  margin: 0;
+
+  li {
+    font-size: 0.98rem;
+    color: $dark_grey;
+    margin-bottom: 0.75rem;
+    line-height: 1.65;
+
+    @media (max-width: $breakpoint-xsm) {
+      font-size: 0.88rem;
+    }
+  }
+}
+
+.pdm-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pdm-tech-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: 'Inconsolata', monospace;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid;
+  border-radius: 3px;
+  opacity: 0.9;
+  transition: opacity 0.15s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.pdm-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.pdm-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.3rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $gradient-end;
+  background: rgba($gradient-end, 0.04);
+  border: 1px solid rgba($gradient-end, 0.45);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+
+  .pdm-arrow {
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  &:hover {
+    background: rgba($gradient-end, 0.1);
+    box-shadow: 0 0 18px rgba($gradient-end, 0.25);
+
+    .pdm-arrow {
+      transform: translate(4px, -4px);
+    }
+  }
+
+  &--live {
+    color: #a448e5;
+    background: rgba(#a448e5, 0.04);
+    border-color: rgba(#a448e5, 0.45);
+
+    &:hover {
+      background: rgba(#a448e5, 0.1);
+      box-shadow: 0 0 18px rgba(#a448e5, 0.25);
+    }
+  }
+}
+
+/* ── Media column ────────────────────────────────────────── */
+
+.pdm-media {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  min-width: 0;
+
+  @media (max-width: $breakpoint-md) {
+    overflow-y: visible;
+  }
+}
+
+/* Browser frame */
+.pdm-browser-frame {
+  width: 100%;
+  border: 1px solid rgba($gradient-end, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.pdm-browser-chrome {
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba($gradient-end, 0.12);
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.pdm-browser-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    &:nth-child(1) { background: rgba(255, 95, 86, 0.75); }
+    &:nth-child(2) { background: rgba(255, 189, 46, 0.75); }
+    &:nth-child(3) { background: rgba(40, 201, 64, 0.75); }
+  }
+}
+
+.pdm-browser-url {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0.22rem 0.6rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: 'Inconsolata', monospace;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdm-media-content {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+/* Phone frame */
+.pdm-phone-frame {
+  position: relative;
+  width: 210px;
+  border: 2px solid rgba($gradient-end, 0.22);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba($gradient-end, 0.06), 0 8px 30px rgba(0, 0, 0, 0.4);
+  align-self: center;
+
+  .pdm-media-content {
+    max-height: 420px;
+    object-fit: cover;
+  }
+
+  &--compact {
+    width: 170px;
+    align-self: flex-end;
+
+    .pdm-media-content {
+      max-height: 300px;
+    }
+  }
+
+  @media (max-width: $breakpoint-xsm) {
+    width: 160px;
+
+    &--compact {
+      width: 130px;
+    }
+  }
+}
+
+.pdm-phone-notch {
+  height: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    width: 55px;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+}
+
+.pdm-phone-home {
+  height: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 2px;
+  }
+}
+
+/* Placeholder */
+.pdm-placeholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  width: 100%;
+}
+
+.pdm-placeholder-inner {
+  text-align: center;
+  border: 1px dashed rgba($gradient-end, 0.2);
+  padding: 3rem 4rem;
+
+  p {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.18em;
+    color: rgba($gradient-end, 0.45);
+    margin: 0.4rem 0 0;
+  }
+
+  @media (max-width: $breakpoint-xsm) {
+    padding: 2rem 2.5rem;
+  }
+}
+
+.pdm-cursor {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.8rem;
+  color: rgba($gradient-end, 0.5);
+  display: block;
+  animation: pdm-blink 1s steps(1) infinite;
+}
+
+@keyframes pdm-blink {
+  50% { opacity: 0; }
+}

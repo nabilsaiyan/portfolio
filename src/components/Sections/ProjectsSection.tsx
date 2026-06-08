@@ -1,8 +1,9 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import '../../styles/components/ProjectsSection.scss'
 import Reveal from '../Animations/Reveal'
 import { useLang } from '../../context/LanguageContext'
 import { translations } from '../../i18n/translations'
+import ProjectDetailModal from './ProjectDetailModal'
 
 const TECH_COLORS = [
   '#FF5733', '#33FFA8', '#3366FF', '#FF33A8', '#33FF33', '#FFD700',
@@ -18,17 +19,12 @@ const getTechColor = (tech: string) => {
 const LaptopCanvas = lazy(() => import('../Canvas/LaptopCanvas'))
 const PhonesCanvas = lazy(() => import('../Canvas/PhonesCanvas'))
 
+type ProjectKey = 'p1' | 'p2' | 'p3'
+
 function ProjectsSection() {
   const { lang } = useLang()
   const t = translations[lang].projects
-
-  const goToGitHubProject = () => {
-    window.open(
-      'https://github.com/nabilsaiyan/series-finder',
-      '_blank',
-      'noopener noreferrer',
-    )
-  }
+  const [openProject, setOpenProject] = useState<ProjectKey | null>(null)
 
   return (
     <section id="projects" className="projects-section">
@@ -36,6 +32,7 @@ function ProjectsSection() {
         <h1 className="title-section">{t.title}</h1>
       </Reveal>
 
+      {/* ── 01 Cartello ───────────────────────────────────── */}
       <div className="part-one">
         <div className="text-iphone t1">
           <Reveal>
@@ -67,17 +64,19 @@ function ProjectsSection() {
               ))}
             </div>
           </Reveal>
-          <span className="view-button" onClick={goToGitHubProject} data-text={t.viewProject}>
+          <span className="view-button" onClick={() => setOpenProject('p1')} data-text={t.viewProject}>
             <a>{t.viewProject}</a>
             <span className="view-button__arrow">→</span>
           </span>
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>
-            <LaptopCanvas />
+            <LaptopCanvas imageUrl="/images/cartello.jpg" />
           </Suspense>
         </div>
       </div>
+
+      {/* ── 02 Series Finder ──────────────────────────────── */}
       <div className="part-two">
         <div className="text-iphone t2">
           <Reveal>
@@ -109,6 +108,54 @@ function ProjectsSection() {
               ))}
             </div>
           </Reveal>
+          <span className="view-button" onClick={() => setOpenProject('p2')} data-text={t.viewProject}>
+            <a>{t.viewProject}</a>
+            <span className="view-button__arrow">→</span>
+          </span>
+        </div>
+        <div className="background-canvas">
+          <Suspense fallback={null}>
+            <LaptopCanvas imageUrl="/images/series-finder.jpg" />
+          </Suspense>
+        </div>
+      </div>
+
+      {/* ── 03 Mobile App ─────────────────────────────────── */}
+      <div className="part-three">
+        <div className="text-iphone t3">
+          <Reveal>
+            <div className="divider">
+              <p>03</p>
+              <hr />
+            </div>
+          </Reveal>
+          <Reveal>
+            <h1>{t.p3.title}</h1>
+          </Reveal>
+          <ul>
+            {t.p3.features.map((feature, i) => (
+              <li key={i}>
+                <Reveal>
+                  <div>{feature}</div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+          <Reveal>
+            <div className="project-techs">
+              {t.p3.technologies.map((tech: string) => (
+                <span key={tech} className="project-tech-tag" style={{
+                  color: getTechColor(tech),
+                  borderColor: `${getTechColor(tech)}44`,
+                  background: `${getTechColor(tech)}0d`,
+                }}>{tech}</span>
+              ))}
+            </div>
+          </Reveal>
+          <span className="view-button" onClick={() => setOpenProject('p3')} data-text={t.viewProject}>
+            <a>{t.viewProject}</a>
+            <span className="view-button__arrow">→</span>
+          </span>
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>
@@ -116,6 +163,11 @@ function ProjectsSection() {
           </Suspense>
         </div>
       </div>
+
+      <ProjectDetailModal
+        projectKey={openProject}
+        onClose={() => setOpenProject(null)}
+      />
     </section>
   )
 }

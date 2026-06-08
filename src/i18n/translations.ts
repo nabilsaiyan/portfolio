@@ -18,6 +18,16 @@ export const translations = {
       title: 'Projects',
       viewProject: 'View Project',
       p1: {
+        title: 'A full-stack e-commerce platform with real-time cart and seamless checkout.',
+        features: [
+          'Product catalog with categories, live search and advanced filters.',
+          'Secure payments via Stripe — checkout, webhooks and order history.',
+          'Seller dashboard with inventory management and sales analytics.',
+          'Authentication with role-based access for buyers and sellers.',
+        ],
+        technologies: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'NextAuth v5', 'Zustand', 'TanStack Query', 'Cloudinary', 'Resend', 'Tailwind CSS'],
+      },
+      p2: {
         title: 'Discover, filter and bookmark TV series.',
         features: [
           'Server-rendered pages with automatic refresh — always up-to-date trending and top-rated series.',
@@ -27,7 +37,7 @@ export const translations = {
         ],
         technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Framer Motion', 'NextAuth v5', 'Zod', 'TMDB API'],
       },
-      p2: {
+      p3: {
         title: 'Discover places and navigate with interactive directions.',
         features: [
           'Interactive map to explore nearby places and points of interest.',
@@ -109,6 +119,16 @@ export const translations = {
       title: 'Projets',
       viewProject: 'Voir le projet',
       p1: {
+        title: 'Plateforme e-commerce full-stack avec panier temps réel et paiement intégré.',
+        features: [
+          'Catalogue produits avec catégories, recherche en direct et filtres avancés.',
+          'Paiements sécurisés via Stripe — caisse, webhooks et historique des commandes.',
+          'Dashboard vendeur avec gestion des stocks et analytics.',
+          'Authentification avec accès basé sur les rôles pour acheteurs et vendeurs.',
+        ],
+        technologies: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'NextAuth v5', 'Zustand', 'TanStack Query', 'Cloudinary', 'Resend', 'Tailwind CSS'],
+      },
+      p2: {
         title: 'Découvrez, filtrez et sauvegardez vos séries TV.',
         features: [
           'Pages générées côté serveur avec rafraîchissement automatique — séries tendances toujours à jour.',
@@ -118,7 +138,7 @@ export const translations = {
         ],
         technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Framer Motion', 'NextAuth v5', 'Zod', 'TMDB API'],
       },
-      p2: {
+      p3: {
         title: 'Découvrez des lieux et naviguez avec des directions interactives.',
         features: [
           'Carte interactive pour explorer les lieux et points d\'intérêt à proximité.',

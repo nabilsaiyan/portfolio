@@ -6,13 +6,13 @@ import { useScroll, useSpring, useTransform } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
 import { Vector3, Mesh, MeshStandardMaterial, SRGBColorSpace, Color, LinearFilter, LinearMipmapLinearFilter, TextureLoader } from 'three'
 
-function MacbookScreen() {
+function MacbookScreen({ imageUrl }: { imageUrl: string }) {
   const { scene } = useGLTF('./models/macbook/scene.gltf')
   const { gl } = useThree()
 
   useEffect(() => {
     const loader = new TextureLoader()
-    loader.load('/images/series-finder.jpg', (screenshot) => {
+    loader.load(imageUrl, (screenshot) => {
       screenshot.colorSpace = SRGBColorSpace
       screenshot.flipY = true
       screenshot.generateMipmaps = true
@@ -33,12 +33,12 @@ function MacbookScreen() {
         }
       })
     })
-  }, [scene, gl])
+  }, [scene, gl, imageUrl])
 
   return null
 }
 
-function LaptopCanvas() {
+function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: string }) {
   const sceneRef = useRef(null)
   const { scene: gltfScene } = useGLTF('./models/macbook/scene.gltf')
 
@@ -84,7 +84,7 @@ function LaptopCanvas() {
       gl={{ antialias: true, powerPreference: 'high-performance' }}
     >
       <Environment preset="sunset" />
-      <MacbookScreen />
+      <MacbookScreen imageUrl={imageUrl} />
       <motion.primitive
         object={gltfScene}
         position={laptopPosition}
