@@ -26,6 +26,15 @@ function DragWrapper({ children }: { children: React.ReactNode }) {
   const dragOffset = useRef({ y: 0, x: 0 })
 
   useEffect(() => {
+    const canvas = gl.domElement
+    canvas.style.cursor = 'grab'
+    const onDown = (e: PointerEvent) => {
+      isDragging.current = true
+      dragOffset.current.y = ref.current?.rotation.y ?? 0
+      dragOffset.current.x = ref.current?.rotation.x ?? 0
+      prevXY.current = { x: e.clientX, y: e.clientY }
+      canvas.style.cursor = 'grabbing'
+    }
     const onMove = (e: PointerEvent) => {
       if (!isDragging.current) return
       dragOffset.current.y += (e.clientX - prevXY.current.x) * 0.007
@@ -34,13 +43,16 @@ function DragWrapper({ children }: { children: React.ReactNode }) {
     }
     const onUp = () => {
       isDragging.current = false
-      gl.domElement.style.cursor = ''
+      canvas.style.cursor = 'grab'
     }
+    canvas.addEventListener('pointerdown', onDown)
     window.addEventListener('pointermove', onMove)
     window.addEventListener('pointerup', onUp)
     return () => {
+      canvas.removeEventListener('pointerdown', onDown)
       window.removeEventListener('pointermove', onMove)
       window.removeEventListener('pointerup', onUp)
+      canvas.style.cursor = ''
     }
   }, [gl])
 
@@ -54,28 +66,7 @@ function DragWrapper({ children }: { children: React.ReactNode }) {
     ref.current.rotation.x = dragOffset.current.x
   })
 
-  const onPointerDown = (e: { clientX: number; clientY: number; stopPropagation: () => void }) => {
-    isDragging.current = true
-    dragOffset.current.y = ref.current?.rotation.y ?? 0
-    dragOffset.current.x = ref.current?.rotation.x ?? 0
-    prevXY.current = { x: e.clientX, y: e.clientY }
-    gl.domElement.style.cursor = 'grabbing'
-    e.stopPropagation()
-  }
-
-  return (
-    <group ref={ref}>
-      <mesh
-        onPointerDown={onPointerDown}
-        onPointerEnter={() => { gl.domElement.style.cursor = 'grab' }}
-        onPointerLeave={() => { if (!isDragging.current) gl.domElement.style.cursor = '' }}
-      >
-        <sphereGeometry args={[10, 8, 8]} />
-        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-      </mesh>
-      {children}
-    </group>
-  )
+  return <group ref={ref}>{children}</group>
 }
 
 function MacbookScreen({ imageUrl, scene }: { imageUrl: string; scene: Group }) {
