@@ -9,7 +9,7 @@ import { translations } from '../../i18n/translations'
 
 const C = '#00d4ff'
 
-function IntroSection() {
+function IntroSection({ ready = false }: { ready?: boolean }) {
   const { lang } = useLang()
   const t = translations[lang].intro
   const [phase, setPhase] = useState(0)
@@ -31,7 +31,7 @@ function IntroSection() {
   return (
     <section id="intro" className="intro-section">
       <div className="background-canvas">
-        <AvatarCanvas />
+        <AvatarCanvas ready={ready} />
       </div>
 
       <div className="intro-content">

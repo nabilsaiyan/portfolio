@@ -20,7 +20,7 @@ const CartelloCanvas = lazy(() => import('../Canvas/CartelloCanvas'))
 const LaptopCanvas = lazy(() => import('../Canvas/LaptopCanvas'))
 const PhonesCanvas = lazy(() => import('../Canvas/PhonesCanvas'))
 
-type ProjectKey = 'p1' | 'p2' | 'p3'
+type ProjectKey = 'p1' | 'p2' | 'p3' | 'p4'
 
 function ProjectsSection() {
   const { lang } = useLang()
@@ -88,7 +88,7 @@ function ProjectsSection() {
 
       </div>
 
-      {/* ── 02 Series Finder ──────────────────────────────── */}
+      {/* ── 02 Nexametrics ────────────────────────────────── */}
       <div className="part-two">
         <div className="text-iphone t2">
           <Reveal>
@@ -127,12 +127,12 @@ function ProjectsSection() {
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>
-            <LaptopCanvas imageUrl="/images/series-finder.jpg" />
+            <LaptopCanvas imageUrl="/images/nexametrics.jpg" />
           </Suspense>
         </div>
       </div>
 
-      {/* ── 03 Mobile App ─────────────────────────────────── */}
+      {/* ── 03 Series Finder ──────────────────────────────── */}
       <div className="part-three">
         <div className="text-iphone t3">
           <Reveal>
@@ -165,6 +165,50 @@ function ProjectsSection() {
             </div>
           </Reveal>
           <span className="view-button" onClick={() => setOpenProject('p3')} data-text={t.viewProject}>
+            <a>{t.viewProject}</a>
+            <span className="view-button__arrow">→</span>
+          </span>
+        </div>
+        <div className="background-canvas">
+          <Suspense fallback={null}>
+            <LaptopCanvas imageUrl="/images/series-finder.jpg" />
+          </Suspense>
+        </div>
+      </div>
+
+      {/* ── 04 Mobile App ─────────────────────────────────── */}
+      <div className="part-four">
+        <div className="text-iphone t4">
+          <Reveal>
+            <div className="divider">
+              <p>04</p>
+              <hr />
+            </div>
+          </Reveal>
+          <Reveal>
+            <h1>{t.p4.title}</h1>
+          </Reveal>
+          <ul>
+            {t.p4.features.map((feature, i) => (
+              <li key={i}>
+                <Reveal>
+                  <div>{feature}</div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+          <Reveal>
+            <div className="project-techs">
+              {t.p4.technologies.map((tech: string) => (
+                <span key={tech} className="project-tech-tag" style={{
+                  color: getTechColor(tech),
+                  borderColor: `${getTechColor(tech)}44`,
+                  background: `${getTechColor(tech)}0d`,
+                }}>{tech}</span>
+              ))}
+            </div>
+          </Reveal>
+          <span className="view-button" onClick={() => setOpenProject('p4')} data-text={t.viewProject}>
             <a>{t.viewProject}</a>
             <span className="view-button__arrow">→</span>
           </span>

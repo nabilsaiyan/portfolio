@@ -159,6 +159,37 @@
     }
   }
 
+  .part-four {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: $breakpoint-xl) {
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 1rem;
+    }
+  }
+
+  .t4 {
+    margin: 0rem 0rem 2rem 7rem;
+
+    @media (min-width: $breakpoint-lg) and (max-width: $breakpoint-xl) {
+      margin: 0rem 0rem 2rem 3rem;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      margin: 2rem 0;
+    }
+  }
+
   .project-techs {
     display: flex;
     flex-wrap: wrap;

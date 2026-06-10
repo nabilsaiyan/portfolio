@@ -28,6 +28,16 @@ export const translations = {
         technologies: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'NextAuth v5', 'Zustand', 'TanStack Query', 'Cloudinary', 'Resend', 'Tailwind CSS'],
       },
       p2: {
+        title: 'Real-time e-commerce analytics dashboard with live metrics and insights.',
+        features: [
+          'KPI cards with live-updating revenue, orders, customers and average order value.',
+          'Interactive charts — revenue trends, category breakdowns and customer acquisition.',
+          'Order and customer management with advanced filters, search and pagination.',
+          'Fully responsive with animated data visualisations and simulated live data.',
+        ],
+        technologies: ['React 19', 'TypeScript', 'Vite', 'Recharts', 'Framer Motion', 'React Router v7', 'SCSS', 'Faker.js', 'date-fns', 'Lucide React', 'react-hot-toast', 'MSW', 'Express'],
+      },
+      p3: {
         title: 'Discover, filter and bookmark TV series.',
         features: [
           'Server-rendered pages with automatic refresh — always up-to-date trending and top-rated series.',
@@ -37,7 +47,7 @@ export const translations = {
         ],
         technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Framer Motion', 'NextAuth v5', 'Zod', 'TMDB API'],
       },
-      p3: {
+      p4: {
         title: 'Discover places and navigate with interactive directions.',
         features: [
           'Interactive map to explore nearby places and points of interest.',
@@ -129,6 +139,16 @@ export const translations = {
         technologies: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Stripe', 'NextAuth v5', 'Zustand', 'TanStack Query', 'Cloudinary', 'Resend', 'Tailwind CSS'],
       },
       p2: {
+        title: 'Dashboard analytique e-commerce en temps réel avec métriques et insights live.',
+        features: [
+          'KPI cards avec métriques live — chiffre d\'affaires, commandes, clients et panier moyen.',
+          'Graphiques interactifs — tendances de revenus, répartition par catégorie et acquisition clients.',
+          'Gestion des commandes et clients avec filtres avancés, recherche et pagination.',
+          'Entièrement responsive avec visualisations animées et données simulées en direct.',
+        ],
+        technologies: ['React 19', 'TypeScript', 'Vite', 'Recharts', 'Framer Motion', 'React Router v7', 'SCSS', 'Faker.js', 'date-fns', 'Lucide React', 'react-hot-toast', 'MSW', 'Express'],
+      },
+      p3: {
         title: 'Découvrez, filtrez et sauvegardez vos séries TV.',
         features: [
           'Pages générées côté serveur avec rafraîchissement automatique — séries tendances toujours à jour.',
@@ -138,7 +158,7 @@ export const translations = {
         ],
         technologies: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Framer Motion', 'NextAuth v5', 'Zod', 'TMDB API'],
       },
-      p3: {
+      p4: {
         title: 'Découvrez des lieux et naviguez avec des directions interactives.',
         features: [
           'Carte interactive pour explorer les lieux et points d\'intérêt à proximité.',

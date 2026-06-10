@@ -3,18 +3,32 @@ import { Suspense, useEffect, useState, useRef } from 'react'
 import { Environment } from '@react-three/drei'
 import Setup from '../Avatars/Setup'
 import { Vector3, Group } from 'three'
-import { useScroll } from 'framer-motion'
+import { useScroll, useSpring } from 'framer-motion'
 
-function ScrollRotation({ children }: { children: React.ReactNode }) {
+function ScrollRotation({ children, ready }: { children: React.ReactNode; ready: boolean }) {
   const ref = useRef<Group>(null)
   const { scrollYProgress } = useScroll()
-  useFrame(() => {
-    if (ref.current) ref.current.rotation.y = scrollYProgress.get() * 1.8
+  const appearScale = useSpring(0, { stiffness: 60, damping: 18 })
+
+  useEffect(() => {
+    if (ready) appearScale.set(1)
+  }, [ready, appearScale])
+
+  useFrame(({ clock }) => {
+    if (!ref.current) return
+    const scroll = scrollYProgress.get()
+    ref.current.rotation.y = scroll * 1.8
+    const s = appearScale.get() * (1 + scroll * 0.5)
+    ref.current.scale.set(s, s, s)
+    const t = clock.elapsedTime
+    ref.current.position.y = -scroll * 2 + Math.sin(t * 0.55) * 0.28
+    ref.current.position.x = Math.sin(t * 0.28) * 0.15
+    ref.current.rotation.z = Math.sin(t * 0.38) * 0.025
   })
   return <group ref={ref}>{children}</group>
 }
 
-function AvatarCanvas() {
+function AvatarCanvas({ ready = false }: { ready?: boolean }) {
   const [cameraPosition, setCameraPosition] = useState<Vector3>(() => {
     const w = window.innerWidth
     if (w < 450) return new Vector3(2, 3.8, -17)
@@ -57,7 +71,7 @@ function AvatarCanvas() {
       <ambientLight />
       <Environment preset="sunset" />
       <Suspense fallback={null}>
-        <ScrollRotation>
+        <ScrollRotation ready={ready}>
           <Setup position={setupPosition} rotation={[-0.4, -1, 0]} scale={0.7} />
         </ScrollRotation>
       </Suspense>

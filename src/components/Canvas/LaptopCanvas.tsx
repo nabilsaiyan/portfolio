@@ -1,13 +1,24 @@
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import '../../styles/components/LaptopCanvas.scss'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
-import { Vector3, Mesh, MeshStandardMaterial, SRGBColorSpace, Color, LinearFilter, LinearMipmapLinearFilter, TextureLoader } from 'three'
+import { Vector3, Mesh, MeshStandardMaterial, SRGBColorSpace, Color, LinearFilter, LinearMipmapLinearFilter, TextureLoader, Group } from 'three'
 
-function MacbookScreen({ imageUrl }: { imageUrl: string }) {
-  const { scene } = useGLTF('./models/macbook/scene.gltf')
+function FloatWrapper({ children }: { children: React.ReactNode }) {
+  const ref = useRef<Group>(null)
+  useFrame(({ clock }) => {
+    if (!ref.current) return
+    const t = clock.elapsedTime
+    ref.current.position.y = Math.sin(t * 0.55) * 0.25
+    ref.current.position.x = Math.sin(t * 0.28) * 0.12
+    ref.current.rotation.z = Math.sin(t * 0.38) * 0.03
+  })
+  return <group ref={ref}>{children}</group>
+}
+
+function MacbookScreen({ imageUrl, scene }: { imageUrl: string; scene: Group }) {
   const { gl } = useThree()
 
   useEffect(() => {
@@ -42,10 +53,12 @@ function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: s
   const sceneRef = useRef(null)
   const { scene: gltfScene } = useGLTF('./models/macbook/scene.gltf')
 
-  const ref = useRef(null)
+  const clonedScene = useMemo(() => gltfScene.clone(true), [gltfScene])
+
+  const ref = useRef<HTMLCanvasElement>(null)
 
   const { scrollYProgress } = useScroll({
-    target: sceneRef,
+    target: ref,
     offset: ['start end', 'end start'],
   })
 
@@ -84,16 +97,18 @@ function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: s
       gl={{ antialias: true, powerPreference: 'high-performance' }}
     >
       <Environment preset="sunset" />
-      <MacbookScreen imageUrl={imageUrl} />
-      <motion.primitive
-        object={gltfScene}
-        position={laptopPosition}
-        scale={scale}
-        rotation-x={rotateX}
-        receiveShadow
-        ref={sceneRef}
-        rotation-y={rotateY}
-      />
+      <MacbookScreen imageUrl={imageUrl} scene={clonedScene} />
+      <FloatWrapper>
+        <motion.primitive
+          object={clonedScene}
+          position={laptopPosition}
+          scale={scale}
+          rotation-x={rotateX}
+          receiveShadow
+          ref={sceneRef}
+          rotation-y={rotateY}
+        />
+      </FloatWrapper>
       <OrbitControls enableZoom={false} position={[2, 0.5, 0]} enabled={false} />
     </Canvas>
   )

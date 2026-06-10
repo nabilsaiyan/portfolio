@@ -1,7 +1,7 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { CanvasTexture, Group, SRGBColorSpace, Texture, TextureLoader, Vector3 } from 'three'
-import { useScroll } from 'framer-motion'
+import { useScroll, useSpring, useTransform } from 'framer-motion'
 import type { MotionValue } from 'framer-motion'
 import '../../styles/components/CartelloCanvas.scss'
 
@@ -66,6 +66,9 @@ function CardMesh({ frontUrl, backUrl, scrollYProgress, pos, wrapRef }: CardMesh
   const groupRef   = useRef<Group>(null)
   const { pointer } = useThree()
 
+  const cardScale       = useTransform(scrollYProgress, [0, 0.4], [0.1, 1.0])
+  const cardScaleSpring = useSpring(cardScale, { stiffness: 120, damping: 20 })
+
   // Drag state — all refs, no re-renders
   const dragging   = useRef(false)
   const prevXY     = useRef({ x: 0, y: 0 })
@@ -100,6 +103,9 @@ function CardMesh({ frontUrl, backUrl, scrollYProgress, pos, wrapRef }: CardMesh
     if (!groupRef.current) return
     const t      = clock.elapsedTime
     const scroll = scrollYProgress.get()
+
+    const s = cardScaleSpring.get()
+    groupRef.current.scale.set(s, s, s)
 
     // Float
     groupRef.current.position.y = Math.sin(t * 0.55) * 0.09

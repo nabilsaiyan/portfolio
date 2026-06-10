@@ -16,8 +16,8 @@ const getTechColor = (tech: string) => {
   return TECH_COLORS[Math.abs(hash) % TECH_COLORS.length]
 }
 
-const PROJECT_NAMES: Record<string, string> = { p1: 'Cartello', p2: 'Series Finder', p3: 'Mobile App' }
-const PROJECT_NUMBERS: Record<string, string> = { p1: '01', p2: '02', p3: '03' }
+const PROJECT_NAMES: Record<string, string> = { p1: 'Cartello', p2: 'Nexametrics', p3: 'Series Finder', p4: 'Mobile App' }
+const PROJECT_NUMBERS: Record<string, string> = { p1: '01', p2: '02', p3: '03', p4: '04' }
 
 function GitHubIcon() {
   return (
@@ -79,7 +79,7 @@ const MediaPlayer = forwardRef<HTMLVideoElement, { src: string }>(({ src }, ref)
 MediaPlayer.displayName = 'MediaPlayer'
 
 interface Props {
-  projectKey: 'p1' | 'p2' | 'p3' | null
+  projectKey: 'p1' | 'p2' | 'p3' | 'p4' | null
   onClose: () => void
 }
 

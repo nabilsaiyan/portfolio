@@ -25,10 +25,10 @@ function App() {
         {started && (
           <>
             <Navbar />
-            <IntroSection />
+            <IntroSection ready={loadingDisapear} />
             <Suspense fallback={null}>
-              <ExperienceSection />
               <ProjectsSection />
+              <ExperienceSection />
               <DetailsSection />
             </Suspense>
             <CustomCursor />
