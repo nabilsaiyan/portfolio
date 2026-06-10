@@ -19,6 +19,7 @@ const getTechColor = (tech: string) => {
 const CartelloCanvas = lazy(() => import('../Canvas/CartelloCanvas'))
 const LaptopCanvas = lazy(() => import('../Canvas/LaptopCanvas'))
 const PhonesCanvas = lazy(() => import('../Canvas/PhonesCanvas'))
+const NexaBarV1cCanvas = lazy(() => import('../Canvas/NexaBarV1cCanvas'))
 
 type ProjectKey = 'p1' | 'p2' | 'p3' | 'p4'
 
@@ -127,7 +128,7 @@ function ProjectsSection() {
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>
-            <LaptopCanvas imageUrl="/images/nexametrics.jpg" />
+            <NexaBarV1cCanvas />
           </Suspense>
         </div>
       </div>
