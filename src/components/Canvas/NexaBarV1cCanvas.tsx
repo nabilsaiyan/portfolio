@@ -1,4 +1,4 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Suspense, useRef, useState, useEffect } from 'react'
 import { Environment, Grid } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
@@ -18,15 +18,67 @@ const BAR_COLOR = (i: number) => i % 2 === 0 ? '#00d4ff' : '#a448e5'
 
 function FloatGroup({ children, baseX }: { children: React.ReactNode; baseX: number }) {
   const ref = useRef<Group>(null)
+  const { gl } = useThree()
+  const isDragging = useRef(false)
+  const prevXY = useRef({ x: 0, y: 0 })
+  const dragOffset = useRef({ y: 0, x: 0 })
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!isDragging.current) return
+      // negate x-drag to compensate for scale.x=-1 flip
+      dragOffset.current.y -= (e.clientX - prevXY.current.x) * 0.007
+      dragOffset.current.x += (e.clientY - prevXY.current.y) * 0.005
+      prevXY.current = { x: e.clientX, y: e.clientY }
+    }
+    const onUp = () => {
+      isDragging.current = false
+      gl.domElement.style.cursor = ''
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+  }, [gl])
+
   useFrame(({ clock }) => {
     if (!ref.current) return
     const t = clock.elapsedTime
+    if (!isDragging.current) {
+      dragOffset.current.y *= 0.95
+      dragOffset.current.x *= 0.95
+    }
     ref.current.position.y = -0.8 + Math.sin(t * 0.55) * 0.2
     ref.current.position.x = baseX + Math.sin(t * 0.28) * 0.1
     ref.current.rotation.z = Math.sin(t * 0.38) * 0.025
-    ref.current.rotation.y = -0.25 + Math.sin(t * 0.18) * 0.08
+    ref.current.rotation.y = -0.25 + Math.sin(t * 0.18) * 0.08 + dragOffset.current.y
+    ref.current.rotation.x = dragOffset.current.x
   })
-  return <group ref={ref} scale={[-1, 1, 1]}>{children}</group>
+
+  const onPointerDown = (e: { clientX: number; clientY: number; stopPropagation: () => void }) => {
+    isDragging.current = true
+    dragOffset.current.y = (ref.current?.rotation.y ?? 0) - (-0.25)
+    dragOffset.current.x = ref.current?.rotation.x ?? 0
+    prevXY.current = { x: e.clientX, y: e.clientY }
+    gl.domElement.style.cursor = 'grabbing'
+    e.stopPropagation()
+  }
+
+  return (
+    <group ref={ref} scale={[-1, 1, 1]}>
+      <mesh
+        onPointerDown={onPointerDown}
+        onPointerEnter={() => { gl.domElement.style.cursor = 'grab' }}
+        onPointerLeave={() => { if (!isDragging.current) gl.domElement.style.cursor = '' }}
+      >
+        <boxGeometry args={[5, 4, 2]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+      {children}
+    </group>
+  )
 }
 
 // ── Individual Bar ────────────────────────────────────────────────────────────

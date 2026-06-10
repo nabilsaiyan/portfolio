@@ -121,10 +121,17 @@ function ProjectsSection() {
               ))}
             </div>
           </Reveal>
-          <span className="view-button" onClick={() => setOpenProject('p2')} data-text={t.viewProject}>
-            <a>{t.viewProject}</a>
-            <span className="view-button__arrow">→</span>
-          </span>
+          <div className="view-button-row">
+            <span className="view-button" onClick={() => setOpenProject('p2')} data-text={t.viewProject}>
+              <a>{t.viewProject}</a>
+              <span className="view-button__arrow">→</span>
+            </span>
+            <div className="drag-hint">
+              <span className="drag-hint__card" aria-hidden />
+              <span>drag to rotate</span>
+              <span className="drag-hint__arrow" aria-hidden />
+            </div>
+          </div>
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>
@@ -165,10 +172,17 @@ function ProjectsSection() {
               ))}
             </div>
           </Reveal>
-          <span className="view-button" onClick={() => setOpenProject('p3')} data-text={t.viewProject}>
-            <a>{t.viewProject}</a>
-            <span className="view-button__arrow">→</span>
-          </span>
+          <div className="view-button-row">
+            <span className="view-button" onClick={() => setOpenProject('p3')} data-text={t.viewProject}>
+              <a>{t.viewProject}</a>
+              <span className="view-button__arrow">→</span>
+            </span>
+            <div className="drag-hint">
+              <span className="drag-hint__card" aria-hidden />
+              <span>drag to rotate</span>
+              <span className="drag-hint__arrow" aria-hidden />
+            </div>
+          </div>
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>
@@ -209,10 +223,17 @@ function ProjectsSection() {
               ))}
             </div>
           </Reveal>
-          <span className="view-button" onClick={() => setOpenProject('p4')} data-text={t.viewProject}>
-            <a>{t.viewProject}</a>
-            <span className="view-button__arrow">→</span>
-          </span>
+          <div className="view-button-row">
+            <span className="view-button" onClick={() => setOpenProject('p4')} data-text={t.viewProject}>
+              <a>{t.viewProject}</a>
+              <span className="view-button__arrow">→</span>
+            </span>
+            <div className="drag-hint">
+              <span className="drag-hint__card" aria-hidden />
+              <span>drag to rotate</span>
+              <span className="drag-hint__arrow" aria-hidden />
+            </div>
+          </div>
         </div>
         <div className="background-canvas">
           <Suspense fallback={null}>

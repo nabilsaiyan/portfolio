@@ -18,6 +18,66 @@ function FloatWrapper({ children }: { children: React.ReactNode }) {
   return <group ref={ref}>{children}</group>
 }
 
+function DragWrapper({ children }: { children: React.ReactNode }) {
+  const ref = useRef<Group>(null)
+  const { gl } = useThree()
+  const isDragging = useRef(false)
+  const prevXY = useRef({ x: 0, y: 0 })
+  const dragOffset = useRef({ y: 0, x: 0 })
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!isDragging.current) return
+      dragOffset.current.y += (e.clientX - prevXY.current.x) * 0.007
+      dragOffset.current.x += (e.clientY - prevXY.current.y) * 0.005
+      prevXY.current = { x: e.clientX, y: e.clientY }
+    }
+    const onUp = () => {
+      isDragging.current = false
+      gl.domElement.style.cursor = ''
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+  }, [gl])
+
+  useFrame(() => {
+    if (!ref.current) return
+    if (!isDragging.current) {
+      dragOffset.current.y *= 0.95
+      dragOffset.current.x *= 0.95
+    }
+    ref.current.rotation.y = dragOffset.current.y
+    ref.current.rotation.x = dragOffset.current.x
+  })
+
+  const onPointerDown = (e: { clientX: number; clientY: number; stopPropagation: () => void }) => {
+    isDragging.current = true
+    dragOffset.current.y = ref.current?.rotation.y ?? 0
+    dragOffset.current.x = ref.current?.rotation.x ?? 0
+    prevXY.current = { x: e.clientX, y: e.clientY }
+    gl.domElement.style.cursor = 'grabbing'
+    e.stopPropagation()
+  }
+
+  return (
+    <group ref={ref}>
+      <mesh
+        onPointerDown={onPointerDown}
+        onPointerEnter={() => { gl.domElement.style.cursor = 'grab' }}
+        onPointerLeave={() => { if (!isDragging.current) gl.domElement.style.cursor = '' }}
+      >
+        <sphereGeometry args={[10, 8, 8]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+      {children}
+    </group>
+  )
+}
+
 function MacbookScreen({ imageUrl, scene }: { imageUrl: string; scene: Group }) {
   const { gl } = useThree()
 
@@ -99,6 +159,7 @@ function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: s
       <Environment preset="sunset" />
       <MacbookScreen imageUrl={imageUrl} scene={clonedScene} />
       <FloatWrapper>
+        <DragWrapper>
         <motion.primitive
           object={clonedScene}
           position={laptopPosition}
@@ -108,6 +169,7 @@ function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: s
           ref={sceneRef}
           rotation-y={rotateY}
         />
+        </DragWrapper>
       </FloatWrapper>
       <OrbitControls enableZoom={false} position={[2, 0.5, 0]} enabled={false} />
     </Canvas>

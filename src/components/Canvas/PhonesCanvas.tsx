@@ -1,4 +1,4 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import '../../styles/components/PhonesCanvas.scss'
 import { useEffect, useRef, useState } from 'react'
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
@@ -16,6 +16,66 @@ function FloatWrapper({ children }: { children: React.ReactNode }) {
     ref.current.rotation.z = Math.sin(t * 0.38) * 0.04
   })
   return <group ref={ref}>{children}</group>
+}
+
+function DragWrapper({ children }: { children: React.ReactNode }) {
+  const ref = useRef<Group>(null)
+  const { gl } = useThree()
+  const isDragging = useRef(false)
+  const prevXY = useRef({ x: 0, y: 0 })
+  const dragOffset = useRef({ y: 0, x: 0 })
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!isDragging.current) return
+      dragOffset.current.y += (e.clientX - prevXY.current.x) * 0.007
+      dragOffset.current.x += (e.clientY - prevXY.current.y) * 0.005
+      prevXY.current = { x: e.clientX, y: e.clientY }
+    }
+    const onUp = () => {
+      isDragging.current = false
+      gl.domElement.style.cursor = ''
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+  }, [gl])
+
+  useFrame(() => {
+    if (!ref.current) return
+    if (!isDragging.current) {
+      dragOffset.current.y *= 0.95
+      dragOffset.current.x *= 0.95
+    }
+    ref.current.rotation.y = dragOffset.current.y
+    ref.current.rotation.x = dragOffset.current.x
+  })
+
+  const onPointerDown = (e: { clientX: number; clientY: number; stopPropagation: () => void }) => {
+    isDragging.current = true
+    dragOffset.current.y = ref.current?.rotation.y ?? 0
+    dragOffset.current.x = ref.current?.rotation.x ?? 0
+    prevXY.current = { x: e.clientX, y: e.clientY }
+    gl.domElement.style.cursor = 'grabbing'
+    e.stopPropagation()
+  }
+
+  return (
+    <group ref={ref}>
+      <mesh
+        onPointerDown={onPointerDown}
+        onPointerEnter={() => { gl.domElement.style.cursor = 'grab' }}
+        onPointerLeave={() => { if (!isDragging.current) gl.domElement.style.cursor = '' }}
+      >
+        <sphereGeometry args={[1.5, 8, 8]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+      {children}
+    </group>
+  )
 }
 
 function PhonesCanvas() {
@@ -83,16 +143,18 @@ function PhonesCanvas() {
       <ambientLight intensity={3} />
       <Environment preset="sunset" />
       <FloatWrapper>
-        <motion.primitive
-          ref={firstRef}
-          y
-          object={scene1}
-          position={firstPhonePosition}
-          scale={firstScale}
-          receiveShadow
-          rotation-x={firstRotateX}
-          rotation-y={firstRotateY}
-        />
+        <DragWrapper>
+          <motion.primitive
+            ref={firstRef}
+            y
+            object={scene1}
+            position={firstPhonePosition}
+            scale={firstScale}
+            receiveShadow
+            rotation-x={firstRotateX}
+            rotation-y={firstRotateY}
+          />
+        </DragWrapper>
       </FloatWrapper>
       {/* <motion.primitive
         object={scene2}
