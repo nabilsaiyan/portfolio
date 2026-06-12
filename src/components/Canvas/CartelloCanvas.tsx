@@ -126,6 +126,7 @@ function CardMesh({ frontUrl, backUrl, scrollYProgress, pos, wrapRef }: CardMesh
   })
 
   const onPointerDown = (e: { clientX: number; clientY: number; stopPropagation: () => void }) => {
+    if (window.innerWidth < 768) return
     dragging.current = true
     // Seed drag offset from current rotation so there's no snap
     if (groupRef.current) {

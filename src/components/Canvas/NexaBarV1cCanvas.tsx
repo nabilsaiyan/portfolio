@@ -1,4 +1,4 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Suspense, useRef, useState, useEffect } from 'react'
 import { Environment, Grid } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
@@ -8,68 +8,60 @@ import { Group, Mesh } from 'three'
 // ── Bar data ──────────────────────────────────────────────────────────────────
 
 const BARS = [
-  { x: -1.5, h: 1.4 }, { x: -1.0, h: 2.1 }, { x: -0.5, h: 1.7 },
-  { x:  0.0, h: 2.6 }, { x:  0.5, h: 1.2 }, { x:  1.0, h: 2.3 }, { x:  1.5, h: 1.9 },
+  { x: -1.5, h: 1.4 },
+  { x: -1.0, h: 2.1 },
+  { x: -0.5, h: 1.7 },
+  { x: 0.0, h: 2.6 },
+  { x: 0.5, h: 1.2 },
+  { x: 1.0, h: 2.3 },
+  { x: 1.5, h: 1.9 },
 ]
 
-const BAR_COLOR = (i: number) => i % 2 === 0 ? '#00d4ff' : '#a448e5'
+const BAR_COLOR = (i: number) => (i % 2 === 0 ? '#00d4ff' : '#a448e5')
+
+function ScaleIn({
+  children,
+  scrollYProgress,
+}: {
+  children: React.ReactNode
+  scrollYProgress: MotionValue<number>
+}) {
+  const ref = useRef<Group>(null)
+  const rawScale = useTransform(scrollYProgress, [0, 0.35], [0, 1])
+  const springScale = useSpring(rawScale, { stiffness: 120, damping: 20 })
+  useFrame(() => {
+    if (!ref.current) return
+    const s = springScale.get()
+    ref.current.scale.set(s, s, s)
+  })
+  return <group ref={ref}>{children}</group>
+}
 
 // ── Float group ───────────────────────────────────────────────────────────────
 
-function FloatGroup({ children, baseX }: { children: React.ReactNode; baseX: number }) {
+function FloatGroup({
+  children,
+  baseX,
+}: {
+  children: React.ReactNode
+  baseX: number
+}) {
   const ref = useRef<Group>(null)
-  const { gl } = useThree()
-  const isDragging = useRef(false)
-  const prevXY = useRef({ x: 0, y: 0 })
-  const dragOffset = useRef({ y: 0, x: 0 })
-
-  useEffect(() => {
-    const canvas = gl.domElement
-    canvas.style.cursor = 'grab'
-    const onDown = (e: PointerEvent) => {
-      isDragging.current = true
-      dragOffset.current.y = (ref.current?.rotation.y ?? 0) - (-0.25)
-      dragOffset.current.x = ref.current?.rotation.x ?? 0
-      prevXY.current = { x: e.clientX, y: e.clientY }
-      canvas.style.cursor = 'grabbing'
-    }
-    const onMove = (e: PointerEvent) => {
-      if (!isDragging.current) return
-      // negate x-drag to compensate for scale.x=-1 flip
-      dragOffset.current.y -= (e.clientX - prevXY.current.x) * 0.007
-      dragOffset.current.x += (e.clientY - prevXY.current.y) * 0.005
-      prevXY.current = { x: e.clientX, y: e.clientY }
-    }
-    const onUp = () => {
-      isDragging.current = false
-      canvas.style.cursor = 'grab'
-    }
-    canvas.addEventListener('pointerdown', onDown)
-    window.addEventListener('pointermove', onMove)
-    window.addEventListener('pointerup', onUp)
-    return () => {
-      canvas.removeEventListener('pointerdown', onDown)
-      window.removeEventListener('pointermove', onMove)
-      window.removeEventListener('pointerup', onUp)
-      canvas.style.cursor = ''
-    }
-  }, [gl])
 
   useFrame(({ clock }) => {
     if (!ref.current) return
     const t = clock.elapsedTime
-    if (!isDragging.current) {
-      dragOffset.current.y *= 0.95
-      dragOffset.current.x *= 0.95
-    }
-    ref.current.position.y = -0.8 + Math.sin(t * 0.55) * 0.2
+    ref.current.position.y = -1.8 + Math.sin(t * 0.55) * 0.2
     ref.current.position.x = baseX + Math.sin(t * 0.28) * 0.1
     ref.current.rotation.z = Math.sin(t * 0.38) * 0.025
-    ref.current.rotation.y = -0.25 + Math.sin(t * 0.18) * 0.08 + dragOffset.current.y
-    ref.current.rotation.x = dragOffset.current.x
+    ref.current.rotation.y = -0.25 + Math.sin(t * 0.18) * 0.08
   })
 
-  return <group ref={ref} scale={[-1, 1, 1]}>{children}</group>
+  return (
+    <group ref={ref} scale={[-1.4, 1.4, 1.4]}>
+      {children}
+    </group>
+  )
 }
 
 // ── Individual Bar ────────────────────────────────────────────────────────────
@@ -123,7 +115,6 @@ interface SceneProps {
 function Scene({ scrollYProgress, baseX }: SceneProps) {
   return (
     <FloatGroup baseX={baseX}>
-      {/* Grid floor */}
       <Grid
         position={[0, 0, 0]}
         args={[12, 12]}
@@ -138,8 +129,6 @@ function Scene({ scrollYProgress, baseX }: SceneProps) {
         followCamera={false}
         infiniteGrid={false}
       />
-
-      {/* Bars */}
       {BARS.map((bar, i) => (
         <Bar
           key={i}
@@ -158,10 +147,12 @@ function Scene({ scrollYProgress, baseX }: SceneProps) {
 
 function NexaBarV1cCanvas() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [baseX, setBaseX] = useState(() => window.innerWidth >= 1280 ? 1.8 : 0)
+  const [baseX, setBaseX] = useState(() =>
+    window.innerWidth >= 1280 ? 2.8 : 0,
+  )
 
   useEffect(() => {
-    const onResize = () => setBaseX(window.innerWidth >= 1280 ? 1.8 : 0)
+    const onResize = () => setBaseX(window.innerWidth >= 1280 ? 2.8 : 0)
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
@@ -187,11 +178,26 @@ function NexaBarV1cCanvas() {
             color="#ffffff"
             castShadow
           />
-          <directionalLight position={[4, 2, -3]} intensity={2.5} color="#ffe0ff" />
-          <directionalLight position={[0, -2, 8]} intensity={1.5} color="#c0ffee" />
-          <pointLight position={[0, 5, 3]} intensity={5} color="#a0c0ff" distance={16} />
+          <directionalLight
+            position={[4, 2, -3]}
+            intensity={2.5}
+            color="#ffe0ff"
+          />
+          <directionalLight
+            position={[0, -2, 8]}
+            intensity={1.5}
+            color="#c0ffee"
+          />
+          <pointLight
+            position={[0, 5, 3]}
+            intensity={5}
+            color="#a0c0ff"
+            distance={16}
+          />
           <Environment preset="sunset" />
-          <Scene scrollYProgress={scrollYProgress} baseX={baseX} />
+          <ScaleIn scrollYProgress={scrollYProgress}>
+            <Scene scrollYProgress={scrollYProgress} baseX={baseX} />
+          </ScaleIn>
         </Suspense>
       </Canvas>
     </div>

@@ -126,11 +126,6 @@ function ProjectsSection() {
               <a>{t.viewProject}</a>
               <span className="view-button__arrow">→</span>
             </span>
-            <div className="drag-hint">
-              <span className="drag-hint__card" aria-hidden />
-              <span>drag to rotate</span>
-              <span className="drag-hint__arrow" aria-hidden />
-            </div>
           </div>
         </div>
         <div className="background-canvas">
@@ -177,11 +172,6 @@ function ProjectsSection() {
               <a>{t.viewProject}</a>
               <span className="view-button__arrow">→</span>
             </span>
-            <div className="drag-hint">
-              <span className="drag-hint__card" aria-hidden />
-              <span>drag to rotate</span>
-              <span className="drag-hint__arrow" aria-hidden />
-            </div>
           </div>
         </div>
         <div className="background-canvas">
@@ -228,11 +218,6 @@ function ProjectsSection() {
               <a>{t.viewProject}</a>
               <span className="view-button__arrow">→</span>
             </span>
-            <div className="drag-hint">
-              <span className="drag-hint__card" aria-hidden />
-              <span>drag to rotate</span>
-              <span className="drag-hint__arrow" aria-hidden />
-            </div>
           </div>
         </div>
         <div className="background-canvas">

@@ -3,8 +3,31 @@ import '../../styles/components/LaptopCanvas.scss'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
+import type { MotionValue } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
-import { Vector3, Mesh, MeshStandardMaterial, SRGBColorSpace, Color, LinearFilter, LinearMipmapLinearFilter, TextureLoader, Group } from 'three'
+import {
+  Vector3,
+  Mesh,
+  MeshStandardMaterial,
+  SRGBColorSpace,
+  Color,
+  LinearFilter,
+  LinearMipmapLinearFilter,
+  TextureLoader,
+  Group,
+} from 'three'
+
+function ScaleIn({ children, scrollYProgress }: { children: React.ReactNode; scrollYProgress: MotionValue<number> }) {
+  const ref = useRef<Group>(null)
+  const rawScale = useTransform(scrollYProgress, [0, 0.35], [0, 1])
+  const springScale = useSpring(rawScale, { stiffness: 120, damping: 20 })
+  useFrame(() => {
+    if (!ref.current) return
+    const s = springScale.get()
+    ref.current.scale.set(s, s, s)
+  })
+  return <group ref={ref}>{children}</group>
+}
 
 function FloatWrapper({ children }: { children: React.ReactNode }) {
   const ref = useRef<Group>(null)
@@ -18,58 +41,13 @@ function FloatWrapper({ children }: { children: React.ReactNode }) {
   return <group ref={ref}>{children}</group>
 }
 
-function DragWrapper({ children }: { children: React.ReactNode }) {
-  const ref = useRef<Group>(null)
-  const { gl } = useThree()
-  const isDragging = useRef(false)
-  const prevXY = useRef({ x: 0, y: 0 })
-  const dragOffset = useRef({ y: 0, x: 0 })
-
-  useEffect(() => {
-    const canvas = gl.domElement
-    canvas.style.cursor = 'grab'
-    const onDown = (e: PointerEvent) => {
-      isDragging.current = true
-      dragOffset.current.y = ref.current?.rotation.y ?? 0
-      dragOffset.current.x = ref.current?.rotation.x ?? 0
-      prevXY.current = { x: e.clientX, y: e.clientY }
-      canvas.style.cursor = 'grabbing'
-    }
-    const onMove = (e: PointerEvent) => {
-      if (!isDragging.current) return
-      dragOffset.current.y += (e.clientX - prevXY.current.x) * 0.007
-      dragOffset.current.x += (e.clientY - prevXY.current.y) * 0.005
-      prevXY.current = { x: e.clientX, y: e.clientY }
-    }
-    const onUp = () => {
-      isDragging.current = false
-      canvas.style.cursor = 'grab'
-    }
-    canvas.addEventListener('pointerdown', onDown)
-    window.addEventListener('pointermove', onMove)
-    window.addEventListener('pointerup', onUp)
-    return () => {
-      canvas.removeEventListener('pointerdown', onDown)
-      window.removeEventListener('pointermove', onMove)
-      window.removeEventListener('pointerup', onUp)
-      canvas.style.cursor = ''
-    }
-  }, [gl])
-
-  useFrame(() => {
-    if (!ref.current) return
-    if (!isDragging.current) {
-      dragOffset.current.y *= 0.95
-      dragOffset.current.x *= 0.95
-    }
-    ref.current.rotation.y = dragOffset.current.y
-    ref.current.rotation.x = dragOffset.current.x
-  })
-
-  return <group ref={ref}>{children}</group>
-}
-
-function MacbookScreen({ imageUrl, scene }: { imageUrl: string; scene: Group }) {
+function MacbookScreen({
+  imageUrl,
+  scene,
+}: {
+  imageUrl: string
+  scene: Group
+}) {
   const { gl } = useThree()
 
   useEffect(() => {
@@ -100,16 +78,18 @@ function MacbookScreen({ imageUrl, scene }: { imageUrl: string; scene: Group }) 
   return null
 }
 
-function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: string }) {
+function LaptopCanvas({
+  imageUrl = '/images/series-finder.jpg',
+}: {
+  imageUrl?: string
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef(null)
   const { scene: gltfScene } = useGLTF('./models/macbook/scene.gltf')
-
   const clonedScene = useMemo(() => gltfScene.clone(true), [gltfScene])
 
-  const ref = useRef<HTMLCanvasElement>(null)
-
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: wrapRef,
     offset: ['start end', 'end start'],
   })
 
@@ -125,6 +105,9 @@ function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: s
     if (w < 1280) return new Vector3(0, -0.9, -1.2)
     return new Vector3(2, -1.2, -2)
   })
+  const [phoneScale, setPhoneScale] = useState(() =>
+    window.innerWidth < 768 ? 1.3 : 1,
+  )
 
   useEffect(() => {
     const handleResize = () => {
@@ -133,37 +116,45 @@ function LaptopCanvas({ imageUrl = '/images/series-finder.jpg' }: { imageUrl?: s
       else if (w < 768) setLaptopPosition(new Vector3(0, -1.2, -2))
       else if (w < 1280) setLaptopPosition(new Vector3(0, -0.9, -1.2))
       else setLaptopPosition(new Vector3(2, -1.2, -2))
+      setPhoneScale(w < 768 ? 1.5 : 1)
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
-    <Canvas
-      className="canvas"
-      shadows
-      ref={ref}
-      camera={{ rotation: [0, -0.5, 0], fov: 50 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, powerPreference: 'high-performance' }}
-    >
-      <Environment preset="sunset" />
-      <MacbookScreen imageUrl={imageUrl} scene={clonedScene} />
-      <FloatWrapper>
-        <DragWrapper>
-        <motion.primitive
-          object={clonedScene}
-          position={laptopPosition}
-          scale={scale}
-          rotation-x={rotateX}
-          receiveShadow
-          ref={sceneRef}
-          rotation-y={rotateY}
+    <div ref={wrapRef} style={{ width: '100%', height: '100%' }}>
+      <Canvas
+        className="canvas"
+        shadows
+        camera={{ rotation: [0, -0.5, 0], fov: 50 }}
+        dpr={[1, 2]}
+        gl={{ antialias: true, powerPreference: 'high-performance' }}
+      >
+        <Environment preset="sunset" />
+        <MacbookScreen imageUrl={imageUrl} scene={clonedScene} />
+        <ScaleIn scrollYProgress={scrollYProgress}>
+          <FloatWrapper>
+            <group scale={phoneScale}>
+              <motion.primitive
+                object={clonedScene}
+                position={laptopPosition}
+                scale={scale}
+                rotation-x={rotateX}
+                receiveShadow
+                ref={sceneRef}
+                rotation-y={rotateY}
+              />
+            </group>
+          </FloatWrapper>
+        </ScaleIn>
+        <OrbitControls
+          enableZoom={false}
+          position={[2, 0.5, 0]}
+          enabled={false}
         />
-        </DragWrapper>
-      </FloatWrapper>
-      <OrbitControls enableZoom={false} position={[2, 0.5, 0]} enabled={false} />
-    </Canvas>
+      </Canvas>
+    </div>
   )
 }
 

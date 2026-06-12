@@ -1,10 +1,23 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import '../../styles/components/PhonesCanvas.scss'
 import { useEffect, useRef, useState } from 'react'
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
+import { Environment, useGLTF } from '@react-three/drei'
 import { useScroll, useSpring, useTransform } from 'framer-motion'
+import type { MotionValue } from 'framer-motion'
 import { motion } from 'framer-motion-3d'
 import { Vector3, Group } from 'three'
+
+function ScaleIn({ children, scrollYProgress }: { children: React.ReactNode; scrollYProgress: MotionValue<number> }) {
+  const ref = useRef<Group>(null)
+  const rawScale = useTransform(scrollYProgress, [0, 0.35], [0, 1])
+  const springScale = useSpring(rawScale, { stiffness: 120, damping: 20 })
+  useFrame(() => {
+    if (!ref.current) return
+    const s = springScale.get()
+    ref.current.scale.set(s, s, s)
+  })
+  return <group ref={ref}>{children}</group>
+}
 
 function FloatWrapper({ children }: { children: React.ReactNode }) {
   const ref = useRef<Group>(null)
@@ -18,144 +31,57 @@ function FloatWrapper({ children }: { children: React.ReactNode }) {
   return <group ref={ref}>{children}</group>
 }
 
-function DragWrapper({ children }: { children: React.ReactNode }) {
-  const ref = useRef<Group>(null)
-  const { gl } = useThree()
-  const isDragging = useRef(false)
-  const prevXY = useRef({ x: 0, y: 0 })
-  const dragOffset = useRef({ y: 0, x: 0 })
-
-  useEffect(() => {
-    const canvas = gl.domElement
-    canvas.style.cursor = 'grab'
-    const onDown = (e: PointerEvent) => {
-      isDragging.current = true
-      dragOffset.current.y = ref.current?.rotation.y ?? 0
-      dragOffset.current.x = ref.current?.rotation.x ?? 0
-      prevXY.current = { x: e.clientX, y: e.clientY }
-      canvas.style.cursor = 'grabbing'
-    }
-    const onMove = (e: PointerEvent) => {
-      if (!isDragging.current) return
-      dragOffset.current.y += (e.clientX - prevXY.current.x) * 0.007
-      dragOffset.current.x += (e.clientY - prevXY.current.y) * 0.005
-      prevXY.current = { x: e.clientX, y: e.clientY }
-    }
-    const onUp = () => {
-      isDragging.current = false
-      canvas.style.cursor = 'grab'
-    }
-    canvas.addEventListener('pointerdown', onDown)
-    window.addEventListener('pointermove', onMove)
-    window.addEventListener('pointerup', onUp)
-    return () => {
-      canvas.removeEventListener('pointerdown', onDown)
-      window.removeEventListener('pointermove', onMove)
-      window.removeEventListener('pointerup', onUp)
-      canvas.style.cursor = ''
-    }
-  }, [gl])
-
-  useFrame(() => {
-    if (!ref.current) return
-    if (!isDragging.current) {
-      dragOffset.current.y *= 0.95
-      dragOffset.current.x *= 0.95
-    }
-    ref.current.rotation.y = dragOffset.current.y
-    ref.current.rotation.x = dragOffset.current.x
-  })
-
-  return <group ref={ref}>{children}</group>
-}
-
 function PhonesCanvas() {
+  const wrapRef = useRef<HTMLDivElement>(null)
   const firstRef = useRef(null)
   const { scene: scene1 } = useGLTF('./models/phone2/scene.gltf')
-  const { scene: scene2 } = useGLTF('./models/phone1/scene.gltf')
-
-  const ref = useRef<HTMLCanvasElement>(null)
 
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: wrapRef,
     offset: ['start end', 'end start'],
   })
 
   const rotateYSmooth = useSpring(scrollYProgress)
-
   const firstRotateY = useTransform(rotateYSmooth, [0, 1], [4.5, 6.6])
   const firstRotateX = useTransform(rotateYSmooth, [0, 1], [0.1, 0.4])
-
   const firstScale = useTransform(rotateYSmooth, [0, 1], [0.04, 0.11])
 
-  const [firstPhonePosition, setFirstPhonePosition] = useState<Vector3>(
-    new Vector3(0.8, -0.4, 0),
-  )
-  const [secondPhonePosition, setSecondPhonePosition] = useState<Vector3>(
-    new Vector3(1.2, -0.4, 0),
-  )
+  const [firstPhonePosition, setFirstPhonePosition] = useState<Vector3>(new Vector3(0.8, -0.4, 0))
 
   useEffect(() => {
     const handleResize = () => {
-      const screenWidth = window.innerWidth
-      if (screenWidth < 1280 && screenWidth > 768) {
-        setFirstPhonePosition(new Vector3(0, -0.4, 0))
-        setSecondPhonePosition(new Vector3(0.4, -0.4, 0))
-      } else if (screenWidth < 768 && screenWidth > 450) {
-        setFirstPhonePosition(new Vector3(0, -0.4, 0))
-        setSecondPhonePosition(new Vector3(0.4, -0.4, 0))
-      } else if (screenWidth < 450) {
-        setFirstPhonePosition(new Vector3(0, -0.4, 0))
-        setSecondPhonePosition(new Vector3(0.4, -0.4, 0))
-      } else {
-        setFirstPhonePosition(new Vector3(0.8, -0.4, 0))
-        setSecondPhonePosition(new Vector3(1.2, -0.4, 0))
-      }
+      const w = window.innerWidth
+      setFirstPhonePosition(w >= 1280 ? new Vector3(0.8, -0.4, 0) : new Vector3(0, -0.4, 0))
     }
-
     window.addEventListener('resize', handleResize)
     handleResize()
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
-    <Canvas
-      className="canvas"
-      shadows
-      ref={ref}
-      camera={{
-        position: [0, 0, 2],
-        rotation: [0, 0, 0],
-        fov: 60,
-      }}
-    >
-      <ambientLight intensity={3} />
-      <Environment preset="sunset" />
-      <FloatWrapper>
-        <DragWrapper>
-          <motion.primitive
-            ref={firstRef}
-            y
-            object={scene1}
-            position={firstPhonePosition}
-            scale={firstScale}
-            receiveShadow
-            rotation-x={firstRotateX}
-            rotation-y={firstRotateY}
-          />
-        </DragWrapper>
-      </FloatWrapper>
-      {/* <motion.primitive
-        object={scene2}
-        position={secondPhonePosition}
-        scale={8}
-        receiveShadow
-        rotation-y={firstRotateY}
-        rotation-x={firstRotateX}
-      /> */}
-    </Canvas>
+    <div ref={wrapRef} style={{ width: '100%', height: '100%' }}>
+      <Canvas
+        className="canvas"
+        shadows
+        camera={{ position: [0, 0, 2], rotation: [0, 0, 0], fov: 60 }}
+      >
+        <ambientLight intensity={3} />
+        <Environment preset="sunset" />
+        <ScaleIn scrollYProgress={scrollYProgress}>
+          <FloatWrapper>
+            <motion.primitive
+              ref={firstRef}
+              object={scene1}
+              position={firstPhonePosition}
+              scale={firstScale}
+              receiveShadow
+              rotation-x={firstRotateX}
+              rotation-y={firstRotateY}
+            />
+          </FloatWrapper>
+        </ScaleIn>
+      </Canvas>
+    </div>
   )
 }
 

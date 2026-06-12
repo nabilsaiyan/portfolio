@@ -83,6 +83,20 @@
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
     }
+
+    .background-canvas {
+      @media (min-width: $breakpoint-md + 1) and (max-width: $breakpoint-xl) {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        width: calc(100% + 3rem);
+      }
+
+      @media (max-width: $breakpoint-md) {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        width: calc(100% + 2rem);
+      }
+    }
   }
 
   .part-two {
@@ -101,6 +115,20 @@
 
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
+    }
+
+    .background-canvas {
+      @media (min-width: $breakpoint-md + 1) and (max-width: $breakpoint-xl) {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        width: calc(100% + 3rem);
+      }
+
+      @media (max-width: $breakpoint-md) {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        width: calc(100% + 2rem);
+      }
     }
   }
 
@@ -145,6 +173,20 @@
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
     }
+
+    .background-canvas {
+      @media (min-width: $breakpoint-md + 1) and (max-width: $breakpoint-xl) {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        width: calc(100% + 3rem);
+      }
+
+      @media (max-width: $breakpoint-md) {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        width: calc(100% + 2rem);
+      }
+    }
   }
 
   .t3 {
@@ -175,6 +217,20 @@
 
     @media (max-width: $breakpoint-md) {
       padding: 0 1rem;
+    }
+
+    .background-canvas {
+      @media (min-width: $breakpoint-md + 1) and (max-width: $breakpoint-xl) {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        width: calc(100% + 3rem);
+      }
+
+      @media (max-width: $breakpoint-md) {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        width: calc(100% + 2rem);
+      }
     }
   }
 
@@ -446,6 +502,10 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
   color: rgba(255, 255, 255, 0.38);
   font-family: 'Inconsolata', monospace;
   font-size: 0.72rem;
